@@ -1,0 +1,2 @@
+default:
+	pylint src/**/*.py
