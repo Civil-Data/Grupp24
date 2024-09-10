@@ -1,28 +1,24 @@
 " Module containing shared information and configuration data"
 
 from typing import List, Callable, Tuple
-from main_classes.person import Person
-from main_classes.elevator import Elevator
+from genome import Genome, Person
 
-class Data:
-    """
-    Export information and configuration data
-    """
-    GENOME_LENGTH: int = 8
-    POPULATION_SIZE: int = 50
-    
-    NUMBER_OF_FLOORS: int = 5
-    NUMBER_OF_PEOPLE: int = NUMBER_OF_FLOORS * 3
+GENOME_LENGTH: int = 8
+POPULATION_SIZE: int = 20
+GENERATION_LIMIT: int = 100
+MUTATION_CHANCE: float = 1.0
 
-    Genome = List[int]
-    Population = List[Genome]
+NUMBER_OF_FLOORS: int = 10
+NUMBER_OF_PEOPLE: int = NUMBER_OF_FLOORS * 3
 
-    People = List[Person]
-    People_queues = List[People]
+Population = List[Genome]
 
-    FitnessFunction = Callable[[Genome, People, Elevator], int]
-    PopulateFunction = Callable[[], Population]
-    SelectionFunction = Callable[[Population, FitnessFunction], Tuple[Genome, Genome]]
-    CrossoverFunction = Callable[[Genome, Genome], Tuple[Genome, Genome]]
-    MutationFunction = Callable[[Genome], Genome]
+People = List[Person]
+People_queues = List[People]
+
+PopulateFunction = Callable[[], Population]
+FitnessFunction = Callable[[Genome], int]
+SelectionFunction = Callable[[Population, FitnessFunction], Tuple[Genome, Genome]]
+CrossoverFunction = Callable[[Genome, Genome], Tuple[Genome, Genome]]
+MutationFunction = Callable[[Genome], None]
     

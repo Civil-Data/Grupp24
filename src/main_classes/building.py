@@ -1,20 +1,56 @@
-" Building module "
+"""
+Building module
+"""
 
-from elevator import Elevator
-from data import Data
+from main_classes.elevator import Elevator, data
 
 class Building:
     """
-    param: people_matrix = a 2D array representation of which persons are on each floor
-    param: genome = the sequence that determines what floors to go to in what order, passed to
-    Elevator instantiation
-    param: number_of_floors = the total number of floors, starting at 0 for ground floor
+    param: people_queues = a 2D array of where people are in the building
     """
 
-    def __init__(self, people_queues: Data.People_queues, genome: Data.Genome, number_of_floors: int) -> None:
-        if number_of_floors < 1:
-            raise ValueError("number_of_floors may not be less than 1.")
+    people_queues: data.People_queues
+    elevator: Elevator
+
+    def __init__(self, people_queues: data.People_queues) -> None:
         
         self.people_queues = people_queues
-        self.elevator = Elevator(genome, people_queues)
-        self.number_of_floors = number_of_floors
+        self.elevator = Elevator()
+
+    def move_elevator(self, previous_floor: int, arrived_floor: int) -> None:
+        """
+        Do stuff when the elevator has traveled up or down
+        """
+        if arrived_floor == previous_floor and self.elevator.current_floor != 0:
+            raise ValueError("arrived_floor must not be equal to previous_floor")
+
+        if not 0 <= arrived_floor < data.NUMBER_OF_FLOORS:
+            raise ValueError("arrived_floor out of bounds")
+
+        if not 0 <= previous_floor < data.NUMBER_OF_FLOORS:
+            raise ValueError("previous_floor out of bounds")
+
+        self.elevator.current_floor = arrived_floor
+
+        for person in self.elevator.occupants:
+            # All occupants have traveled a certain distance
+            person.distance_traveled += abs(self.elevator.current_floor - previous_floor)
+            if self.elevator.current_floor == person.end_floor:
+                # If anyone has arrived at their destination, remove them from elevator
+                person.has_arrived = True
+                self.elevator.occupants.remove(person)
+
+        # Loop over all people waiting for the elevator at the current floor
+        for person in self.people_queues[self.elevator.current_floor]:
+            # If there is any availabe room in the elevator, load up on more people
+            if len(self.elevator.occupants) < self.elevator.max_capacity:
+                # Make sure there's no shenanigans going on
+                assert person.start_floor == self.elevator.current_floor
+                
+                # Load person on to elevator
+                self.elevator.occupants.append(person)
+
+                # Remove that person from the queue of people waiting for elevator
+                self.people_queues[self.elevator.current_floor].remove(person)
+            else:
+                break
