@@ -3,19 +3,21 @@ Module containing static selection function(s)
 """
 
 import random
-import data
 from typing import List, Tuple
+import data
 from genome import Genome
 
 class Selection:
     " Class containing static selection function(s) "
-    
-    # Rank Selection
-    # In rank selection, individuals are ranked based on their fitness, and selection is based on
-    # this rank rather than raw fitness values. This can help maintain diversity in the population.
+
     @staticmethod
     def rank(population: data.Population, fitness_function: data.FitnessFunction) -> Tuple[Genome, Genome]:
-        
+        """
+        In rank selection, individuals are ranked based on their fitness, and selection is
+        based on this rank rather than raw fitness values. This can help maintain diversity
+        in the population.
+        """
+
         # Calculate fitness for each genome
         fitness_scores: List[Tuple[Genome, int]] = [(genome, fitness_function(genome)) for genome in population]
 
@@ -44,8 +46,8 @@ class Selection:
         parents: List[Genome] = []
         while len(parents) < 2:  # 2 parents
             random_value = random.uniform(0.0, 1.0)  # Generate a random number between 0 and 1
-            for j in range(len(cumulative_probabilities)):
-                if random_value <= cumulative_probabilities[j]:
+            for j, value in enumerate(cumulative_probabilities):
+                if random_value <= value:
                     selected_parent = ranked_population[j][0]
                     if selected_parent not in parents:  # Check if the parent is already selected
                         parents.append(selected_parent)
@@ -53,13 +55,3 @@ class Selection:
 
         assert len(parents) == 2
         return parents
-
-
-    # Roulette Wheel Selection
-    # In this method, individuals are selected based on their fitness proportionate to the totals
-    # fitness of the population. The idea is to create a "roulette wheel" where each individual 
-    # has a slice proportional to its fitness.
-
-    # Tournament Selection
-    # In tournament selection, a subset of individuals is chosen randomly, and the best individual
-    # from this subset is selected. This can be repeated to select multiple individuals.

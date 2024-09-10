@@ -13,7 +13,7 @@ class Building:
     elevator: Elevator
 
     def __init__(self, people_queues: data.People_queues) -> None:
-        
+
         self.people_queues = people_queues
         self.elevator = Elevator()
 
@@ -46,7 +46,7 @@ class Building:
             if len(self.elevator.occupants) < self.elevator.max_capacity:
                 # Make sure there's no shenanigans going on
                 assert person.start_floor == self.elevator.current_floor
-                
+
                 # Load person on to elevator
                 self.elevator.occupants.append(person)
 

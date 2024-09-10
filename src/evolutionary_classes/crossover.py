@@ -5,8 +5,15 @@ from typing import Tuple
 from genome import Genome
 
 class Crossover:
+    """
+    Class containing static crossover function(s)
+    """
     @staticmethod
     def swap_last_halves(parent_1: Genome, parent_2: Genome) -> Tuple[Genome, Genome]:
+        """
+        Swap the last halves of the parents' genomes.
+        If the genomes are of different length, swap with respect to the shorter parent's length.
+        """
 
         genome_1 = list(parent_1.genome)
         genome_2 = list(parent_2.genome)

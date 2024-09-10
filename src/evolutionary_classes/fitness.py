@@ -11,13 +11,16 @@ class Fitness:
     """
     @staticmethod
     def calc_fitness(genome: Genome) -> int:
+        """
+        Calculate the fitness score of a genome
+        """
         accumulated_score: int = 0
 
         for person in genome.people:
             if person.has_arrived:
                 # Reward based on:
                 # More people
-                accumulated_score += data.NUMBER_OF_PEOPLE 
+                accumulated_score += data.NUMBER_OF_PEOPLE
                 # More floors
                 accumulated_score += data.NUMBER_OF_FLOORS
                 # Less stops
@@ -27,6 +30,6 @@ class Fitness:
             # Excess travel
             delta_distance = person.distance_traveled - person.distance_needed
             if delta_distance > 0:
-                accumulated_score -= delta_distance 
+                accumulated_score -= delta_distance
 
         return accumulated_score
