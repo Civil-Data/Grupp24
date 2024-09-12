@@ -2,6 +2,7 @@
 place_people module tests
 """
 
+
 import sys
 import os
 import copy
@@ -9,15 +10,13 @@ from icecream import ic
 #To see what is generated, run this file by it self
 #Then the ic will print out the data
 
-
 # Add path to src directory
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
-
-import data
 from main import place_people, init_people
+import data
 
 
-# Check that the number of people matches the expected count 
+# Check that the number of people matches the expected count
 # Check that each person has valid floor values
 # Check correct initial states
 # Check distance_traveled is zero
@@ -31,7 +30,7 @@ def test_init_people():
         assert person.has_arrived is not True
         assert person.distance_traveled == 0
         assert person.distance_needed != 0
-        
+
         ic(person.start_floor)
         ic(person.end_floor)
         ic(person.has_arrived)
