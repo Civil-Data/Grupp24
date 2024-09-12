@@ -3,6 +3,7 @@ Module containing static fitness function(s)
 """
 
 from genome import Genome
+from data import PERSON_ARRIVED_SCORE
 
 class Fitness:
     """
@@ -17,6 +18,6 @@ class Fitness:
 
         for person in genome.people:
             if person.has_arrived:
-                accumulated_score += 10
+                accumulated_score += PERSON_ARRIVED_SCORE
 
         genome.fitness_score = accumulated_score

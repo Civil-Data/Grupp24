@@ -56,7 +56,12 @@ def run_evolution(
             reverse=True # Highest score first
         )
 
-        print(f"Gen {generation} \t Top three scores: {ranked_population[0].fitness_score} {ranked_population[1].fitness_score} {ranked_population[2].fitness_score}")
+        print(f"Gen {generation}   Top three genomes (fitness,length):   ({ranked_population[0].fitness_score},{len(ranked_population[0].genome)}) ({ranked_population[1].fitness_score},{len(ranked_population[1].genome)}) ({ranked_population[1].fitness_score},{len(ranked_population[1].genome)})")
+
+        # Check if we have achieved the max possible score, then break off
+        if ranked_population[0].fitness_score == data.MAXIMUM_POSSIBLE_SCORE:
+            print("Maximum possible score achieved")
+            break
 
         next_population: data.Population = []
 
@@ -129,5 +134,6 @@ if __name__ == "__main__":
         fitness_function = Fitness.calc_fitness,
         selection_function = Selection.rank,
         crossover_function = Crossover.swap_last_halves,
-        mutation_functions = [Mutation.swap]
+        mutation_functions = [Mutation.swap,
+                              Mutation.increase_genome_length]
     )

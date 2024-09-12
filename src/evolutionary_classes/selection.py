@@ -21,6 +21,8 @@ class Selection:
 
         # Hand out the ranks 1, 2, 3, ...
         ranks: List[int] = list(range(1, len(ranked_population) + 1))
+        # ... but 1 is the lowest rank
+        ranks.reverse()
 
         # Calc the probability to get picked by ranks
         total_ranks = sum(ranks)
