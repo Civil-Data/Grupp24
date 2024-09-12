@@ -30,7 +30,7 @@ def run_evolution(
     population: data.Population = populate_function()
 
     # Loop over the generations
-    for _ in range(data.GENERATION_LIMIT):
+    for generation in range(data.GENERATION_LIMIT):
 
         # Loop over the genomes
         for genome in population:
@@ -45,41 +45,51 @@ def run_evolution(
         
         # All genomes has been run. Prepare the next population of genomes
 
+        # Calculate fitness for each genome
+        for genome in population:
+            fitness_function(genome)
+
+        # Sort the genomes based on the fitness
+        ranked_population: data.Population = sorted(
+            population, # The population to be sorted
+            key=lambda genome: genome.fitness_score, # Sort based on fitness score
+            reverse=True # Highest score first
+        )
+
+        print(f"Gen {generation} \t Top three scores: {ranked_population[0].fitness_score} {ranked_population[1].fitness_score} {ranked_population[2].fitness_score}")
+
         next_population: data.Population = []
 
         # Elitism
-        numb_elitism_parents: int = math.floor(data.POPULATION_SIZE * data.ELITISM_PERC)
-        # If odd, increase by 1
-        if numb_elitism_parents % 2 == 1:
-            numb_elitism_parents += 1
-        # If that +1 pushes it over the population size
-        if numb_elitism_parents > data.POPULATION_SIZE:
-            numb_elitism_parents = data.POPULATION_SIZE
-        
-        assert 0 <= numb_elitism_parents <= data.POPULATION_SIZE
+        if data.ELITISM_PERC > 0.0:
+            # not neccessary to check data.ELITISM_PERC, but it looks nicer and saves some time 
+            numb_elitism_parents: int = math.floor(data.POPULATION_SIZE * data.ELITISM_PERC)
+            # If odd, increase by 1
+            if numb_elitism_parents % 2 == 1:
+                numb_elitism_parents += 1
+            # If that +1 pushes it over the population size
+            if numb_elitism_parents > data.POPULATION_SIZE:
+                numb_elitism_parents = data.POPULATION_SIZE
+            
+            assert 0 <= numb_elitism_parents <= data.POPULATION_SIZE
+            assert numb_elitism_parents % 2 == 0
 
-        if numb_elitism_parents > 0:
-            # Calculate fitness for each genome
-            fitness_scores: List[Tuple[Genome, int]] = [(genome, fitness_function(genome)) for genome in population]
-
-            # Sort the genomes based on the fitness
-            ranked_population: List[Tuple[Genome, int]] = sorted(
-                fitness_scores,
-                key=lambda x: x[1], # 'x' is a tuple, [1] is indexing to the int. I.e. sort based on the int value
-                reverse=True # Highest score first
-            )
-
-            for i in range(numb_elitism_parents):
-                next_population.append(ranked_population[i][0]) # index 0 accesses the Genome object of the Tuple
+            if numb_elitism_parents > 0: # <==> numb_elitism_parents >= 2
+                for i in range(numb_elitism_parents):
+                    next_population.append(ranked_population[i])
 
         while len(next_population) < data.POPULATION_SIZE:
             # Only deal with even populations for now
             assert data.POPULATION_SIZE % 2 == 0 
             
             # Select two parents
-            parents = selection_function(population, fitness_function)
-            # Breed two children from those parents
-            children = crossover_function(parents[0], parents[1])
+            parents: Tuple[Genome, Genome] = selection_function(ranked_population)
+            # Breed two children from those parents with a chance for crossover
+            children: Tuple[Genome, Genome]
+            if data.CROSSOVER_CHANCE > random.uniform(0.0, 1.0):
+                children = crossover_function(parents[0], parents[1])
+            else:
+                children = parents
 
             # A chance to individually apply a random mutation to the children
             for child in children:
