@@ -21,9 +21,6 @@ class Building:
         """
         Do stuff when the elevator has traveled up or down
         """
-        if arrived_floor == previous_floor and self.elevator.current_floor != 0:
-            raise ValueError("arrived_floor must not be equal to previous_floor")
-
         if not 0 <= arrived_floor < data.NUMBER_OF_FLOORS:
             raise ValueError("arrived_floor out of bounds")
 

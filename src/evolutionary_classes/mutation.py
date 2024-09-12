@@ -15,7 +15,7 @@ class Mutation:
         """
         Swap to randomly chosen indices.
         """
-        genome_len: int = len(list(genome.genome))
+        genome_len: int = len(genome.genome)
 
         ix_1: int = random.randint(0, genome_len - 1)
         ix_2: int = random.randint(0, genome_len - 1)
