@@ -5,7 +5,6 @@ place_people module tests
 
 import sys
 import os
-import copy
 from icecream import ic
 #To see what is generated, run this file by it self
 #Then the ic will print out the data
@@ -22,6 +21,9 @@ import data
 # Check distance_traveled is zero
 # Check non-zero distance needed
 def test_init_people():
+    """
+    tsk tsk tsk
+    """
     people = init_people()
     assert len(people) is data.NUMBER_OF_PEOPLE
     for person in people:
@@ -39,6 +41,9 @@ def test_init_people():
 
 # Check that each person is on the correct floor
 def test_place_people():
+    """
+    tsk tsk tsk
+    """
     floors = place_people(init_people())
     current_floor = 0
     for floor in floors:
