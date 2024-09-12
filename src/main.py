@@ -39,7 +39,7 @@ def run_evolution(
 
             # Loop over the floors
             for floor in genome.genome:
-                building.move_elevator(floor, building.elevator.current_floor)
+                building.move_elevator(building.elevator.current_floor, floor)
 
             next_population: data.Population = []
 
