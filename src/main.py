@@ -1,15 +1,17 @@
 " Main program module "
 
-from typing import List
+from typing import List, Tuple
 import data
 import random
 import copy
-from icecream import ic
+import math
+#from icecream import ic
 from evolutionary_classes.fitness import Fitness
 from evolutionary_classes.populate import Populate
 from evolutionary_classes.selection import Selection
 from evolutionary_classes.crossover import Crossover
 from evolutionary_classes.mutation import Mutation
+from genome import Genome
 from main_classes.building import Building
 from main_classes.person import Person
 
@@ -40,30 +42,57 @@ def run_evolution(
             # Loop over the floors
             for floor in genome.genome:
                 building.move_elevator(building.elevator.current_floor, floor)
+        
+        # All genomes has been run. Prepare the next population of genomes
 
-            next_population: data.Population = []
+        next_population: data.Population = []
 
-            while len(next_population) < data.POPULATION_SIZE:
-                # Only deal with even populations for now
-                assert data.POPULATION_SIZE % 2 == 0 
-                
-                # Select two parents
-                parents = selection_function(population, fitness_function)
-                # Breed two children from those parents
-                children = crossover_function(parents[0], parents[1])
+        # Elitism
+        numb_elitism_parents: int = math.floor(data.POPULATION_SIZE * data.ELITISM_PERC)
+        # If odd, increase by 1
+        if numb_elitism_parents % 2 == 1:
+            numb_elitism_parents += 1
+        # If that +1 pushes it over the population size
+        if numb_elitism_parents > data.POPULATION_SIZE:
+            numb_elitism_parents = data.POPULATION_SIZE
+        
+        assert 0 <= numb_elitism_parents <= data.POPULATION_SIZE
 
-                # A chance to individually apply a random mutation to the children
-                for child in children:
-                    if data.MUTATION_CHANCE > random.uniform(0.0, 1.0):
-                        mutation_functions[random.randint(0, len(mutation_functions) - 1)](child)
+        if numb_elitism_parents > 0:
+            # Calculate fitness for each genome
+            fitness_scores: List[Tuple[Genome, int]] = [(genome, fitness_function(genome)) for genome in population]
 
-                # Add the children to the next generation
-                next_population += children
+            # Sort the genomes based on the fitness
+            ranked_population: List[Tuple[Genome, int]] = sorted(
+                fitness_scores,
+                key=lambda x: x[1], # 'x' is a tuple, [1] is indexing to the int. I.e. sort based on the int value
+                reverse=True # Highest score first
+            )
 
-            assert len(next_population) == data.POPULATION_SIZE
+            for i in range(numb_elitism_parents):
+                next_population.append(ranked_population[i][0]) # index 0 accesses the Genome object of the Tuple
 
-            # Update the population
-            population = next_population
+        while len(next_population) < data.POPULATION_SIZE:
+            # Only deal with even populations for now
+            assert data.POPULATION_SIZE % 2 == 0 
+            
+            # Select two parents
+            parents = selection_function(population, fitness_function)
+            # Breed two children from those parents
+            children = crossover_function(parents[0], parents[1])
+
+            # A chance to individually apply a random mutation to the children
+            for child in children:
+                if data.MUTATION_CHANCE > random.uniform(0.0, 1.0):
+                    mutation_functions[random.randint(0, len(mutation_functions) - 1)](child)
+
+            # Add the children to the next generation
+            next_population += children
+
+        assert len(next_population) == data.POPULATION_SIZE
+
+        # Update the population
+        population = next_population
 
 def init_people() -> data.People:
     """
