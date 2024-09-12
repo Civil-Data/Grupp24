@@ -2,3 +2,5 @@
 
 # Lint
 - To lint the whole project run `make`
+# Run tests
+- make test
