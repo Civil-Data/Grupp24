@@ -37,5 +37,5 @@ jobs:
       # Finally run the linter, based in a configuration file .pylintrc in cwd
       - name: Launch Pylint
         run: |
-          pylint src/**/*.py
+          make
           
