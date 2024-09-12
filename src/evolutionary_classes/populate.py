@@ -2,7 +2,6 @@
 Module containing static population generating function(s)
 """
 
-from typing import List
 import random
 import data
 from genome import Genome
@@ -17,9 +16,9 @@ class Populate:
         Generate a population of random Genomes
         """
 
-        genomes: List[Genome] = []
+        population: data.Population = []
         for _ in range(data.POPULATION_SIZE):
-            genomes.append(Genome(random.randint(0, data.NUMBER_OF_FLOORS - 1) for _ in range(data.GENOME_LENGTH)))
+            population.append(Genome([random.randint(0, data.NUMBER_OF_FLOORS - 1) for _ in range(data.GENOME_LENGTH)]))
 
-        return genomes
+        return population
     
