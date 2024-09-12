@@ -1,5 +1,5 @@
 default:
-	pylint src/**/*.py tests/*.py
+	pylint src/**/*.py tests/**/*.py
 
 test:
 	pytest -v
