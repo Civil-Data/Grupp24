@@ -2,7 +2,6 @@
 Module containing static population generating function(s)
 """
 
-from typing import List
 import random
 import data
 from genome import Genome
