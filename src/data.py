@@ -1,4 +1,4 @@
-" Module containing shared information and configuration data"
+"Module containing shared information and configuration data"
 
 from typing import List, Callable, Tuple
 from genome import Genome, Person
