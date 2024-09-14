@@ -2,6 +2,12 @@
 This module contains tests for the mutation module.
 """
 
+import sys
+import os
+
+# Add path to src directory
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../src")))
+
 from genome import Genome
 from evolutionary_classes.mutation import Mutation
 
