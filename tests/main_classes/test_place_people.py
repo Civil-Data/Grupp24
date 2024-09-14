@@ -2,15 +2,17 @@
 place_people module tests
 """
 
-
 import sys
 import os
 from icecream import ic
-#To see what is generated, run this file by it self
-#Then the ic will print out the data
+
+# To see what is generated, run this file by it self
+# Then the ic will print out the data
 
 # Add path to src directory
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+sys.path.insert(
+    0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../src"))
+)
 from main import place_people, init_people
 import data
 
@@ -39,6 +41,7 @@ def test_init_people():
         ic(person.distance_traveled)
         ic(person.distance_needed)
 
+
 # Check that each person is on the correct floor
 def test_place_people():
     """
@@ -52,6 +55,7 @@ def test_place_people():
             assert person.start_floor == current_floor
             ic(person.start_floor)
         current_floor += 1
+
 
 if __name__ == "__main__":
     ic.enable()
