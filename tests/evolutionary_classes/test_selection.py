@@ -11,7 +11,7 @@ sys.path.insert(
 )
 
 from typing import List
-import pytest
+#import pytest
 from evolutionary_classes.selection import Selection
 
 
