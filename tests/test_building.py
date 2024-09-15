@@ -7,7 +7,7 @@ import copy
 # Add path to src directory
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
-from main_classes.building import Building, data
+from main_classes.building import Building
 from main import place_people, init_people
 
 
@@ -27,4 +27,3 @@ def test_move_elevator():
     #It is allowed shuold and should therefore result in the elevator not moving floors.
     building.move_elevator(building.elevator.current_floor, building.elevator.current_floor)
     assert building.elevator.current_floor is building.elevator.current_floor
-
