@@ -1,0 +1,156 @@
+% TARI29_Assignment_report_template.tex
+% This is a template for the assignment reports
+% TARI29 Artificial Intelligence, 7.5 credits, Winter 2024
+% Original version by:  Vladimir Tarasov, 2024
+% Revised by:           Alexandros Tzanetos, 2024 
+
+% Use a modern class instead of an old article class
+\documentclass{scrartcl}
+
+\KOMAoptions{
+    parskip=half,  % full, off
+    fontsize=12pt, % base font size (10pt default)
+    % headings=big,% small/normal/big headings (normal is default), 
+    % paper=a5,    % paper format (a4 default) 
+    pagesize=auto  % Use paper format for PDF too
+}
+
+% ---------------------- Report details --------------------- %
+%\newcommand{\docauthor}{Name1, Name2, Name3}
+\newcommand{\courseyear}{2024}
+\newcommand{\coursename}{TARI29 Artificial Intelligence}
+\newcommand{\coursecredits}{7.5 credits}
+\newcommand{\fullcoursename}{\coursename, \coursecredits}
+\newcommand{\termname}{Winter \courseyear}
+\newcommand{\groupnumber}{24}
+\newcommand{\reportname}{Group \groupnumber\ Assignment Report}
+\newcommand{\assignmentname}{Evolutionary Computation Assignment}
+% ------------------ End of report details ------------------ %
+
+
+
+% ---------- Setting up properties of the PDF file ---------- %
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    allcolors=blue,
+    pdftitle={\reportname},
+    pdfauthor={Oskar Sundberg, Linus Savinainen, Samuel Wallander Leyonberg, Gustav Pråmell, Joel Scarinius Stävmo},
+    pdfsubject={\coursename, \termname}
+	% pdfpagemode=FullScreen,
+	% pdfpagemode= UseOutlines % the default if present
+}
+% ------------ End of properties of the PDF file ------------ %
+
+
+
+% ----------- Setting up the headers and footers ------------ %
+\usepackage{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\KOMAoptions{% 
+    headsepline,% line below the header
+    plainheadsepline,% also on scrplain
+}
+\clearpairofpagestyles % Erase all current configurations
+% inner part of the header [titel_page]{other_pages}
+\ihead[\coursename, \courseyear]{\coursename, \courseyear}
+% outer part of the header [titel_page]{other_pages}
+\ohead{\assignmentname}
+% center part of the footer [titel_page]{other_pages}
+\cfoot[\textup{Page \pagemark\ of \ztotpages}]{\textup{Page \pagemark\ of \ztotpages}}
+% ------------- End of the headers and footers -------------- %
+
+
+
+% ---------------- Setting up the title page ---------------- %
+\title{\reportname}
+\subtitle{An Evolutionary Algorithm for an elevator to deliver as many people as possible to their desired floor}
+%\author{\docauthor}
+\author{Oskar Sundberg \and Linus Savinainen \and Samuel Wallander Leyonberg \and Gustav Pråmell \and Joel Scarinius Stävmo}
+\date{\today}
+% ------------------ End of the title page ------------------ %
+
+
+
+% --------------- Packages and custom commands -------------- %
+% Specify the input encoding of the source file as UTF8 
+\usepackage[utf8]{inputenc}
+% The T1 font encoding is an 8-bit encoding and fully supports words containing accented characters
+\usepackage[T1]{fontenc}
+% Load Latin modern fonts in outline format
+\usepackage{lmodern}
+% Load better typewriter font
+\usepackage{inconsolata}
+% For better hyphenation patterns
+\usepackage[english]{babel}
+% For improved micro-typography
+\usepackage{microtype}
+% Switch off extra space after a sentence
+\frenchspacing
+% To be able to iclude pictures
+\usepackage{graphicx}
+\usepackage{zref-totpages} % To get the total number of pages
+\usepackage{mathtools,amsmath} % for advanced math formulas
+ % To highlight source code
+\usepackage{minted}
+% Default options for all minted environments
+\setminted{
+           style=default, % for minted envronment
+           autogobble, % automatically remove all common leading whitespace
+           xleftmargin=10pt, % indentation to add (on the left) before the listing
+           numbersep=6pt, % gap between numbers and start of line
+           linenos, % enables line numbers
+           mathescape % enables the usual math mode inside comments
+}
+\setmintedinline[c]{style=default} % for minted inlines
+% Flexible handling of verbatim text
+\usepackage{fancyvrb}
+% For well-spaced lines and guidelines in tables
+\usepackage{booktabs}
+% To typeset algorithms or pseudocode in LaTeX 
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+% For plots and graphs
+\usepackage{pgfplots}
+\pgfplotsset{width=10cm,compat=1.9}
+
+% To generate placeholder text - can be deleted when you have written real text
+\usepackage{lipsum}
+% ----------- End of packages and custom commands ----------- %
+
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+\label{sec:intro}
+\input{Introduction}
+
+\section{Optimize elevator routing}
+\label{sec:problem_description}
+\input{Optimmize_Elevator_Routing}
+
+\section{Algorithm}
+\label{sec:algorithm}
+\input{Algorithm}
+
+\section{Experimental part}
+\label{sec:experimentation}
+\input{Experimental_part}
+
+\section{Results and Analysis}
+\label{sec:results-analysis}
+\input{Results_and_Analysis}
+
+\section{Conclusions}
+\label{sec:conclusions}
+\input{Conclusions}
+
+\end{document}
