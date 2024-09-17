@@ -1,6 +1,4 @@
-"""
-place_people module tests
-"""
+"place_people module tests"
 
 import sys
 import os
@@ -17,14 +15,13 @@ from main import place_people, init_people
 import data
 
 
-# Check that the number of people matches the expected count
-# Check that each person has valid floor values
-# Check correct initial states
-# Check distance_traveled is zero
-# Check non-zero distance needed
 def test_init_people():
     """
-    tsk tsk tsk
+    Check that the number of people matches the expected count
+    Check that each person has valid floor values
+    Check correct initial states
+    Check distance_traveled is zero
+    Check non-zero distance needed
     """
     people = init_people()
     assert len(people) is data.NUMBER_OF_PEOPLE
@@ -42,11 +39,8 @@ def test_init_people():
         ic(person.distance_needed)
 
 
-# Check that each person is on the correct floor
 def test_place_people():
-    """
-    tsk tsk tsk
-    """
+    "Check that each person is on the correct floor"
     floors = place_people(init_people())
     current_floor = 0
     for floor in floors:
