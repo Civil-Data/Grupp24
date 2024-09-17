@@ -11,12 +11,15 @@ sys.path.insert(
 )
 
 from evolutionary_classes.populate import Populate
-import data
+from data import NUMBER_OF_FLOORS, POPULATION_SIZE
 
 
 def test_generate_population() -> None:
     """
-    Generate a population of random Genomes
+    Test that the generate_population function actually generates a valid population.
     """
     population = Populate.generate_population()
-    assert len(population) == data.POPULATION_SIZE
+    assert len(population) == POPULATION_SIZE
+    for genome in population:
+        for i in genome.genome:
+            assert 0 <= i < NUMBER_OF_FLOORS
