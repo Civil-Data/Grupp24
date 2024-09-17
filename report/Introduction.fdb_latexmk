@@ -1,0 +1,17 @@
+# Fdb version 4
+["pdflatex"] 1726471713.08771 "/home/joel/civ-data/Artificial_Intelligence/Assignments/Grupp24/report/Introduction.tex" "Introduction.pdf" "Introduction" 1726471713.31818 2
+  "/etc/texmf/web2c/texmf.cnf" 1711377135.91875 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/home/joel/civ-data/Artificial_Intelligence/Assignments/Grupp24/report/Introduction.tex" 1726471712.50937 2408 6d7c10d400b1cad077ef252461b0b5b8 ""
+  "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmti10.tfm" 1136768653 1480 aa8e34af0eb6a2941b776984cf1dfdc4 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1716435808 7424022 47cf59d1cf66d050bfa5e76eaa0c6e75 ""
+  "Introduction.aux" 1726471713.08137 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "Introduction.tex" 1726471712.50937 2408 6d7c10d400b1cad077ef252461b0b5b8 ""
+  (generated)
+  "Introduction.aux"
+  "Introduction.log"
+  "Introduction.pdf"
+  (rewritten before read)

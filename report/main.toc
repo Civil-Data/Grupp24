@@ -1,0 +1,11 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {section}{\numberline {2}Optimize elevator routing}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Mathematical formulation}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Similar published academic work}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Why this evolutionary approach}{4}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Algorithm}{4}{section.3}%
+\contentsline {section}{\numberline {4}Experimental part}{6}{section.4}%
+\contentsline {section}{\numberline {5}Results and Analysis}{6}{section.5}%
+\contentsline {section}{\numberline {6}Conclusions}{7}{section.6}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

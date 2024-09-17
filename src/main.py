@@ -113,7 +113,7 @@ def init_people() -> data.People:
     """
     Get a list of people with random start and end floors
     """
-    return [Person(*random.sample(range(data.NUMBER_OF_FLOORS), 2)) for _ in range(data.NUMBER_OF_PEOPLE)]
+    return [Person(*random.sample(range(data.NUMBER_OF_FLOORS), 2), data.NUMBER_OF_FLOORS) for _ in range(data.NUMBER_OF_PEOPLE)]
 
 def place_people(people: data.People) -> data.People_queues:
     """
