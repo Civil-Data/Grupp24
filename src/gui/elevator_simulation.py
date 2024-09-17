@@ -1,10 +1,14 @@
+"""
+This module contains the code to run a visual simulation of the elevator using the best genome.
+"""
+
 import time
-import pygame
 import copy
+import pygame
 import data
 from genome import Genome
 from main_classes.building import Building
-from shared import CONST_PEOPLE_LIST, place_people
+from init_and_place_people import CONST_PEOPLE_LIST, place_people
 
 pygame.init()
 screen_info = pygame.display.Info()
