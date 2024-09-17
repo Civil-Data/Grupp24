@@ -5,7 +5,7 @@ test:
 	pytest -v
 
 latex:
-	cd report && pdflatex -shell-escape main.tex && rm -f *.aux *.log *.out *.toc *.fls *.fdb_latexmk
+	cd report && latexmk -pdf -shell-escape main.tex && latexmk -c && rm -rf _minted-main && rm -f main.bbl
 
 run:
 	python src/main.py
