@@ -4,7 +4,7 @@
 
 ## Run
 
-- To lint the whole project run `make run`
+- To run the evolutionary algorithm run `make run`
 
 ## Lint
 
@@ -13,3 +13,7 @@
 ## Test
 
 - To run the tests, run `make test`
+
+## Generate PDF and clean files in report directory
+
+- To generate the PDF and clean files in the report directory, run `make latex`
