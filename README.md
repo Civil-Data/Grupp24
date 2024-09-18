@@ -17,3 +17,7 @@
 ## Generate PDF and clean files in report directory
 
 - To generate the PDF and clean files in the report directory, run `make latex`
+
+## Clean files in report directory
+
+- To clean files in the report directory, run `make clean`
