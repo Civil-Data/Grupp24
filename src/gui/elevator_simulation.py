@@ -164,18 +164,18 @@ def run_simulation(best_genome: Genome) -> None:
             pygame.display.flip()
             clock.tick(FPS)
 
-        # Simulate picking up people from the current floor
-        people_to_pick_up = building.people_queues[floor]
-        while people_to_pick_up and len(elevator_passengers) < ELEVATOR_CAPACITY:
-            person = people_to_pick_up.pop(0)
-            elevator_passengers.append(person)
-
         # Simulate dropping off passengers
         passengers_to_drop = [p for p in elevator_passengers if p.end_floor == floor]
         for passenger in passengers_to_drop:
             elevator_passengers.remove(passenger)
             people_arrived[floor] = (people_arrived[floor] or 0) + 1
 
+        # Simulate picking up people from the current floor
+        people_to_pick_up = building.people_queues[floor]
+        while people_to_pick_up and len(elevator_passengers) < ELEVATOR_CAPACITY:
+            person = people_to_pick_up.pop(0)
+            elevator_passengers.append(person)
+            
         print(f"Elevator moved to floor {floor}")
         time.sleep(1)  # Add a delay to visualize the movement
 
