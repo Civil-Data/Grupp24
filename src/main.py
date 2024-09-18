@@ -65,8 +65,13 @@ def run_evolution(
 
         # Check if we have achieved the max possible score, then break off
         if ranked_population[0].fitness_score == data.MAXIMUM_POSSIBLE_SCORE:
-            print("Maximum possible score achieved")
-            run_simulation(ranked_population[0])
+            print("Maximum possible score achieved!")
+            print(f"Best Genome:\n{ranked_population[0].genome}")
+            print(
+                "Press 'y' to run simulation for best genome or any other key to exit"
+            )
+            if input() == "y":
+                run_simulation(ranked_population[0])
             break
 
         next_population: data.Population = []
