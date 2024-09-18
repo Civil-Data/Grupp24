@@ -2,7 +2,9 @@
 Person module
 """
 
+import json
 import data
+
 
 class Person:
     """
@@ -21,10 +23,19 @@ class Person:
             raise ValueError("start_floor may not be negative.")
 
         if end_floor > data.NUMBER_OF_FLOORS - 1:
-            raise ValueError("end_floor may not exceed total number of floors minus one.")
+            raise ValueError(
+                "end_floor may not exceed total number of floors minus one."
+            )
 
         self.start_floor = start_floor
         self.end_floor = end_floor
         self.has_arrived = False
         self.distance_traveled: int = 0
         self.distance_needed: int = abs(start_floor - end_floor)
+
+    def to_json(self):
+        return {"start_floor": self.start_floor, "end_floor": self.end_floor}
+
+    @classmethod
+    def from_json(cls, data):
+        return cls(start_floor=data["start_floor"], end_floor=data["end_floor"])
