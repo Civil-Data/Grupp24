@@ -11,7 +11,7 @@ from icecream import ic
 sys.path.insert(
     0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../src"))
 )
-from main import place_people, init_people
+from init_and_place_people import place_people, init_people
 import data
 
 
