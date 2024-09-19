@@ -136,11 +136,11 @@ attr-naming-style=snake_case
 
 # Bad variable names which should always be refused, separated by a comma.
 bad-names=foo,
-          bar,
-          baz,
-          toto,
-          tutu,
-          tata
+		  bar,
+		  baz,
+		  toto,
+		  tutu,
+		  tata
 
 # Bad variable names regexes, separated by a comma. If names match any regex,
 # they will always be refused
@@ -191,11 +191,11 @@ function-naming-style=snake_case
 
 # Good variable names which should always be accepted, separated by a comma.
 good-names=i,
-           j,
-           k,
-           ex,
-           Run,
-           _
+		   j,
+		   k,
+		   ex,
+		   Run,
+		   _
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted
@@ -263,10 +263,10 @@ check-protected-access-in-special-methods=no
 
 # List of method names used to declare (i.e. assign) instance attributes.
 defining-attr-methods=__init__,
-                      __new__,
-                      setUp,
-                      asyncSetUp,
-                      __post_init__
+					  __new__,
+					  setUp,
+					  asyncSetUp,
+					  __post_init__
 
 # List of member names, which should be excluded from the protected access
 # warning.
@@ -337,9 +337,9 @@ ignore-long-lines=^\s*(# )?<?https?://\S+>?$
 # Number of spaces of indent required inside a hanging or continued line.
 indent-after-paren=4
 
-# String used as indentation unit. This is usually "    " (4 spaces) or "\t" (1
+# String used as indentation unit. This is usually "	" (4 spaces) or "\t" (1
 # tab).
-indent-string='    '
+indent-string='	'
 
 # Maximum number of characters on a single line.
 max-line-length=150
@@ -412,10 +412,10 @@ logging-modules=logging
 # all. Valid levels: HIGH, CONTROL_FLOW, INFERENCE, INFERENCE_FAILURE,
 # UNDEFINED.
 confidence=HIGH,
-           CONTROL_FLOW,
-           INFERENCE,
-           INFERENCE_FAILURE,
-           UNDEFINED
+		   CONTROL_FLOW,
+		   INFERENCE,
+		   INFERENCE_FAILURE,
+		   UNDEFINED
 
 # Disable the message, report, category or checker with the given id(s). You
 # can either give multiple identifiers separated by comma (,) or put this
@@ -427,18 +427,18 @@ confidence=HIGH,
 # no Warning level messages displayed, use "--disable=all --enable=classes
 # --disable=W".
 disable=raw-checker-failed,
-        bad-inline-option,
-        locally-disabled,
-        file-ignored,
-        suppressed-message,
-        useless-suppression,
-        deprecated-pragma,
-        use-symbolic-message-instead,
-        use-implicit-booleaness-not-comparison-to-string,
-        use-implicit-booleaness-not-comparison-to-zero,
-        E0401,
-        W0612,
-        C0413
+		bad-inline-option,
+		locally-disabled,
+		file-ignored,
+		suppressed-message,
+		useless-suppression,
+		deprecated-pragma,
+		use-symbolic-message-instead,
+		use-implicit-booleaness-not-comparison-to-string,
+		use-implicit-booleaness-not-comparison-to-zero,
+		E0401,
+		W0612,
+		C0413
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -458,8 +458,8 @@ timeout-methods=requests.api.delete,requests.api.get,requests.api.head,requests.
 
 # List of note tags to take in consideration, separated by a comma.
 notes=FIXME,
-      XXX,
-      TODO
+	  XXX,
+	  TODO
 
 # Regular expression of note tags to take in consideration.
 notes-rgx=
@@ -587,9 +587,9 @@ ignore-on-opaque-inference=yes
 
 # List of symbolic message names to ignore for Mixin members.
 ignored-checks-for-mixins=no-member,
-                          not-async-context-manager,
-                          not-context-manager,
-                          attribute-defined-outside-init
+						  not-async-context-manager,
+						  not-context-manager,
+						  attribute-defined-outside-init
 
 # List of class names for which member attributes should not be checked (useful
 # for classes with dynamically set attributes). This supports the use of
@@ -630,7 +630,7 @@ allowed-redefined-builtins=
 # List of strings which can identify a callback function by name. A callback
 # name must start or end with one of those strings.
 callbacks=cb_,
-          _cb
+		  _cb
 
 # A regular expression matching the name of dummy variables (i.e. expected to
 # not be used).
