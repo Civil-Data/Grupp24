@@ -59,9 +59,8 @@ def run_evolution(
             reverse=True,  # Highest score first
         )
 
-        print(
-            f"Gen {generation}   Top three genomes (fitness,length):   ({ranked_population[0].fitness_score},{len(ranked_population[0].genome)}) ({ranked_population[1].fitness_score},{len(ranked_population[1].genome)}) ({ranked_population[1].fitness_score},{len(ranked_population[1].genome)})"
-        )
+        print(f"Gen {generation}   Top three genomes (fitness,time,length):   ({ranked_population[0].fitness_score},{ranked_population[0].time_score},{len(ranked_population[0].genome)}) ({ranked_population[1].fitness_score},{ranked_population[1].time_score},{len(ranked_population[1].genome)}) ({ranked_population[2].fitness_score},{ranked_population[2].time_score},{len(ranked_population[2].genome)})")
+
 
         # Check if we have achieved the max possible score, then break off
         if ranked_population[0].fitness_score == data.MAXIMUM_POSSIBLE_SCORE:
