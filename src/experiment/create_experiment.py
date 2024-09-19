@@ -7,6 +7,7 @@ import sys
 import os
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
+
 import json
 import random
 import data
@@ -14,14 +15,14 @@ from main_classes.person import Person
 
 
 # Number of genomes in generation
-number_of_genomes = 1000
+number_of_genomes = 100
 # Length range on genomes
-range_start = 12
-range_end = 14
+range_start = 2
+range_end = 12
 # numbers of floors
-floors = 8
+floors = 6
 # How many people can be slotted on one floor
-floor_length = 2
+floor_length = 100
 
 
 def create_random_generation(
@@ -29,7 +30,7 @@ def create_random_generation(
     range_start,
     range_end,
     number_of_floors,
-    filename=f"Generation_{number_of_genomes}.json",
+    filename=f"Generation_{floors}_{number_of_genomes}.json",
 ) -> data.Population:
 
     population_list: data.Population = []
@@ -44,9 +45,9 @@ def create_random_generation(
 
         # Ensure not the same floor two times in a row
         for _ in range(k - 1):
-            next_num = random.choice(range(number_of_floors + 1))
+            next_num = random.choice(range(number_of_floors))
             while next_num == genome_list[-1]:
-                next_num = random.choice(range(number_of_floors + 1))
+                next_num = random.choice(range(number_of_floors))
 
             genome_list.append(next_num)
 
@@ -84,8 +85,8 @@ def create_random_building(
         )
 
 
-# create_random_generation(number_of_genomes, range_start, range_end, floors)
-create_random_building(floors, floor_length)
+create_random_generation(number_of_genomes, range_start, range_end, floors)
+# create_random_building(floors, floor_length)
 
 print(
     f"List of {number_of_genomes} generations has been created check file for results!"
