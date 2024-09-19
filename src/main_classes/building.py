@@ -45,7 +45,7 @@ class Building:
                 person.has_arrived = True
                 # The time the person has been waiting is the same as the time from the start until they have arrived
                 person.time_spent_waiting += self.time_passed
-                self.elevator.occupants.remove(person) 
+                self.elevator.occupants.remove(person)
 
         # Loop over all people waiting for the elevator at the current floor
         for person in self.people_queues[self.elevator.current_floor]:

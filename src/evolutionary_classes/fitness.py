@@ -22,6 +22,6 @@ class Fitness:
                 accumulated_score += PERSON_ARRIVED_SCORE
                 accumulated_time_score += person.time_spent_waiting
             else:
-                accumulated_time_score += TIME_PENALTY 
+                accumulated_time_score += TIME_PENALTY
         genome.fitness_score = accumulated_score
         genome.time_score = accumulated_time_score
