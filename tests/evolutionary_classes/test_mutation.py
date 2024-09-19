@@ -44,6 +44,9 @@ def test_decrease_genome_length() -> None:
     genome.genome = [1, 2, 3, 4, 5, 6]
     Mutation.decrease_genome_length(genome)
     assert len(genome.genome) == 5
+    genome.genome = [1, 2]
+    Mutation.decrease_genome_length(genome)
+    assert len(genome.genome) > 1
 
 
 def test_swap_and_inc() -> None:
@@ -65,3 +68,7 @@ def test_swap_and_dec() -> None:
     Mutation.swap_and_dec(genome)
     assert genome.genome != [1, 2, 3, 4, 5, 6]
     assert len(genome.genome) == 5
+    genome.genome = [1, 2]
+    Mutation.swap_and_dec(genome)
+    assert len(genome.genome) > 1
+    assert genome.genome == [2, 1]
