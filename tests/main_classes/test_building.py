@@ -10,7 +10,7 @@ sys.path.insert(
 )
 
 from main_classes.building import Building
-from main import place_people, init_people
+from init_and_place_people import place_people, init_people
 
 
 def test_move_elevator():
