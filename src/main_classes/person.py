@@ -16,6 +16,7 @@ class Person:
     has_arrived: bool
     distance_traveled: int
     distance_needed: int
+    time_spent_waiting: int
 
     def __init__(self, start_floor: int, end_floor: int) -> None:
         if start_floor < 0:
@@ -31,6 +32,7 @@ class Person:
         self.has_arrived = False
         self.distance_traveled: int = 0
         self.distance_needed: int = abs(start_floor - end_floor)
+        self.time_spent_waiting: int = 0
 
     def to_json(self):
         return {"start_floor": self.start_floor, "end_floor": self.end_floor}
