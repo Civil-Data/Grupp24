@@ -15,27 +15,30 @@ from main_classes.person import Person
 
 
 # Number of genomes in generation
-number_of_genomes = 100
+NUMBER_OF_GNEOMES = 100
 # Length range on genomes
-range_start = 2
-range_end = 12
+RANGE_START = 2
+RANGE_END = 6
 # numbers of floors
-floors = 6
+FLOORS = 15
 # How many people can be slotted on one floor
-floor_length = 100
+FLOOR_LENGTH = 1
 
 
 def create_random_generation(
-    number_of_genomes,
+    number_of_gnomes,
     range_start,
     range_end,
     number_of_floors,
-    filename=f"Generation_{floors}_{number_of_genomes}.json",
+    filename=f"Generation_{FLOORS}_{NUMBER_OF_GNEOMES}.json",
 ) -> data.Population:
+    """
+    Creates json file with set number of generations
+    """
 
     population_list: data.Population = []
 
-    for _ in range(number_of_genomes):
+    for _ in range(number_of_gnomes):
         k = random.randint(range_start, range_end)
 
         # set start to floor 0
@@ -53,7 +56,7 @@ def create_random_generation(
 
         population_list.append(genome_list)
 
-        with open(filename, "w") as file:
+        with open(filename, "w", encoding="UTF-8") as file:
             json.dump(population_list, file, indent=4)
     # To ensure success
     return population_list
@@ -62,8 +65,11 @@ def create_random_generation(
 def create_random_building(
     number_of_floor,
     floor_queue_length,
-    filename=f"Building_{floors}_{floor_length}.json",
+    filename=f"Building_{FLOORS}_{FLOOR_LENGTH}.json",
 ) -> data.People:
+    """
+    Create a building from set parameters
+    """
     building_list: data.People = []
 
     for i in range(number_of_floor):
@@ -75,19 +81,19 @@ def create_random_building(
             while i == end_floor:
                 end_floor = random.choice(range(number_of_floor))
 
-            building_list.append(Person(i, end_floor))
+            building_list.append(Person(i, end_floor, FLOORS))
 
-    with open(filename, "w") as file:
+    with open(filename, "w", encoding="UTF-8") as file:
         json.dump(
-            [person.to_json() for person in building_list],
+            [person.to_json(FLOORS) for person in building_list],
             file,
             indent=4,
         )
 
 
-create_random_generation(number_of_genomes, range_start, range_end, floors)
-# create_random_building(floors, floor_length)
+create_random_generation(NUMBER_OF_GNEOMES, RANGE_START, RANGE_END, FLOORS)
+create_random_building(FLOORS, FLOOR_LENGTH)
 
 print(
-    f"List of {number_of_genomes} generations has been created check file for results!"
+    f"List of {NUMBER_OF_GNEOMES} generations has been created check file for results!"
 )

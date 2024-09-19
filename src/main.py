@@ -6,6 +6,7 @@ import math
 import os
 import data
 from itertools import product
+import copy
 
 # from icecream import ic
 from evolutionary_classes.fitness import Fitness
@@ -45,7 +46,7 @@ def run_evolution(
         # Loop over the genomes
         for genome in population:
             # Always reset to original state between the genome iterations
-            people_list: data.People = experiment.people_list
+            people_list: data.People = copy.deepcopy(experiment.people_list)
             building: Building = Building(place_people(people_list))
             genome.people = people_list
 

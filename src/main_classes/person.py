@@ -2,8 +2,6 @@
 Person module
 """
 
-import data
-
 
 class Person:
     """
@@ -18,11 +16,11 @@ class Person:
     distance_needed: int
     time_spent_waiting: int
 
-    def __init__(self, start_floor: int, end_floor: int) -> None:
+    def __init__(self, start_floor: int, end_floor: int, number_of_floors: int) -> None:
         if start_floor < 0:
             raise ValueError("start_floor may not be negative.")
 
-        if end_floor > data.NUMBER_OF_FLOORS - 1:
+        if end_floor > number_of_floors - 1:
             raise ValueError(
                 "end_floor may not exceed total number of floors minus one."
             )
@@ -34,12 +32,12 @@ class Person:
         self.distance_needed: int = abs(start_floor - end_floor)
         self.time_spent_waiting: int = 0
 
-    def to_json(self):
-        return {"start_floor": self.start_floor, "end_floor": self.end_floor}
-
-    @classmethod
-    def from_json(cls, data):
-        return cls(
-            start_floor=data["start_floor"],
-            end_floor=data["end_floor"],
-        )
+    def to_json(self, number_of_floors):
+        """
+        Save a person class down to a json file
+        """
+        return {
+            "start_floor": self.start_floor,
+            "end_floor": self.end_floor,
+            "floors": number_of_floors,
+        }
