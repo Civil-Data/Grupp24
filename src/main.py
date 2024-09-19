@@ -1,10 +1,10 @@
 " Main program module "
 
 from typing import List, Tuple
-import data
 import random
 import math
 import os
+import data
 from itertools import product
 
 # from icecream import ic
@@ -18,6 +18,8 @@ from main_classes.building import Building
 from main_classes.person import Person
 from experiment.experiment import ExperimentElevator, load_building, load_population
 import matplotlib.pyplot as plt
+from gui.elevator_simulation import run_simulation
+from init_and_place_people import CONST_PEOPLE_LIST, place_people
 
 
 def run_evolution(
@@ -76,7 +78,13 @@ def run_evolution(
 
         # Check if we have achieved the max possible score, then break off
         if ranked_population[0].fitness_score == data.MAXIMUM_POSSIBLE_SCORE:
-            print("Maximum possible score achieved")
+            print("Maximum possible score achieved!")
+            print(f"Best Genome:\n{ranked_population[0].genome}")
+            print(
+                "Press 'y' to run simulation for best genome or any other key to exit"
+            )
+            if input() == "y":
+                run_simulation(ranked_population[0])
             break
 
         next_population: data.Population = []
@@ -130,17 +138,6 @@ def run_evolution(
         population = next_population
 
     return result_data
-
-
-def place_people(people: data.People) -> data.People_queues:
-    """
-    Place people on their respective starting floors
-    """
-    matrix: data.People_queues = [[] for _ in range(data.NUMBER_OF_FLOORS)]
-    for person in people:
-        matrix[person.start_floor].append(person)
-
-    return matrix
 
 
 def run_experiments(people_folder_path, generation_folder_path) -> List:

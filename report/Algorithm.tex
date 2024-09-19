@@ -1,0 +1,45 @@
+\textcolor{red}{The third section should present the evolutionary approach you developed. You can divide this section into subsection. In any case, you should mention the following details:}
+
+\textcolor{red}{\textbf{Evolutionary approach.} Clearly describe the algorithm you developed. You should clearly explain the evolutionary operators you used and what modifications you did to match the problem. It is extremely important to present also a pseudocode of your algorithm. An example is given in \ref{alg:pseudocode_example}, below. For more insight into presentation of algorithms, you can advise \cite{zobel2014algorithms}.}
+
+{
+	\color{red}To typeset pseudocode in \LaTeX\ you can use one of the following options:
+	\begin{itemize}
+		\item Choose ONE of the (\texttt{algpseudocode} OR \texttt{algcompatible} OR \texttt{algorithmic}) packages to typeset algorithm bodies, and the algorithm package for captioning the algorithm.
+		\item The \texttt{algorithm2e} package.
+	\end{itemize}
+	You can find more information here: \url{https://www.overleaf.com/learn/latex/Algorithms}
+}
+
+\begin{algorithm}
+	\caption{Example of an algorithm's pseudocode}\label{alg:pseudocode_example}
+	\begin{algorithmic}
+		\Require $n \geq 0$
+		\Ensure $y = x^n$
+		\State $y \gets 1$
+		\State $X \gets x$
+		\State $N \gets n$
+		\While{$N \neq 0$}
+		\If{$N$ is even}
+		\State $X \gets X \times X$
+		\State $N \gets \frac{N}{2}$  \Comment{This is a comment}
+		\ElsIf{$N$ is odd}
+		\State $y \gets y \times X$
+		\State $N \gets N - 1$
+		\EndIf
+		\EndWhile
+	\end{algorithmic}
+\end{algorithm}
+
+\textcolor{red}{\textbf{Solution representation.} Clearly describe the solution representation you used. You can use figures to improve the comprehensibility of this part.}
+
+\textcolor{red}{\textbf{Fitness function.} It is also very important to mention the fitness function you used. In many cases, the objective function of the problem is not the same as the fitness function used in an evolutionary algorithm. An example, following the principles of \cite{zobel2014mathematics}, is given below.}
+
+\begin{equation}
+	F = \sum_{i=1}^d x_i^2
+\end{equation}
+where $x_i$ is the $i$-th gene (i.e., decision variable) in the solution and $d$ corresponds to the number of decision variables in the problem.
+
+\textcolor{red}{\textbf{Note:} Change the section's title to match the name of the algorithm you developed for your assignment.}
+
+\lipsum[3]

@@ -1,15 +1,15 @@
-" Module containing shared information and configuration data"
+"Module containing shared information and configuration data"
 
 from typing import List, Callable, Tuple
 from genome import Genome, Person
 
-GENOME_LENGTH: int = 8
-POPULATION_SIZE: int = 30
-GENERATION_LIMIT: int = 100000
-MUTATION_CHANCE: float = 0.01
+NUMBER_OF_FLOORS: int = 15
+GENOME_LENGTH: int = NUMBER_OF_FLOORS
+POPULATION_SIZE: int = 100
+GENERATION_LIMIT: int = 100
+MUTATION_CHANCE: float = 0.05
 CROSSOVER_CHANCE: float = 1.0
 
-NUMBER_OF_FLOORS: int = 15
 NUMBER_OF_PEOPLE: int = NUMBER_OF_FLOORS * 1
 
 PERSON_ARRIVED_SCORE: int = 10
@@ -28,4 +28,3 @@ FitnessFunction = Callable[[Genome], None]
 SelectionFunction = Callable[[Population], Tuple[Genome, Genome]]
 CrossoverFunction = Callable[[Genome, Genome], Tuple[Genome, Genome]]
 MutationFunction = Callable[[Genome], None]
-    

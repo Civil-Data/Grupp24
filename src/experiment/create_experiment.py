@@ -19,9 +19,9 @@ number_of_genomes = 1000
 range_start = 12
 range_end = 14
 # numbers of floors
-floors = 12
+floors = 8
 # How many people can be slotted on one floor
-floor_length = 27
+floor_length = 2
 
 
 def create_random_generation(
@@ -84,7 +84,7 @@ def create_random_building(
         )
 
 
-create_random_generation(number_of_genomes, range_start, range_end, floors)
+# create_random_generation(number_of_genomes, range_start, range_end, floors)
 create_random_building(floors, floor_length)
 
 print(

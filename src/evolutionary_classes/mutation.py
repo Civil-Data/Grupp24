@@ -6,10 +6,12 @@ import random
 import data
 from genome import Genome
 
+
 class Mutation:
     """
     Class containing static mutation function(s)
     """
+
     @staticmethod
     def swap(genome: Genome) -> None:
         """
@@ -45,11 +47,13 @@ class Mutation:
         """
         Do swap and increase length.
         """
-        Mutation.increase_genome_length(Mutation.swap(genome))
+        Mutation.swap(genome)
+        Mutation.increase_genome_length(genome)
 
     @staticmethod
     def swap_and_dec(genome: Genome) -> None:
         """
         Do swap and decrease length.
         """
-        Mutation.decrease_genome_length(Mutation.swap(genome))
+        Mutation.swap(genome)
+        Mutation.decrease_genome_length(genome)

@@ -2,7 +2,6 @@
 Person module
 """
 
-import json
 import data
 
 
@@ -38,4 +37,7 @@ class Person:
 
     @classmethod
     def from_json(cls, data):
-        return cls(start_floor=data["start_floor"], end_floor=data["end_floor"])
+        return cls(
+            start_floor=data["start_floor"],
+            end_floor=data["end_floor"],
+        )

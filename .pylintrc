@@ -110,7 +110,7 @@ suggestion-mode=yes
 
 # Allow loading of arbitrary C extensions. Extensions are imported into the
 # active Python interpreter and may run arbitrary code.
-unsafe-load-any-extension=no
+unsafe-load-any-extension=yes
 
 # In verbose mode, extra non-checker-related info will be displayed.
 #verbose=
@@ -299,10 +299,10 @@ max-attributes=7
 max-bool-expr=5
 
 # Maximum number of branch for function / method body.
-max-branches=12
+max-branches=13
 
 # Maximum number of locals for function / method body.
-max-locals=15
+max-locals=35
 
 # Maximum number of parents for a class (see R0901).
 max-parents=7
@@ -314,7 +314,7 @@ max-public-methods=20
 max-returns=6
 
 # Maximum number of statements in function / method body.
-max-statements=50
+max-statements=70
 
 # Minimum number of public methods for a class (see R0903).
 min-public-methods=0

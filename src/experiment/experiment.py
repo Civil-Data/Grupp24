@@ -22,16 +22,6 @@ class ExperimentElevator:
         self.people_list: data.People_queues = people_path
         self.generation_list: data.Population = generation_path
 
-    def run(self):
-        results = main.run_evolution(
-            populate_function=Populate.generate_population,
-            fitness_function=Fitness.calc_fitness,
-            selection_function=Selection.rank,
-            crossover_function=Crossover.swap_last_halves,
-            mutation_functions=[Mutation.swap, Mutation.increase_genome_length],
-            experiment=self,
-        )
-
     def display_experiment(self, name, results) -> None:
         generation = [res[0] for res in results]
         fitness_score = [res[1] for res in results]
