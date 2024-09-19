@@ -40,7 +40,9 @@ class Mutation:
 		"""
 		Remove a randomly chosen index.
 		"""
-		genome.genome.pop(random.randint(0, len(genome.genome) - 1))
+		# Ensure that the genome length is at least 2 to be able to run the simulation.
+		if len(genome.genome) > 2:
+			genome.genome.pop(random.randint(0, len(genome.genome) - 1))
 
 	@staticmethod
 	def swap_and_inc(genome: Genome) -> None:
