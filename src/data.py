@@ -15,6 +15,10 @@ NUMBER_OF_PEOPLE: int = NUMBER_OF_FLOORS * 1
 PERSON_ARRIVED_SCORE: int = 10
 MAXIMUM_POSSIBLE_SCORE: int = NUMBER_OF_PEOPLE * PERSON_ARRIVED_SCORE
 
+# How much extra time a person who doesn't end up on the right floor gives
+TIME_PENALTY: int = 100
+
+
 # Top % of genomes to directly carry over to the next generation
 ELITISM_PERC: float = 0.0
 

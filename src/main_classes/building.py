@@ -16,6 +16,12 @@ class Building:
 
         self.people_queues = people_queues
         self.elevator = Elevator()
+        # Counts how many trips the elevator has made
+        self.time_passed = 0
+        # Total time spent waiting by all travelers
+        self.time_spent_waiting = 0
+
+
 
     def move_elevator(self, previous_floor: int, arrived_floor: int) -> None:
         """
@@ -28,6 +34,8 @@ class Building:
             raise ValueError("previous_floor out of bounds")
 
         self.elevator.current_floor = arrived_floor
+        # Increments the number of trips
+        self.time_passed += 1
 
         for person in self.elevator.occupants:
             # All occupants have traveled a certain distance
@@ -35,7 +43,9 @@ class Building:
             if self.elevator.current_floor == person.end_floor:
                 # If anyone has arrived at their destination, remove them from elevator
                 person.has_arrived = True
-                self.elevator.occupants.remove(person)
+                # The time the person has been waiting is the same as the time from the start until they have arrived
+                person.time_spent_waiting += self.time_passed
+                self.elevator.occupants.remove(person) 
 
         # Loop over all people waiting for the elevator at the current floor
         for person in self.people_queues[self.elevator.current_floor]:
