@@ -5,7 +5,7 @@ test:
 	pytest -v
 
 latex:
-	cd report && latexmk -pdf -shell-escape main.tex
+	cd report && latexmk -pdf -shell-escape -interaction=nonstopmode main.tex
 	make clean
 
 clean:
