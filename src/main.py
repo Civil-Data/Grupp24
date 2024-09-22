@@ -161,15 +161,15 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 		people_data = load_building(people_file_path)
 		generation_data = load_population(generation_file_path)
 
-        current_experiment = ExperimentElevator(people_data, generation_data)
-        results = run_evolution(
-            populate_function=Populate.generate_population,
-            fitness_function=Fitness.calc_fitness,
-            selection_function=Selection.rank,
-            crossover_function=Crossover.swap_last_halves,
-            mutation_functions=[Mutation.swap, Mutation.increase_genome_length],
-            experiment=current_experiment,
-        )
+		current_experiment = ExperimentElevator(people_data, generation_data)
+		results = run_evolution(
+			populate_function=Populate.generate_population,
+			fitness_function=Fitness.calc_fitness,
+			selection_function=Selection.rank,
+			crossover_function=Crossover.heuristic_crossover_sequense_of_genes,
+			mutation_functions=[Mutation.swap, Mutation.increase_genome_length],
+			experiment=current_experiment,
+		)
 
 		experiment_name = (
 			f"People: {people_experiment}, Generation: {generation_experiment}"
