@@ -166,7 +166,7 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
             populate_function=Populate.generate_population,
             fitness_function=Fitness.calc_fitness,
             selection_function=Selection.rank,
-            crossover_function=Crossover.swap_last_halves,
+            crossover_function=Crossover.heuristic_crossover,
             mutation_functions=[Mutation.swap, Mutation.increase_genome_length],
             experiment=current_experiment,
         )
