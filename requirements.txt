@@ -16,4 +16,4 @@ pylint==3.2.7
 pytest==8.3.3
 six==1.16.0
 tomlkit==0.13.2
-matplotlib==3.5.1
+matplotlib==3.9.2
