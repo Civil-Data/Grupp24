@@ -19,3 +19,10 @@ install:
 
 update:
 	pip freeze > requirements.txt
+
+experiment:
+	python src/experiment/create_experiment.py
+
+experiment-clean:
+	rm buildings/*
+	rm generations/*
