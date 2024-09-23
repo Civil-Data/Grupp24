@@ -16,3 +16,6 @@ run:
 
 install:
 	pip install -r requirements.txt
+
+update:
+	pip freeze > requirements.txt
