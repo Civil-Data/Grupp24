@@ -38,4 +38,4 @@ jobs:
             # Finally run
             - name: Run code
               run: |
-                  make run
+                  yes | make run
