@@ -23,11 +23,11 @@ jobs:
             # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
             - uses: actions/checkout@v4
 
-            # Install minimal TeX Live and latexmk
-            - name: Install minimal TeX Live and latexmk
+            # Install minimal TeX Live and required packages
+            - name: Install minimal TeX Live and required packages
               run: |
                   sudo apt-get update
-                  sudo apt-get install -y texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended latexmk
+                  sudo apt-get install -y texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended latexmk tex-gyre
 
             # Finally run make latex
             - name: Create PDF and clean up
