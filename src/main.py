@@ -7,8 +7,8 @@ import os
 import data
 from itertools import product
 import copy
+import matplotlib.pyplot as plt
 
-# from icecream import ic
 from evolutionary_classes.fitness import Fitness
 from evolutionary_classes.populate import Populate
 from evolutionary_classes.selection import Selection
@@ -16,12 +16,9 @@ from evolutionary_classes.crossover import Crossover
 from evolutionary_classes.mutation import Mutation
 from genome import Genome
 from main_classes.building import Building
-from main_classes.person import Person
 from experiment.experiment import ExperimentElevator, load_building, load_population
-import matplotlib.pyplot as plt
 from gui.elevator_simulation import run_simulation
-from init_and_place_people import CONST_PEOPLE_LIST, place_people
-
+from init_and_place_people import place_people, CONST_PEOPLE_LIST
 
 def run_evolution(
 	populate_function: data.PopulateFunction,
@@ -29,16 +26,21 @@ def run_evolution(
 	selection_function: data.SelectionFunction,
 	crossover_function: data.CrossoverFunction,
 	mutation_functions: List[data.MutationFunction],
-	experiment: ExperimentElevator,
-) -> None:
+	experiment: ExperimentElevator = None,
+):
 	"""
 	Run the evolution
 	"""
 
 	# Get an initial population
-	population: data.Population = experiment.generation_list
+	if data.DO_EXP:
+		assert experiment is not None
+		population: data.Population = experiment.generation_list
+	else:
+		assert experiment is None
+		population: data.Population = populate_function()
+
 	result_data = []
-	# population: data.Population = populate_function()
 
 	# Loop over the generations
 	for generation in range(data.GENERATION_LIMIT):
@@ -46,7 +48,11 @@ def run_evolution(
 		# Loop over the genomes
 		for genome in population:
 			# Always reset to original state between the genome iterations
-			people_list: data.People = copy.deepcopy(experiment.people_list)
+			if data.DO_EXP:
+				people_list: data.People = copy.deepcopy(experiment.people_list)
+			else:
+				people_list: data.People = copy.deepcopy(CONST_PEOPLE_LIST)
+				
 			building: Building = Building(place_people(people_list))
 			genome.people = people_list
 
@@ -68,25 +74,17 @@ def run_evolution(
 		)
 
 		print(
-			f"Gen {generation}   Top three genomes (fitness,time,length):   ({ranked_population[0].fitness_score},{ranked_population[0].time_score},{len(ranked_population[0].genome)}) ({ranked_population[1].fitness_score},{ranked_population[1].time_score},{len(ranked_population[1].genome)}) ({ranked_population[2].fitness_score},{ranked_population[2].time_score},{len(ranked_population[2].genome)})"
+			f"Gen {generation}   Top three genomes (fitness,length):   ({ranked_population[0].fitness_score},{len(ranked_population[0].genome)}) ({ranked_population[1].fitness_score},{len(ranked_population[1].genome)}) ({ranked_population[2].fitness_score},{len(ranked_population[2].genome)})"
 		)
 
-		result_data_temp = (
+		result_data.append((
 			generation,
 			ranked_population[0].fitness_score,
 			len(ranked_population[0].genome),
-		)
-		result_data.append(result_data_temp)
+		))
 
-		# Check if we have achieved the max possible score, then break off
-		if ranked_population[0].fitness_score == data.MAXIMUM_POSSIBLE_SCORE:
-			print("Maximum possible score achieved!")
-			print(f"Best Genome:\n{ranked_population[0].genome}")
-			print(
-				"Press 'y' to run simulation for best genome or any other key to exit"
-			)
-			if input() == "y":
-				run_simulation(ranked_population[0])
+		# If the last generation has been ranked, break off since there's no need to calculate another population
+		if generation == data.GENERATION_LIMIT - 1:
 			break
 
 		next_population: data.Population = []
@@ -139,8 +137,14 @@ def run_evolution(
 		# Update the population
 		population = next_population
 
-	return result_data
+	print(f"Best Genome:\n{ranked_population[0].genome}")
+	print(
+		"Press 'y' to run simulation for best genome or any other key to exit"
+	)
+	if input() == "y":
+		run_simulation(ranked_population[0])
 
+	return result_data
 
 def run_experiments(people_folder_path, generation_folder_path) -> List:
 	# Getting all files in experiment folders
@@ -150,6 +154,10 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 	mega_results = []
 
 	# Running through all different combinations of experiments
+	# *********************************************************************************************
+	# TODO: if there are different lengths/sizes of buildings and generations or something, it craches at
+	#		place_people() with error index out of bounds at matrix[person.start_floor].append(person)
+	# *********************************************************************************************
 	for people_experiment, generation_experiment in product(
 		people_experiment, generation_experiment
 	):
@@ -162,14 +170,7 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 		generation_data = load_population(generation_file_path)
 
 		current_experiment = ExperimentElevator(people_data, generation_data)
-		results = run_evolution(
-			populate_function=Populate.generate_population,
-			fitness_function=Fitness.calc_fitness,
-			selection_function=Selection.rank,
-			crossover_function=Crossover.swap_last_halves,
-			mutation_functions=[Mutation.swap, Mutation.increase_genome_length],
-			experiment=current_experiment,
-		)
+		results = run(current_experiment)
 
 		experiment_name = (
 			f"People: {people_experiment}, Generation: {generation_experiment}"
@@ -179,13 +180,25 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 		current_experiment.display_experiment(experiment_name, results)
 
 	# Shows all results from all experiments in one graph
-	# plt.show()
+	plt.show()
 
 	return mega_results
 
 
-# CONST_PEOPLE_LIST: data.People = init_building("path")
+def run(exp: ExperimentElevator = None):
+	return run_evolution(
+			populate_function=Populate.generate_population,
+			fitness_function=Fitness.calc_fitness,
+			selection_function=Selection.rank,
+			crossover_function=Crossover.swap_last_halves,
+			mutation_functions=[Mutation.swap,
+					   			Mutation.increase_genome_length,
+								Mutation.decrease_genome_length],
+			experiment=exp
+		)
 
 if __name__ == "__main__":
-
-	run_experiments("./buildings", "./generations")
+	if data.DO_EXP:
+		run_experiments("./buildings", "./generations")
+	else:
+		run()
