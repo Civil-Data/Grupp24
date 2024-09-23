@@ -35,7 +35,7 @@ class Building:
 
 		self.elevator.current_floor = arrived_floor
 		# Increments the number of trips
-		self.time_passed += abs(previous_floor - arrived_floor)
+		self.time_passed += abs(self.elevator.current_floor - previous_floor)
 
 		for person in self.elevator.occupants:
 			# All occupants have traveled a certain distance
