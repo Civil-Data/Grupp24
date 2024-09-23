@@ -4,20 +4,22 @@ from typing import List, Callable, Tuple
 from genome import Genome, Person
 
 NUMBER_OF_FLOORS: int = 15
+NUMBER_OF_PEOPLE: int = NUMBER_OF_FLOORS * 1
+
+ELEVATOR_CAPACITY: int = 8
+
 GENOME_LENGTH: int = NUMBER_OF_FLOORS
 POPULATION_SIZE: int = 100
 GENERATION_LIMIT: int = 100000
+
 MUTATION_CHANCE: float = 0.05
 CROSSOVER_CHANCE: float = 1.0
-
-NUMBER_OF_PEOPLE: int = NUMBER_OF_FLOORS * 1
 
 PERSON_ARRIVED_SCORE: int = 10
 MAXIMUM_POSSIBLE_SCORE: int = NUMBER_OF_PEOPLE * PERSON_ARRIVED_SCORE
 
 # How much extra time a person who doesn't end up on the right floor gives
 TIME_PENALTY: int = 100
-
 
 # Top % of genomes to directly carry over to the next generation
 ELITISM_PERC: float = 0.0
