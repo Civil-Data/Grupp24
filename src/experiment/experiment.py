@@ -37,6 +37,7 @@ class ExperimentElevator:
 		time_score = [res['Time Score'] for res in results]
 		plt.plot(generation, fitness_score, label="Fitness Score", color="blue")
 		plt.plot(generation, genome_length, label="Genome Length", color="green")
+		plt.plot(generation, time_score, label="Time Score", color="red")
 		plt.title(f"Experiment : {name}")
 		plt.xlabel("Generation")
 		plt.ylabel("Value")
