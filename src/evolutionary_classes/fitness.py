@@ -17,13 +17,13 @@ class Fitness:
 		accumulated_score: int = 0
 
 		for person in genome.people:
-			accumulated_score -= person.time_spent_waiting
+			accumulated_score += person.time_spent_waiting
 
 			if person.has_arrived:
-				accumulated_score -= person.distance_traveled - person.distance_needed
+				accumulated_score += person.distance_traveled - person.distance_needed
 			else:
-				accumulated_score -= TIME_PENALTY
+				accumulated_score += TIME_PENALTY
 		
-		accumulated_score -= len(genome.genome)
+		accumulated_score += len(genome.genome) * 100
 		
 		genome.fitness_score = accumulated_score

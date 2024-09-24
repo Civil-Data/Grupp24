@@ -70,7 +70,7 @@ def run_evolution(
 		ranked_population: data.Population = sorted(
 			population,  # The population to be sorted
 			key=lambda genome: genome.fitness_score,  # Sort based on fitness score
-			reverse=True,  # Highest score first
+			reverse=False,  # Lowest score first
 		)
 
 		print(
