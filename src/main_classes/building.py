@@ -61,3 +61,9 @@ class Building:
 				self.people_queues[self.elevator.current_floor].remove(person)
 			else:
 				break
+	
+	def to_text(self):
+		for people in self.people_queues:
+			for person in people:
+				print("*****")
+				person.to_text()

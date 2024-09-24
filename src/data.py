@@ -3,14 +3,14 @@
 from typing import List, Callable, Tuple
 from genome import Genome, Person
 
-NUMBER_OF_FLOORS: int = 15
-NUMBER_OF_PEOPLE: int = NUMBER_OF_FLOORS * 2
+NUMBER_OF_FLOORS: int = 5
+NUMBER_OF_PEOPLE: int = NUMBER_OF_FLOORS * 1
 
 ELEVATOR_CAPACITY: int = 8
 
 GENOME_LENGTH: int = NUMBER_OF_FLOORS
-POPULATION_SIZE: int = 100
-GENERATION_LIMIT: int = 10
+POPULATION_SIZE: int = 3
+GENERATION_LIMIT: int = 1
 
 MUTATION_CHANCE: float = 0.5
 CROSSOVER_CHANCE: float = 1.0
