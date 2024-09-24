@@ -2,13 +2,12 @@
 This module contains the code to run a visual simulation of the elevator using the best genome.
 """
 
+import os
 import time
 import copy
-from typing import List
 import pygame
 import data
 from genome import Genome
-from main_classes.person import Person
 from main_classes.building import Building
 from init_and_place_people import CONST_PEOPLE_LIST, place_people
 from experiment.experiment import load_building
@@ -48,16 +47,14 @@ def run_simulation(best_genome: Genome) -> None:
     elevator_height = int(WINDOW_HEIGHT * ELEVATOR_HEIGHT_PROPORTION)
 
     if data.DO_EXP:
-        people_list: data.People = copy.deepcopy(load_building("./buildings/Building_5_3.json"))
+        people_experiment = [files for files in os.listdir("./buildings")]
+        assert len(people_experiment) == 1
+        people_list: data.People = copy.deepcopy(load_building(f"./buildings/{people_experiment[0]}"))
     else:
         people_list: data.People = copy.deepcopy(CONST_PEOPLE_LIST)
     building: Building = Building(place_people(people_list))
 
     assert len(best_genome.people) == len(people_list) == len(CONST_PEOPLE_LIST)
-    
-    for i in range(len(best_genome.people)):
-        assert best_genome.people[i].start_floor == people_list[i].start_floor == CONST_PEOPLE_LIST[i].start_floor
-        assert best_genome.people[i].end_floor == people_list[i].end_floor == CONST_PEOPLE_LIST[i].end_floor
 
     # Keeps track of the elevator position
     elevator_pos = [
@@ -79,6 +76,15 @@ def run_simulation(best_genome: Genome) -> None:
     for floor in best_genome.genome:
         if not running:
             break
+
+        # Place these two simulation loops here at the top to accurately display the final
+        # numbers, but the numbers will update before the elevator visually reaches the floors
+        
+        # If instead placed just beneath and outside the 'while elevator_pos[1] != target_y:' loop,
+        # the numbers will naturally update as the elevator visually reaches a floor, but not
+        # accurately display the final numbers
+
+        # Pick your poison :)
 
         # Simulate dropping off passengers
         passengers_to_drop = [p for p in elevator_passengers if p.end_floor == floor]

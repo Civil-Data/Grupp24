@@ -32,6 +32,8 @@ class ExperimentElevator:
 		generation = [res[0] for res in results]
 		fitness_score = [res[1] for res in results]
 		genome_length = [res[2] for res in results]
+		# plt.xscale("log") # log scaling on axis
+		plt.yscale("log")
 		plt.plot(generation, fitness_score, label="Fitness Score", color="blue")
 		plt.plot(generation, genome_length, label="Genome Length", color="green")
 		plt.title(f"Experiment : {name}")

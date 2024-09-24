@@ -165,7 +165,8 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 	for people_experiment, generation_experiment in product(
 		people_experiment, generation_experiment
 	):
-		people_file_path = os.path.join(people_folder_path, people_experiment)
+		people_file_path = os.path.join(
+			people_folder_path, people_experiment)
 		generation_file_path = os.path.join(
 			generation_folder_path, generation_experiment
 		)
@@ -187,7 +188,6 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 	plt.show()
 
 	return mega_results
-
 
 def run(exp: ExperimentElevator = None):
 	return run_evolution(
