@@ -48,10 +48,11 @@ def run_evolution(
 		# Loop over the genomes
 		for genome in population:
 			# Always reset to original state between the genome iterations
+			people_list: data.People = None
 			if data.DO_EXP:
-				people_list: data.People = copy.deepcopy(experiment.people_list)
+				people_list = copy.deepcopy(experiment.people_list)
 			else:
-				people_list: data.People = copy.deepcopy(CONST_PEOPLE_LIST)
+				people_list = copy.deepcopy(CONST_PEOPLE_LIST)
 				
 			building: Building = Building(place_people(people_list))
 			genome.people = people_list
@@ -74,7 +75,10 @@ def run_evolution(
 		)
 
 		print(
-			f"Gen {generation}   Top three genomes (arrived/total, fitness, length):   ({ranked_population[0].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[0].fitness_score}, {len(ranked_population[0].genome)}) (({ranked_population[1].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[1].fitness_score}, {len(ranked_population[1].genome)}) (({ranked_population[2].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[2].fitness_score}, {len(ranked_population[2].genome)})"
+			f"Gen {generation}   Top three genomes (arrived/total, fitness, length):   "
+			f"({ranked_population[0].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[0].fitness_score}, {len(ranked_population[0].genome)}) "
+			f"({ranked_population[1].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[1].fitness_score}, {len(ranked_population[1].genome)}) "
+			f"({ranked_population[2].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[2].fitness_score}, {len(ranked_population[2].genome)})"
 		)
 
 		result_data.append((

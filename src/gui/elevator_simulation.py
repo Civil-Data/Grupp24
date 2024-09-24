@@ -4,9 +4,11 @@ This module contains the code to run a visual simulation of the elevator using t
 
 import time
 import copy
+from typing import List
 import pygame
 import data
 from genome import Genome
+from main_classes.person import Person
 from main_classes.building import Building
 from init_and_place_people import CONST_PEOPLE_LIST, place_people
 from experiment.experiment import load_building
@@ -46,11 +48,16 @@ def run_simulation(best_genome: Genome) -> None:
     elevator_height = int(WINDOW_HEIGHT * ELEVATOR_HEIGHT_PROPORTION)
 
     if data.DO_EXP:
-        people_list: data.People = copy.deepcopy(load_building("./buildings/Building_15_3.json"))
+        people_list: data.People = copy.deepcopy(load_building("./buildings/Building_5_3.json"))
     else:
         people_list: data.People = copy.deepcopy(CONST_PEOPLE_LIST)
     building: Building = Building(place_people(people_list))
-    best_genome.people = people_list
+
+    assert len(best_genome.people) == len(people_list) == len(CONST_PEOPLE_LIST)
+    
+    for i in range(len(best_genome.people)):
+        assert best_genome.people[i].start_floor == people_list[i].start_floor == CONST_PEOPLE_LIST[i].start_floor
+        assert best_genome.people[i].end_floor == people_list[i].end_floor == CONST_PEOPLE_LIST[i].end_floor
 
     # Keeps track of the elevator position
     elevator_pos = [
@@ -63,31 +70,31 @@ def run_simulation(best_genome: Genome) -> None:
     building_y = WINDOW_HEIGHT - (data.NUMBER_OF_FLOORS * floor_height)
 
     # Initialize a list to keep track of people who have arrived at their desired floor
-    people_arrived = [None] * data.NUMBER_OF_FLOORS  # None means no update needed
+    people_arrived = [0 for _ in range(data.NUMBER_OF_FLOORS)]
 
     # Track the number of people inside the elevator
-    elevator_passengers = []
+    elevator_passengers: data.People = []
 
     running = True
     for floor in best_genome.genome:
         if not running:
             break
 
-        target_y = building_y + (data.NUMBER_OF_FLOORS - floor - 1) * floor_height
-
         # Simulate dropping off passengers
         passengers_to_drop = [p for p in elevator_passengers if p.end_floor == floor]
         for passenger in passengers_to_drop:
             elevator_passengers.remove(passenger)
-            people_arrived[floor] = (people_arrived[floor] or 0) + 1
+            people_arrived[floor] += 1
 
         # Simulate picking up people from the current floor
-        people_to_pick_up = building.people_queues[floor]
+        people_to_pick_up: data.People = building.people_queues[floor]
         picked_up = 0
         while people_to_pick_up and len(elevator_passengers) < ELEVATOR_CAPACITY:
             person = people_to_pick_up.pop(0)
             elevator_passengers.append(person)
             picked_up += 1
+
+        target_y = building_y + (data.NUMBER_OF_FLOORS - floor - 1) * floor_height
 
         while elevator_pos[1] != target_y:
             for event in pygame.event.get():
@@ -162,7 +169,7 @@ def run_simulation(best_genome: Genome) -> None:
                 )
 
                 # Draw the number of people who have arrived at their desired floor
-                if people_arrived[i] is not None:
+                if people_arrived[i] > 0:
                     arrived_label = font.render(
                     str(people_arrived[i]), True, (0, 255, 0)
                     )
@@ -209,6 +216,7 @@ def run_simulation(best_genome: Genome) -> None:
             pygame.display.flip()
             clock.tick(FPS)
 
+
         print(
             f"Moved to floor: {floor} || Dropped off: {len(passengers_to_drop)} || Picked up: {picked_up}."
         )
@@ -216,5 +224,5 @@ def run_simulation(best_genome: Genome) -> None:
         time.sleep(0.5)
 
     print("Simulation complete.")
-    time.sleep(2)
+    time.sleep(3)
     pygame.quit()

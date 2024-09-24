@@ -3,7 +3,7 @@
 from typing import List, Callable, Tuple
 from genome import Genome, Person
 
-NUMBER_OF_FLOORS: int = 5
+NUMBER_OF_FLOORS: int = 10
 NUMBER_OF_PEOPLE: int = NUMBER_OF_FLOORS * 1
 
 ELEVATOR_CAPACITY: int = 8
@@ -24,6 +24,7 @@ TIME_PENALTY: int = 100
 DO_EXP: bool = False
 
 EXP_RANDOM_BUILDING: bool = True
+EXP_EVEN_BUILDING: bool = not EXP_RANDOM_BUILDING
 EXP_RANGE_START = GENOME_LENGTH // 2
 EXP_RANGE_END = GENOME_LENGTH
 # How many people can be slotted on one floor. Only matters for even buildings

@@ -5,13 +5,13 @@ Saved to text file for now. For multiple testing purposes.
 
 import sys
 import os
+from typing import List
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 
 import json
 import random
 import data
-from genome import Genome
 from main_classes.person import Person
 
 # All configuration variables are handled from data.py
@@ -32,7 +32,7 @@ def create_random_generation(
 	for _ in range(number_of_gnomes):
 		k = random.randint(range_start, range_end)
 
-		genome: Genome = [0]
+		genome: List[int] = [0]
 
 		# Ensure not the same floor two times in a row
 		for _ in range(k - 1):
