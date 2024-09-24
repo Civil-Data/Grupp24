@@ -36,7 +36,7 @@ jobs:
 
             # Upload compiled PDF as an artifact
             - name: Upload PDF
-              uses: actions/upload-artifact@v3
+              uses: actions/upload-artifact@v4
               with:
-                  name: compiled-document
+                  name: compiled-pdf
                   path: report/main.pdf
