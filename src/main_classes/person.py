@@ -41,7 +41,7 @@ class Person:
 			"end_floor": self.end_floor,
 			"floors": number_of_floors,
 		}
-    def print(self)
+    def to_text(self):
         print(self.start_floor)
         print(self.end_floor)
         print(self.has_arrived)
