@@ -9,6 +9,7 @@ import data
 from genome import Genome
 from main_classes.building import Building
 from init_and_place_people import CONST_PEOPLE_LIST, place_people
+from experiment.experiment import load_building
 
 # Constants for Pygame
 FPS = 60
@@ -44,8 +45,10 @@ def run_simulation(best_genome: Genome) -> None:
     elevator_width = int(WINDOW_WIDTH * ELEVATOR_WIDTH_PROPORTION)
     elevator_height = int(WINDOW_HEIGHT * ELEVATOR_HEIGHT_PROPORTION)
 
-    # Copy the people list to avoid modifying the original list
-    people_list: data.People = copy.deepcopy(CONST_PEOPLE_LIST)
+    if data.DO_EXP:
+        people_list: data.People = copy.deepcopy(load_building("./buildings/Building_15_3.json"))
+    else:
+        people_list: data.People = copy.deepcopy(CONST_PEOPLE_LIST)
     building: Building = Building(place_people(people_list))
     best_genome.people = people_list
 
@@ -71,6 +74,20 @@ def run_simulation(best_genome: Genome) -> None:
             break
 
         target_y = building_y + (data.NUMBER_OF_FLOORS - floor - 1) * floor_height
+
+        # Simulate dropping off passengers
+        passengers_to_drop = [p for p in elevator_passengers if p.end_floor == floor]
+        for passenger in passengers_to_drop:
+            elevator_passengers.remove(passenger)
+            people_arrived[floor] = (people_arrived[floor] or 0) + 1
+
+        # Simulate picking up people from the current floor
+        people_to_pick_up = building.people_queues[floor]
+        picked_up = 0
+        while people_to_pick_up and len(elevator_passengers) < ELEVATOR_CAPACITY:
+            person = people_to_pick_up.pop(0)
+            elevator_passengers.append(person)
+            picked_up += 1
 
         while elevator_pos[1] != target_y:
             for event in pygame.event.get():
@@ -191,20 +208,6 @@ def run_simulation(best_genome: Genome) -> None:
 
             pygame.display.flip()
             clock.tick(FPS)
-
-        # Simulate dropping off passengers
-        passengers_to_drop = [p for p in elevator_passengers if p.end_floor == floor]
-        for passenger in passengers_to_drop:
-            elevator_passengers.remove(passenger)
-            people_arrived[floor] = (people_arrived[floor] or 0) + 1
-
-        # Simulate picking up people from the current floor
-        people_to_pick_up = building.people_queues[floor]
-        picked_up = 0
-        while people_to_pick_up and len(elevator_passengers) < ELEVATOR_CAPACITY:
-            person = people_to_pick_up.pop(0)
-            elevator_passengers.append(person)
-            picked_up += 1
 
         print(
             f"Moved to floor: {floor} || Dropped off: {len(passengers_to_drop)} || Picked up: {picked_up}."

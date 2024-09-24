@@ -21,9 +21,9 @@ class ExperimentElevator:
 	param: path to generation list json file
 	"""
 
-	def __init__(self, people_path, generation_path) -> None:
-		self.people_list: data.People_queues = people_path
-		self.generation_list: data.Population = generation_path
+	def __init__(self, people: data.People, generation: data.Population) -> None:
+		self.people_list: data.People = people
+		self.generation_list: data.Population = generation
 
 	def display_experiment(self, name, results) -> None:
 		"""

@@ -24,6 +24,6 @@ class Fitness:
 			else:
 				accumulated_score += TIME_PENALTY
 		
-		accumulated_score += len(genome.genome) * 100
+		accumulated_score += len(genome.genome)
 		
 		genome.fitness_score = accumulated_score

@@ -74,7 +74,7 @@ def run_evolution(
 		)
 
 		print(
-			f"Gen {generation}   Top three genomes (fitness,length):   ({ranked_population[0].fitness_score},{len(ranked_population[0].genome)}) ({ranked_population[1].fitness_score},{len(ranked_population[1].genome)}) ({ranked_population[2].fitness_score},{len(ranked_population[2].genome)})"
+			f"Gen {generation}   Top three genomes (arrived/total, fitness, length):   ({ranked_population[0].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[0].fitness_score}, {len(ranked_population[0].genome)}) (({ranked_population[1].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[1].fitness_score}, {len(ranked_population[1].genome)}) (({ranked_population[2].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[2].fitness_score}, {len(ranked_population[2].genome)})"
 		)
 
 		result_data.append((
