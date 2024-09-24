@@ -17,12 +17,14 @@ from main_classes.person import Person
 # Number of genomes in generation
 NUMBER_OF_GNEOMES = 100
 # Length range on genomes
-RANGE_START = 2
-RANGE_END = 6
+GENOME_RANGE_START = 8
+GENOME_RANGE_END = 10
 # numbers of floors
 FLOORS = 15
-# How many people can be slotted on one floor
-FLOOR_LENGTH = 1
+# How many people can be slotted on one floor start range
+FLOOR_LENGTH_START = 1
+# How many people can be slotted on one floor end range
+FLOOR_LENGTH_END = 1
 
 
 def create_random_generation(
@@ -30,7 +32,7 @@ def create_random_generation(
 	range_start,
 	range_end,
 	number_of_floors,
-	filename=f"Generation_{FLOORS}_{NUMBER_OF_GNEOMES}.json",
+	filename=f"Generation_{FLOORS}_{NUMBER_OF_GNEOMES}_{GENOME_RANGE_START}_{GENOME_RANGE_END}.json",
 ) -> data.Population:
 	"""
 	Creates json file with set number of generations
@@ -42,14 +44,12 @@ def create_random_generation(
 		k = random.randint(range_start, range_end)
 
 		# set start to floor 0
-		genome_list: data.Genome = [0]
-		# used if first number doesn't need to be 0
-		# genome_list = [random.choice(range(m + 1))]
+		genome_list: data.Genome = []
 
 		# Ensure not the same floor two times in a row
-		for _ in range(k - 1):
+		for _ in range(k):
 			next_num = random.choice(range(number_of_floors))
-			while next_num == genome_list[-1]:
+			while len(genome_list) > 1 and next_num == genome_list[-1]:
 				next_num = random.choice(range(number_of_floors))
 
 			genome_list.append(next_num)
@@ -64,8 +64,9 @@ def create_random_generation(
 
 def create_random_building(
 	number_of_floor,
-	floor_queue_length,
-	filename=f"Building_{FLOORS}_{FLOOR_LENGTH}.json",
+	floor_queue_length_start,
+	floor_queue_length_end,
+	filename=f"Building_{FLOORS}_{FLOOR_LENGTH_START}_{FLOOR_LENGTH_END}.json",
 ) -> data.People:
 	"""
 	Create a building from set parameters
@@ -74,7 +75,9 @@ def create_random_building(
 
 	for i in range(number_of_floor):
 
-		for _ in range(floor_queue_length):
+		k = random.randint(floor_queue_length_start, floor_queue_length_end)
+
+		for _ in range(k):
 
 			end_floor = random.choice(range(number_of_floor))
 
@@ -91,9 +94,12 @@ def create_random_building(
 		)
 
 
-create_random_generation(NUMBER_OF_GNEOMES, RANGE_START, RANGE_END, FLOORS)
-create_random_building(FLOORS, FLOOR_LENGTH)
-
+create_random_generation(NUMBER_OF_GNEOMES, GENOME_RANGE_START, GENOME_RANGE_END, FLOORS)
 print(
 	f"List of {NUMBER_OF_GNEOMES} generations has been created check file for results!"
+)
+
+create_random_building(FLOORS, FLOOR_LENGTH_START, FLOOR_LENGTH_END)
+print(
+	f"Building of {FLOORS} floors has been created check file for results!"
 )
