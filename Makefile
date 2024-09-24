@@ -15,6 +15,9 @@ lint:
 test:
 	pytest -v
 
+create:
+	python src/experiment/create_experiment.py
+
 latex:
 	cd report && latexmk -pdf -shell-escape -interaction=nonstopmode main.tex
 	make clean

@@ -9,6 +9,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../"
 
 import json
 import matplotlib.pyplot as plt
+import pandas as pf
 import data
 
 from main_classes.person import Person
@@ -29,19 +30,30 @@ class ExperimentElevator:
 		"""
 		Plots a graph of best for of every generation
 		"""
-		generation = [res[0] for res in results]
-		fitness_score = [res[1] for res in results]
-		genome_length = [res[2] for res in results]
-		# plt.xscale("log") # log scaling on axis
+		generation = [res['Generation'] for res in results]
+		fitness_score = [res['Best Fitness'] for res in results]
+		best_genome = [res['Best Genome'] for res in results]
+		genome_length = [res['Genome Length'] for res in results]
+		# time_score = [res['Time Score'] for res in results]
+    # plt.xscale("log") # log scaling on axis
 		plt.yscale("log")
 		plt.plot(generation, fitness_score, label="Fitness Score", color="blue")
 		plt.plot(generation, genome_length, label="Genome Length", color="green")
+		# plt.plot(generation, time_score, label="Time Score", color="red")
 		plt.title(f"Experiment : {name}")
 		plt.xlabel("Generation")
 		plt.ylabel("Value")
 		plt.legend()
 		# Show experiment graph after every run
-		# plt.show()
+		plt.show()
+
+def save_experiment(result: list) -> None:
+	"""
+	Saves experiment results to csv file
+	"""
+	data_frame = pf.DataFrame(result)
+	data_frame.to_csv("test_results.csv")
+	print("Results saved to csv file")
 
 
 def load_population(filename) -> data.Population:

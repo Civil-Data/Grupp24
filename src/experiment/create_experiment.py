@@ -16,12 +16,17 @@ from main_classes.person import Person
 
 # All configuration variables are handled from data.py
 
+# How many people can be slotted on one floor start range
+FLOOR_LENGTH_START = 1
+# How many people can be slotted on one floor end range
+FLOOR_LENGTH_END = 1
+
 def create_random_generation(
 	number_of_gnomes,
 	range_start,
 	range_end,
 	number_of_floors,
-	filename=f"./generations/Generation_{data.NUMBER_OF_FLOORS}_{data.POPULATION_SIZE}.json",
+	filename=f"./generations/Generation_{data.NUMBER_OF_FLOORS}_{data.POPULATION_SIZE}_{GENOME_RANGE_START}_{GENOME_RANGE_END}.json",
 ) -> data.Population:
 	"""
 	Creates json file with set number of generations
@@ -32,12 +37,14 @@ def create_random_generation(
 	for _ in range(number_of_gnomes):
 		k = random.randint(range_start, range_end)
 
-		genome: List[int] = [0]
+		# set start to floor 0
+		genome_list: List[int] = []
 
 		# Ensure not the same floor two times in a row
-		for _ in range(k - 1):
+		for _ in range(k):
 			next_num = random.choice(range(number_of_floors))
-			while next_num == genome[-1]:
+
+			while len(genome_list) > 1 and next_num == genome_list[-1]:
 				next_num = random.choice(range(number_of_floors))
 
 			genome.append(next_num)
@@ -49,23 +56,21 @@ def create_random_generation(
 	# To ensure success
 	return population
 
-
 def create_even_building(
-	filename=f"./buildings/Building_{data.NUMBER_OF_FLOORS}_{data.EXP_FLOOR_LENGTH}.json",
+	filename=f"./buildings/Building_{data.NUMBER_OF_FLOORS}_{FLOOR_LENGTH_START}_{FLOOR_LENGTH_END}.json",
 ) -> data.People:
 	"""
 	Create a building from set parameters with people evenly distributed among the building's floors
 	"""
 	# Check that the people can be evenly distributed
 	assert data.NUMBER_OF_PEOPLE % data.NUMBER_OF_FLOORS == 0
-	assert data.NUMBER_OF_FLOORS * data.EXP_FLOOR_LENGTH == data.NUMBER_OF_PEOPLE
+	# assert data.NUMBER_OF_FLOORS * data.EXP_FLOOR_LENGTH == data.NUMBER_OF_PEOPLE
 	
 	building_list: data.People = []
 
 	for i in range(data.NUMBER_OF_FLOORS):
-
-		for _ in range(data.EXP_FLOOR_LENGTH):
-
+		k = random.randint(FLOOR_LENGTH_START, FLOOR_LENGTH_END)
+		for _ in range(k):
 			end_floor = random.choice(range(data.NUMBER_OF_FLOORS))
 
 			while i == end_floor:
@@ -113,4 +118,9 @@ else:
 
 print(
 	f"List of {data.POPULATION_SIZE} generations has been created check file for results!"
+)
+
+create_random_building(FLOORS, FLOOR_LENGTH_START, FLOOR_LENGTH_END)
+print(
+	f"Building of {FLOORS} floors has been created check file for results!"
 )

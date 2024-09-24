@@ -4,10 +4,10 @@ from typing import List, Tuple
 import random
 import math
 import os
-import data
 from itertools import product
 import copy
 import matplotlib.pyplot as plt
+import data
 
 from evolutionary_classes.fitness import Fitness
 from evolutionary_classes.populate import Populate
@@ -16,7 +16,7 @@ from evolutionary_classes.crossover import Crossover
 from evolutionary_classes.mutation import Mutation
 from genome import Genome
 from main_classes.building import Building
-from experiment.experiment import ExperimentElevator, load_building, load_population
+from experiment.experiment import ExperimentElevator, load_building, load_population, save_experiment
 from gui.elevator_simulation import run_simulation
 from init_and_place_people import place_people, CONST_PEOPLE_LIST
 
@@ -81,11 +81,14 @@ def run_evolution(
 			f"({ranked_population[2].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[2].fitness_score}, {len(ranked_population[2].genome)})"
 		)
 
-		result_data.append((
-			generation,
-			ranked_population[0].fitness_score,
-			len(ranked_population[0].genome),
-		))
+		result_data_temp = {
+			'Generation': generation,
+			'Best Fitness': ranked_population[0].fitness_score,
+			'Best Genome': ranked_population[0].genome,
+			'Genome Length': len(ranked_population[0].genome),
+			'Time Score': ranked_population[0].time_score,
+		}
+		result_data.append(result_data_temp)
 
 		# If the last generation has been ranked, break off since there's no need to calculate another population
 		if generation == data.GENERATION_LIMIT - 1:
@@ -151,6 +154,9 @@ def run_evolution(
 	return result_data
 
 def run_experiments(people_folder_path, generation_folder_path) -> List:
+	"""
+	Running evoultion on specific experiments
+	"""
 	# Getting all files in experiment folders
 	people_experiment = [files for files in os.listdir(people_folder_path)]
 	generation_experiment = [files for files in os.listdir(generation_folder_path)]
@@ -175,7 +181,8 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 		generation_data = load_population(generation_file_path)
 
 		current_experiment = ExperimentElevator(people_data, generation_data)
-		results = run(current_experiment)
+		
+    results = run(current_experiment)
 
 		experiment_name = (
 			f"People: {people_experiment}, Generation: {generation_experiment}"
@@ -186,6 +193,7 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 
 	# Shows all results from all experiments in one graph
 	plt.show()
+	save_experiment(mega_results)
 
 	return mega_results
 
