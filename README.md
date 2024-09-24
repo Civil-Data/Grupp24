@@ -1,6 +1,6 @@
 # Elevator optimization
 
-[![Run Pylint](https://github.com/Civil-Data/Grupp24/actions/workflows/pylint.yml/badge.svg)](https://github.com/Civil-Data/Grupp24/actions/workflows/pylint.yml) [![Run PyTest](https://github.com/Civil-Data/Grupp24/actions/workflows/pytest.yml/badge.svg)](https://github.com/Civil-Data/Grupp24/actions/workflows/pytest.yml)
+[![Run Pylint](https://github.com/Civil-Data/Grupp24/actions/workflows/pylint.yml/badge.svg)](https://github.com/Civil-Data/Grupp24/actions/workflows/pylint.yml) [![Run PyTest](https://github.com/Civil-Data/Grupp24/actions/workflows/pytest.yml/badge.svg)](https://github.com/Civil-Data/Grupp24/actions/workflows/pytest.yml) [![Run build](https://github.com/Civil-Data/Grupp24/actions/workflows/run.yml/badge.svg)](https://github.com/Civil-Data/Grupp24/actions/workflows/run.yml) [![Run latex](https://github.com/Civil-Data/Grupp24/actions/workflows/latex.yml/badge.svg)](https://github.com/Civil-Data/Grupp24/actions/workflows/latex.yml)
 
 ## Run
 
