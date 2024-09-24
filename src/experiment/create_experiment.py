@@ -17,14 +17,14 @@ from main_classes.person import Person
 # Number of genomes in generation
 NUMBER_OF_GNEOMES = 100
 # Length range on genomes
-GENOME_RANGE_START = 22
-GENOME_RANGE_END = 24
+GENOME_RANGE_START = 8
+GENOME_RANGE_END = 10
 # numbers of floors
 FLOORS = 15
 # How many people can be slotted on one floor start range
-FLOOR_LENGTH_START = 0
+FLOOR_LENGTH_START = 1
 # How many people can be slotted on one floor end range
-FLOOR_LENGTH_END = 4
+FLOOR_LENGTH_END = 1
 
 
 def create_random_generation(
