@@ -66,12 +66,12 @@ class Building:
 				to_remove.append(person)
 			else:
 				break
-		
+
 		for person in to_remove:
-			self.people_queues[self.elevator.current_floor].remove(person)		
-	
-	def to_text(self):
-		for people in self.people_queues:
-			for person in people:
-				print("*****")
-				person.to_text()
+			self.people_queues[self.elevator.current_floor].remove(person)
+
+	# def to_text(self):
+	# 	for people in self.people_queues:
+	# 		for person in people:
+	# 			print("*****")
+	# 			person.to_text()

@@ -182,7 +182,7 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 
 		current_experiment = ExperimentElevator(people_data, generation_data)
 		
-    results = run(current_experiment)
+		results = run(current_experiment)
 
 		experiment_name = (
 			f"People: {people_experiment}, Generation: {generation_experiment}"

@@ -26,7 +26,7 @@ WINDOW_WIDTH: int = int(WINDOW_HEIGHT * 0.7)
 # Proportions for dynamic sizing
 FLOOR_HEIGHT_PROPORTION = 1 / data.NUMBER_OF_FLOORS  # Dynamic based on number of floors
 FLOOR_WIDTH_PROPORTION = 0.5     # 50% of window width
-ELEVATOR_HEIGHT_PROPORTION = FLOOR_HEIGHT_PROPORTION 
+ELEVATOR_HEIGHT_PROPORTION = FLOOR_HEIGHT_PROPORTION
 ELEVATOR_WIDTH_PROPORTION = ELEVATOR_HEIGHT_PROPORTION
 EXIT_BUTTON_SIZE = int(0.05 * WINDOW_WIDTH)
 
@@ -47,7 +47,7 @@ def run_simulation(best_genome: Genome) -> None:
     elevator_height = int(WINDOW_HEIGHT * ELEVATOR_HEIGHT_PROPORTION)
 
     if data.DO_EXP:
-        people_experiment = [files for files in os.listdir("./buildings")]
+        people_experiment = list(os.listdir('./buildings'))
         assert len(people_experiment) == 1
         people_list: data.People = copy.deepcopy(load_building(f"./buildings/{people_experiment[0]}"))
     else:
@@ -79,7 +79,7 @@ def run_simulation(best_genome: Genome) -> None:
 
         # Place these two simulation loops here at the top to accurately display the final
         # numbers, but the numbers will update before the elevator visually reaches the floors
-        
+
         # If instead placed just beneath and outside the 'while elevator_pos[1] != target_y:' loop,
         # the numbers will naturally update as the elevator visually reaches a floor, but not
         # accurately display the final numbers

@@ -25,10 +25,12 @@ DO_EXP: bool = True
 
 EXP_RANDOM_BUILDING: bool = False
 EXP_EVEN_BUILDING: bool = not EXP_RANDOM_BUILDING
-EXP_RANGE_START = GENOME_LENGTH // 2
-EXP_RANGE_END = GENOME_LENGTH
-# How many people can be slotted on one floor. Only matters for even buildings
-EXP_FLOOR_LENGTH = 3
+EXP_GENOME_RANGE_START = GENOME_LENGTH // 2
+EXP_GENOME_RANGE_END = GENOME_LENGTH
+# How many people can be slotted on one floor start range
+EXP_FLOOR_LENGTH_START: int = 1
+# How many people can be slotted on one floor end range
+EXP_FLOOR_LENGTH_END: int = 1
 
 Population = List[Genome]
 
