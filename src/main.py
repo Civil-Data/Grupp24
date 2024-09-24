@@ -85,8 +85,8 @@ def run_evolution(
 			'Generation': generation,
 			'Best Fitness': ranked_population[0].fitness_score,
 			'Best Genome': ranked_population[0].genome,
-			'Genome Length': len(ranked_population[0].genome),
-			'Time Score': ranked_population[0].time_score,
+			'Genome Length': len(ranked_population[0].genome)#,
+			# 'Time Score': ranked_population[0].time_score,
 		}
 		result_data.append(result_data_temp)
 

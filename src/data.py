@@ -23,13 +23,13 @@ TIME_PENALTY: int = 1000
 # Whether or not to use the experiment library by Gurra
 DO_EXP: bool = True
 
-EXP_RANDOM_BUILDING: bool = False
+EXP_RANDOM_BUILDING: bool = True
 EXP_EVEN_BUILDING: bool = not EXP_RANDOM_BUILDING
 EXP_GENOME_RANGE_START = GENOME_LENGTH // 2
 EXP_GENOME_RANGE_END = GENOME_LENGTH
-# How many people can be slotted on one floor start range
+# How many people can be slotted on one floor, start and end range (incl.)
+# Only used in even building
 EXP_FLOOR_LENGTH_START: int = 1
-# How many people can be slotted on one floor end range
 EXP_FLOOR_LENGTH_END: int = 1
 
 Population = List[Genome]

@@ -17,10 +17,6 @@ from main_classes.person import Person
 # All configuration variables are handled from data.py
 
 def create_random_generation(
-	number_of_gnomes,
-	range_start,
-	range_end,
-	number_of_floors,
 	filename=f"./generations/Generation_{data.NUMBER_OF_FLOORS}_{data.POPULATION_SIZE}_{data.EXP_GENOME_RANGE_START}_{data.EXP_GENOME_RANGE_END}.json",
 ) -> data.Population:
 	"""
@@ -29,18 +25,18 @@ def create_random_generation(
 
 	population: data.Population = []
 
-	for _ in range(number_of_gnomes):
-		k = random.randint(range_start, range_end)
+	for _ in range(data.POPULATION_SIZE):
+		k = random.randint(data.EXP_GENOME_RANGE_START, data.EXP_GENOME_RANGE_END)
 
 		# set start to floor 0
 		genome_list: List[int] = []
 
 		# Ensure not the same floor two times in a row
 		for _ in range(k):
-			next_num = random.choice(range(number_of_floors))
+			next_num = random.choice(range(data.NUMBER_OF_FLOORS))
 
 			while len(genome_list) > 1 and next_num == genome_list[-1]:
-				next_num = random.choice(range(number_of_floors))
+				next_num = random.choice(range(data.NUMBER_OF_FLOORS))
 
 			genome_list.append(next_num)
 
@@ -104,7 +100,7 @@ def create_random_building(
 	return building_list
 
 
-create_random_generation(data.POPULATION_SIZE, data.EXP_RANGE_START, data.EXP_RANGE_END, data.NUMBER_OF_FLOORS)
+create_random_generation()
 
 if data.EXP_RANDOM_BUILDING:
 	create_random_building()

@@ -14,7 +14,6 @@ from experiment.experiment import load_building
 
 # Constants for Pygame
 FPS = 60
-ELEVATOR_CAPACITY = data.ELEVATOR_CAPACITY
 ELEVATOR_SPEED = 10
 
 pygame.init()
@@ -95,7 +94,7 @@ def run_simulation(best_genome: Genome) -> None:
         # Simulate picking up people from the current floor
         people_to_pick_up: data.People = building.people_queues[floor]
         picked_up = 0
-        while people_to_pick_up and len(elevator_passengers) < ELEVATOR_CAPACITY:
+        while people_to_pick_up and len(elevator_passengers) < data.ELEVATOR_CAPACITY:
             person = people_to_pick_up.pop(0)
             elevator_passengers.append(person)
             picked_up += 1
@@ -141,8 +140,8 @@ def run_simulation(best_genome: Genome) -> None:
             )
 
             # Draw the building label
-            building_label = font.render("Building 1", True, (255, 255, 255))
-            screen.blit(building_label, (building_x + 10, building_y - 40))
+            # building_label = font.render("Building 1", True, (255, 255, 255))
+            # screen.blit(building_label, (building_x + 10, building_y - 40))
 
             # Draw the floor lines and labels
             for i in range(data.NUMBER_OF_FLOORS):
