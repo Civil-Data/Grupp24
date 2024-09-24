@@ -1,4 +1,15 @@
 default:
+	make check
+	make run
+
+run:
+	python src/main.py
+
+check:
+	make test
+	make lint
+
+lint:
 	pylint src/**/*.py tests/**/*.py
 
 test:
@@ -10,9 +21,6 @@ latex:
 
 clean:
 	cd report && latexmk -c && rm -rf _minted-main && rm -f main.bbl && rm -f main.synctex.gz
-
-run:
-	python src/main.py
 
 install:
 	pip install -r requirements.txt
