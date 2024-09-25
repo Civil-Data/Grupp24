@@ -192,7 +192,7 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 		current_experiment.display_experiment(experiment_name, results)
 
 	# Shows all results from all experiments in one graph
-	pyplot.plt.show()
+	pyplot.show()
 	save_experiment(mega_results)
 
 	return mega_results
