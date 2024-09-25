@@ -8,7 +8,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 
 import json
-import matplotlib.pyplot as plt
+from matplotlib import pyplot
 import pandas as pf
 import data
 
@@ -35,17 +35,17 @@ class ExperimentElevator:
 		best_genome = [res['Best Genome'] for res in results]
 		genome_length = [res['Genome Length'] for res in results]
 		# time_score = [res['Time Score'] for res in results]
-    # plt.xscale("log") # log scaling on axis
-		plt.yscale("log")
-		plt.plot(generation, fitness_score, label="Fitness Score", color="blue")
-		plt.plot(generation, genome_length, label="Genome Length", color="green")
-		# plt.plot(generation, time_score, label="Time Score", color="red")
-		plt.title(f"Experiment : {name}")
-		plt.xlabel("Generation")
-		plt.ylabel("Value")
-		plt.legend()
+    # pyplot.xscale("log") # log scaling on axis
+		pyplot.yscale("log")
+		pyplot.plot(generation, fitness_score, label="Fitness Score", color="blue")
+		pyplot.plot(generation, genome_length, label="Genome Length", color="green")
+		# pyplot.plot(generation, time_score, label="Time Score", color="red")
+		pyplot.title(f"Experiment : {name}")
+		pyplot.xlabel("Generation")
+		pyplot.ylabel("Value")
+		pyplot.legend()
 		# Show experiment graph after every run
-		plt.show()
+		pyplot.show()
 
 def save_experiment(result: list) -> None:
 	"""

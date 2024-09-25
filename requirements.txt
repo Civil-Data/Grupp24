@@ -14,6 +14,7 @@ matplotlib==3.9.2
 mccabe==0.7.0
 numpy==2.1.1
 packaging==24.1
+pandas==2.2.3
 pillow==10.4.0
 platformdirs==4.3.2
 pluggy==1.5.0
@@ -21,10 +22,15 @@ pygame==2.6.0
 Pygments==2.18.0
 pylint==3.2.7
 pyparsing==3.1.4
+PyQt5==5.15.11
+PyQt5-Qt5==5.15.15
+PyQt5_sip==12.15.0
+PySide2==5.13.2
 pytest==8.3.3
 python-dateutil==2.9.0.post0
+pytz==2024.2
+shiboken2==5.13.2
 six==1.16.0
 tomlkit==0.13.2
-matplotlib==3.9.2
-pandas==2.2.3
 tqdm==4.66.5
+tzdata==2024.2
