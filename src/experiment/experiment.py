@@ -8,7 +8,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 
 import json
-import matplotlib.pyplot as plt
+from matplotlib import pyplot, use
 import pandas as pf
 import data
 
@@ -45,7 +45,12 @@ class ExperimentElevator:
 		plt.ylabel("Value")
 		plt.legend()
 		# Show experiment graph after every run
-		plt.show()
+		try:
+			use("Qt5Agg")
+		except:
+			print("Failed to use Qt5Agg PyPlot backend, will use Agg instead")
+			use("Agg")
+		pyplot.show()
 
 def save_experiment(result: list) -> None:
 	"""
