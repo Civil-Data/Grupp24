@@ -8,7 +8,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 
 import json
-from matplotlib import pyplot, use
+from matplotlib import pyplot
 import pandas as pf
 import data
 
