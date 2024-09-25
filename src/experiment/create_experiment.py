@@ -63,11 +63,12 @@ def create_building(
 	# Randomly distribute the remaining people, with respect to the floor limits
 	while remaining_people > 0:
 		for floor in range(data.NUMBER_OF_FLOORS):
-			max_add: int = data.EXP_FLOOR_LENGTH_END - numb_of_ppl_on_floor[floor]
-			if max_add > 0:
-				to_add: int = random.randint(0, min(max_add, remaining_people))
-				numb_of_ppl_on_floor[floor] += to_add
-				remaining_people -= to_add
+			if remaining_people == 0:
+				break
+			
+			if random.choice([0, 1]) == 0: # 50% chance
+				numb_of_ppl_on_floor[floor] += 1
+				remaining_people -= 1
 				assert remaining_people >= 0
 
 	assert remaining_people == 0
@@ -93,7 +94,7 @@ def create_building(
 			indent=4,
 		)
 
-
+assert data.NUMBER_OF_FLOORS >= 2
 create_random_generation()
 create_building()
 

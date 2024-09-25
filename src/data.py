@@ -3,16 +3,16 @@
 from typing import List, Callable, Tuple
 from genome import Genome, Person
 
-NUMBER_OF_FLOORS: int = 100
-NUMBER_OF_PEOPLE: int = 300
+NUMBER_OF_FLOORS: int = 15
+NUMBER_OF_PEOPLE: int = NUMBER_OF_FLOORS
 
 ELEVATOR_CAPACITY: int = 8
 
 GENOME_LENGTH: int = NUMBER_OF_FLOORS
-POPULATION_SIZE: int = 300
+POPULATION_SIZE: int = 100
 GENERATION_LIMIT: int = 1000
 
-MUTATION_CHANCE: float = 0.1
+MUTATION_CHANCE: float = 0.01
 CROSSOVER_CHANCE: float = 1.0
 # Top % of genomes to directly carry over to the next generation
 ELITISM_PERC: float = 0.0
@@ -29,7 +29,7 @@ EXP_GENOME_RANGE_START = GENOME_LENGTH // 2
 EXP_GENOME_RANGE_END = GENOME_LENGTH
 # How many people can be slotted on one floor, start and end range (incl.)
 EXP_FLOOR_LENGTH_START: int = 0
-EXP_FLOOR_LENGTH_END: int = 1000
+EXP_FLOOR_LENGTH_END: int = NUMBER_OF_PEOPLE
 
 Population = List[Genome]
 
