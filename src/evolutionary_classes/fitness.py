@@ -20,6 +20,8 @@ class Fitness:
 			accumulated_score += person.time_spent_waiting
 
 			if person.has_arrived:
+				# Punish excess travel
+				# distance_travel - distance_needed is the excess distance
 				accumulated_score += person.distance_traveled - person.distance_needed
 			else:
 				accumulated_score += TIME_PENALTY
