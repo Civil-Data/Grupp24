@@ -440,7 +440,8 @@ disable=raw-checker-failed,
 		W0612,
 		C0413,
 		W0311,	# bad-indentation
-		E0611	# no-name-in-module
+		E0611,	# no-name-in-module
+		W0702	# bare-except
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
