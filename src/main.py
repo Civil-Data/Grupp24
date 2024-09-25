@@ -211,7 +211,11 @@ def run(exp: ExperimentElevator = None):
 
 if __name__ == "__main__":
 	if data.DO_EXP:
-		use("Qt5Agg")
+		try:
+			use("Qt5Agg")
+		except:
+			print("Failed to use Qt5Agg PyPlot backend, will use Agg instead")
+			use("Agg")
 		run_experiments("./buildings", "./generations")
 	else:
 		run()
