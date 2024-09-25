@@ -8,6 +8,7 @@ from itertools import product
 import copy
 from matplotlib import use, pyplot
 import data
+from tqdm import tqdm
 
 from evolutionary_classes.fitness import Fitness
 from evolutionary_classes.populate import Populate
@@ -43,8 +44,13 @@ def run_evolution(
 	result_data = []
 
 	# Loop over the generations
-	for generation in range(data.GENERATION_LIMIT):
-
+	for generation in tqdm(range(data.GENERATION_LIMIT), 
+							desc="Generations", 
+							initial=1, 
+							bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]",
+							ncols=100,
+							ascii=True,
+							colour="green"):
 		# Loop over the genomes
 		for genome in population:
 			# Always reset to original state between the genome iterations
@@ -74,12 +80,6 @@ def run_evolution(
 			reverse=False,  # Lowest score first
 		)
 
-		print(
-			f"Gen {generation}   Top three genomes (arrived/total, fitness, length):   "
-			f"({ranked_population[0].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[0].fitness_score}, {len(ranked_population[0].genome)}) "
-			f"({ranked_population[1].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[1].fitness_score}, {len(ranked_population[1].genome)}) "
-			f"({ranked_population[2].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[2].fitness_score}, {len(ranked_population[2].genome)})"
-		)
 
 		result_data_temp = {
 			'Generation': generation,
@@ -144,6 +144,12 @@ def run_evolution(
 		# Update the population
 		population = next_population
 
+	print(
+	f"Top three genomes (arrived/total, fitness, length):   "
+	f"({ranked_population[0].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[0].fitness_score}, {len(ranked_population[0].genome)}) "
+	f"({ranked_population[1].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[1].fitness_score}, {len(ranked_population[1].genome)}) "
+	f"({ranked_population[2].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[2].fitness_score}, {len(ranked_population[2].genome)})"
+	)
 	print(f"Best Genome:\n{ranked_population[0].genome}")
 	print(
 		"Press 'y' to run simulation for best genome or any other key to exit"
@@ -204,7 +210,7 @@ def run(exp: ExperimentElevator = None):
 			selection_function=Selection.rank,
 			crossover_function=Crossover.swap_last_halves,
 			mutation_functions=[Mutation.swap,
-					   			Mutation.increase_genome_length,
+								Mutation.increase_genome_length,
 								Mutation.decrease_genome_length],
 			experiment=exp
 		)
