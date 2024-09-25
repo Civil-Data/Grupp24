@@ -6,7 +6,7 @@ import math
 import os
 from itertools import product
 import copy
-import matplotlib.pyplot as plt
+from matplotlib import use, pyplot
 import data
 
 from evolutionary_classes.fitness import Fitness
@@ -192,7 +192,7 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 		current_experiment.display_experiment(experiment_name, results)
 
 	# Shows all results from all experiments in one graph
-	plt.show()
+	pyplot.plt.show()
 	save_experiment(mega_results)
 
 	return mega_results
@@ -211,6 +211,7 @@ def run(exp: ExperimentElevator = None):
 
 if __name__ == "__main__":
 	if data.DO_EXP:
+		use("Qt5Agg")
 		run_experiments("./buildings", "./generations")
 	else:
 		run()
