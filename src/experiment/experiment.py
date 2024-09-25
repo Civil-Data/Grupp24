@@ -22,9 +22,9 @@ class ExperimentElevator:
 	param: path to generation list json file
 	"""
 
-	def __init__(self, people_path, generation_path) -> None:
-		self.people_list: data.People_queues = people_path
-		self.generation_list: data.Population = generation_path
+	def __init__(self, people: data.People, generation: data.Population) -> None:
+		self.people_list: data.People = people
+		self.generation_list: data.Population = generation
 
 	def display_experiment(self, name, results) -> None:
 		"""
@@ -34,10 +34,12 @@ class ExperimentElevator:
 		fitness_score = [res['Best Fitness'] for res in results]
 		best_genome = [res['Best Genome'] for res in results]
 		genome_length = [res['Genome Length'] for res in results]
-		time_score = [res['Time Score'] for res in results]
+		# time_score = [res['Time Score'] for res in results]
+    # plt.xscale("log") # log scaling on axis
+		plt.yscale("log")
 		plt.plot(generation, fitness_score, label="Fitness Score", color="blue")
 		plt.plot(generation, genome_length, label="Genome Length", color="green")
-		plt.plot(generation, time_score, label="Time Score", color="red")
+		# plt.plot(generation, time_score, label="Time Score", color="red")
 		plt.title(f"Experiment : {name}")
 		plt.xlabel("Generation")
 		plt.ylabel("Value")

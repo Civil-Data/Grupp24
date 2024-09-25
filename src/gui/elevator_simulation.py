@@ -2,6 +2,7 @@
 This module contains the code to run a visual simulation of the elevator using the best genome.
 """
 
+import os
 import time
 import copy
 import pygame
@@ -9,208 +10,224 @@ import data
 from genome import Genome
 from main_classes.building import Building
 from init_and_place_people import CONST_PEOPLE_LIST, place_people
+from experiment.experiment import load_building
 
 # Constants for Pygame
-ELEVATOR_WIDTH = 100
-ELEVATOR_HEIGHT = 100
-FLOOR_WIDTH = 400
 FPS = 60
-ELEVATOR_CAPACITY = 8
 ELEVATOR_SPEED = 10
-EXIT_BUTTON_SIZE = 75
 
+pygame.init()
+# Set dynamic GUI resolution
+SCREEN_INFO = pygame.display.Info()
+WINDOW_HEIGHT: int = int(SCREEN_INFO.current_h * 0.85)
+WINDOW_WIDTH: int = int(WINDOW_HEIGHT * 0.7)
+
+# Proportions for dynamic sizing
+FLOOR_HEIGHT_PROPORTION = 1 / data.NUMBER_OF_FLOORS  # Dynamic based on number of floors
+FLOOR_WIDTH_PROPORTION = 0.5     # 50% of window width
+ELEVATOR_HEIGHT_PROPORTION = FLOOR_HEIGHT_PROPORTION
+ELEVATOR_WIDTH_PROPORTION = ELEVATOR_HEIGHT_PROPORTION
+EXIT_BUTTON_SIZE = int(0.05 * WINDOW_WIDTH)
 
 def run_simulation(best_genome: Genome) -> None:
-	"""
-	Run a visual simulation of the elevator using the best genome.
-	"""
-	# Initialize Pygame and the screen settings
-	pygame.init()
-	screen_info = pygame.display.Info()
-	size = (screen_info.current_w, screen_info.current_h)
-	screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
-	pygame.display.set_caption("Elevator Simulation")
-	font = pygame.font.SysFont(None, 50)
-	clock = pygame.time.Clock()
+    """
+    Run a visual simulation of the elevator using the best genome.
+    """
+    # Initialize Pygame and the screen settings
+    screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))  # Windowed mode
+    pygame.display.set_caption("Elevator Simulation")
+    font = pygame.font.SysFont(None, 50)
+    clock = pygame.time.Clock()
 
-	# Variables for Pygame window
-	window_width = screen_info.current_w
-	window_height = screen_info.current_h
-	floor_height = size[1] // (data.NUMBER_OF_FLOORS + 1)
-	# Copy the people list to avoid modifying the original list
-	people_list: data.People = copy.deepcopy(CONST_PEOPLE_LIST)
-	building: Building = Building(place_people(people_list))
-	best_genome.people = people_list
+    # Calculate dynamic sizes
+    floor_height = int(WINDOW_HEIGHT * FLOOR_HEIGHT_PROPORTION)
+    floor_width = int(WINDOW_WIDTH * FLOOR_WIDTH_PROPORTION)
+    elevator_width = int(WINDOW_WIDTH * ELEVATOR_WIDTH_PROPORTION)
+    elevator_height = int(WINDOW_HEIGHT * ELEVATOR_HEIGHT_PROPORTION)
 
-	# Keeps track of the elevator position
-	elevator_pos = [
-		(window_width - FLOOR_WIDTH) // 2 + (FLOOR_WIDTH - ELEVATOR_WIDTH) // 2,
-		window_height - floor_height,
-	]
+    if data.DO_EXP:
+        people_experiment = list(os.listdir('./buildings'))
+        assert len(people_experiment) == 1
+        people_list: data.People = copy.deepcopy(load_building(f"./buildings/{people_experiment[0]}"))
+    else:
+        people_list: data.People = copy.deepcopy(CONST_PEOPLE_LIST)
+    building: Building = Building(place_people(people_list))
 
-	# Calculate the building position
-	building_x = (window_width - FLOOR_WIDTH) // 2
-	building_y = (
-		window_height - (data.NUMBER_OF_FLOORS * floor_height) - 50
-	)  # Move the building down by 50 pixels
+    assert len(best_genome.people) == len(people_list) == len(CONST_PEOPLE_LIST)
 
-	# Initialize a list to keep track of people who have arrived at their desired floor
-	people_arrived = [None] * data.NUMBER_OF_FLOORS  # None means no update needed
+    # Keeps track of the elevator position
+    elevator_pos = [
+        (WINDOW_WIDTH - elevator_width) // 2 + int(floor_width * 0.2),
+        WINDOW_HEIGHT - floor_height - elevator_height,
+    ]
 
-	# Track the number of people inside the elevator
-	elevator_passengers = []
+    # Calculate the building position
+    building_x = (WINDOW_WIDTH - int(WINDOW_WIDTH * FLOOR_WIDTH_PROPORTION)) // 2
+    building_y = WINDOW_HEIGHT - (data.NUMBER_OF_FLOORS * floor_height)
 
-	# Define the exit button
-	exit_button_rect = pygame.Rect(
-		window_width - EXIT_BUTTON_SIZE - 10, 10, EXIT_BUTTON_SIZE, EXIT_BUTTON_SIZE
-	)
+    # Initialize a list to keep track of people who have arrived at their desired floor
+    people_arrived = [0 for _ in range(data.NUMBER_OF_FLOORS)]
 
-	running = True
-	for floor in best_genome.genome:
-		if not running:
-			break
+    # Track the number of people inside the elevator
+    elevator_passengers: data.People = []
 
-		target_y = building_y + (data.NUMBER_OF_FLOORS - floor - 1) * floor_height
+    running = True
+    for floor in best_genome.genome:
+        if not running:
+            break
 
-		while elevator_pos[1] != target_y:
-			for event in pygame.event.get():
-				if event.type == pygame.QUIT:
-					running = False
-				elif event.type == pygame.MOUSEBUTTONDOWN:
-					if exit_button_rect.collidepoint(event.pos):
-						running = False
+        # Place these two simulation loops here at the top to accurately display the final
+        # numbers, but the numbers will update before the elevator visually reaches the floors
 
-			if elevator_pos[1] < target_y:
-				elevator_pos[1] += min(ELEVATOR_SPEED, target_y - elevator_pos[1])
-			elif elevator_pos[1] > target_y:
-				elevator_pos[1] -= min(ELEVATOR_SPEED, elevator_pos[1] - target_y)
+        # If instead placed just beneath and outside the 'while elevator_pos[1] != target_y:' loop,
+        # the numbers will naturally update as the elevator visually reaches a floor, but not
+        # accurately display the final numbers
 
-			screen.fill((75, 75, 75))
+        # Pick your poison :)
 
-			# Draw the building frame
-			pygame.draw.rect(
-				screen,
-				(0, 0, 0),
-				(
-					building_x,
-					building_y,
-					FLOOR_WIDTH,
-					data.NUMBER_OF_FLOORS * floor_height,
-				),
-				2,
-			)
+        # Simulate dropping off passengers
+        passengers_to_drop = [p for p in elevator_passengers if p.end_floor == floor]
+        for passenger in passengers_to_drop:
+            elevator_passengers.remove(passenger)
+            people_arrived[floor] += 1
 
-			# Draw the roof
-			pygame.draw.line(
-				screen,
-				(0, 0, 0),
-				(building_x, building_y),
-				(building_x + FLOOR_WIDTH, building_y),
-				2,
-			)
+        # Simulate picking up people from the current floor
+        people_to_pick_up: data.People = building.people_queues[floor]
+        picked_up = 0
+        while people_to_pick_up and len(elevator_passengers) < data.ELEVATOR_CAPACITY:
+            person = people_to_pick_up.pop(0)
+            elevator_passengers.append(person)
+            picked_up += 1
 
-			# Draw the building label
-			building_label = font.render("Building 1", True, (255, 255, 255))
-			screen.blit(building_label, (building_x + 10, building_y - 40))
+        target_y = building_y + (data.NUMBER_OF_FLOORS - floor - 1) * floor_height
 
-			# Draw the floor lines and labels, also draw the number of people waiting and dropped off on each floor
-			for i in range(data.NUMBER_OF_FLOORS):
-				pygame.draw.line(
-					screen,
-					(0, 0, 0),
-					(building_x, building_y + i * floor_height),
-					(building_x + FLOOR_WIDTH, building_y + i * floor_height),
-				)
-				floor_label = font.render(f"Floor {i}", True, (255, 255, 255))
-				screen.blit(
-					floor_label,
-					(
-						building_x + 10,
-						building_y
-						+ (data.NUMBER_OF_FLOORS - i - 1) * floor_height
-						+ 10,
-					),
-				)
+        while elevator_pos[1] != target_y:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:  # Check for the quit event
+                    running = False
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:  # Left mouse button
+                        if exit_button_rect.collidepoint(event.pos):
+                            running = False
 
-				# Draw the number of people waiting on each floor
-				people_waiting = len(building.people_queues[i])
-				people_label = font.render(str(people_waiting), True, (255, 0, 0))
-				screen.blit(
-					people_label,
-					(
-						building_x - 30,
-						building_y
-						+ (data.NUMBER_OF_FLOORS - i - 1) * floor_height
-						+ 10,
-					),
-				)
+            if elevator_pos[1] < target_y:
+                elevator_pos[1] += min(ELEVATOR_SPEED, target_y - elevator_pos[1])
+            elif elevator_pos[1] > target_y:
+                elevator_pos[1] -= min(ELEVATOR_SPEED, elevator_pos[1] - target_y)
 
-				# Draw the number of people who have arrived at their desired floor
-				if people_arrived[i] is not None:
-					arrived_label = font.render(
-						str(people_arrived[i]), True, (0, 255, 0)
-					)
-					screen.blit(
-						arrived_label,
-						(
-							building_x + FLOOR_WIDTH + 10,
-							building_y
-							+ (data.NUMBER_OF_FLOORS - i - 1) * floor_height
-							+ 10,
-						),
-					)
+            screen.fill((75, 75, 75))
 
-			# Draw the elevator and the number of passengers inside
-			pygame.draw.rect(
-				screen, (0, 0, 0), (*elevator_pos, ELEVATOR_WIDTH, ELEVATOR_HEIGHT)
-			)
+            # Draw the building frame
+            pygame.draw.rect(
+                screen,
+                (0, 0, 0),
+                (
+                    building_x,
+                    building_y,
+                    int(WINDOW_WIDTH * FLOOR_WIDTH_PROPORTION),
+                    data.NUMBER_OF_FLOORS * floor_height,
+                ),
+                2,
+            )
 
-			passenger_label = font.render(
-				str(len(elevator_passengers)), True, (255, 255, 0)
-			)
-			screen.blit(
-				passenger_label,
-				(
-					elevator_pos[0] + ELEVATOR_WIDTH // 2 - 10,
-					elevator_pos[1] + ELEVATOR_HEIGHT // 2 - 10,
-				),
-			)
+            # Draw the roof
+            pygame.draw.line(
+                screen,
+                (0, 0, 0),
+                (building_x, building_y),
+                (building_x + int(WINDOW_WIDTH * FLOOR_WIDTH_PROPORTION), building_y),
+                2,
+            )
 
-			# Draw the exit button
-			pygame.draw.rect(screen, (255, 0, 0), exit_button_rect)
-			exit_label = font.render("X", True, (255, 255, 255))
-			screen.blit(
-				exit_label,
-				(
-					exit_button_rect.x
-					+ (EXIT_BUTTON_SIZE - exit_label.get_width()) // 2,
-					exit_button_rect.y
-					+ (EXIT_BUTTON_SIZE - exit_label.get_height()) // 2,
-				),
-			)
+            # Draw the building label
+            # building_label = font.render("Building 1", True, (255, 255, 255))
+            # screen.blit(building_label, (building_x + 10, building_y - 40))
 
-			pygame.display.flip()
-			clock.tick(FPS)
+            # Draw the floor lines and labels
+            for i in range(data.NUMBER_OF_FLOORS):
+                pygame.draw.line(
+                    screen,
+                    (0, 0, 0),
+                    (building_x, building_y + i * floor_height),
+                    (building_x + int(WINDOW_WIDTH * FLOOR_WIDTH_PROPORTION), building_y + i * floor_height),
+                )
+                floor_label = font.render(f"Floor {i}", True, (255, 255, 255))
+                screen.blit(
+                    floor_label,
+                    (
+                        building_x + 10,
+                        building_y + (data.NUMBER_OF_FLOORS - i - 1) * floor_height + 10,
+                    ),
+                )
 
-		# Simulate dropping off passengers
-		passengers_to_drop = [p for p in elevator_passengers if p.end_floor == floor]
-		for passenger in passengers_to_drop:
-			elevator_passengers.remove(passenger)
-			people_arrived[floor] = (people_arrived[floor] or 0) + 1
+                # Draw the number of people waiting on each floor
+                people_waiting = len(building.people_queues[i])
+                people_label = font.render(str(people_waiting), True, (255, 0, 0))
+                screen.blit(
+                    people_label,
+                        (
+	                        building_x - 30,
+	                        building_y
+	                            + (data.NUMBER_OF_FLOORS - i - 1) * floor_height
+	                            + 10,
+                        ),
+                )
 
-		# Simulate picking up people from the current floor
-		people_to_pick_up = building.people_queues[floor]
-		picked_up = 0
-		while people_to_pick_up and len(elevator_passengers) < ELEVATOR_CAPACITY:
-			person = people_to_pick_up.pop(0)
-			elevator_passengers.append(person)
-			picked_up += 1
+                # Draw the number of people who have arrived at their desired floor
+                if people_arrived[i] > 0:
+                    arrived_label = font.render(
+                    str(people_arrived[i]), True, (0, 255, 0)
+                    )
+                    screen.blit(
+                        arrived_label,
+                        (
+                            building_x + floor_width + 10,
+                            building_y
+                                + (data.NUMBER_OF_FLOORS - i - 1) * floor_height
+                                + 10,
+                        ),
+                    )
 
-		print(
-			f"Moved to floor: {floor} Dropped off: {len(passengers_to_drop)} and Picked up: {picked_up} passengers."
-		)
-		# Sleep to simulate the elevator waiting at each floor
-		time.sleep(0.5)
+            # Draw the elevator and the number of passengers inside
+            pygame.draw.rect(
+                screen, (0, 0, 0), (*elevator_pos, elevator_width, elevator_height)
+            )
 
-	print("Simulation complete.")
-	pygame.quit()
+            passenger_label = font.render(
+                str(len(elevator_passengers)), True, (255, 255, 0)
+            )
+            screen.blit(
+                passenger_label,
+                (
+                    elevator_pos[0] + elevator_width // 2 - 10,
+                    elevator_pos[1] + elevator_height // 2 - 10,
+                ),
+            )
+
+            # Draw the exit button
+            exit_button_rect = pygame.Rect(
+                WINDOW_WIDTH - EXIT_BUTTON_SIZE - 10, 10, EXIT_BUTTON_SIZE, EXIT_BUTTON_SIZE
+            )
+            pygame.draw.rect(screen, (255, 0, 0), exit_button_rect)
+            exit_label = font.render("X", True, (255, 255, 255))
+            screen.blit(
+                exit_label,
+                (
+                    exit_button_rect.x + (EXIT_BUTTON_SIZE - exit_label.get_width()) // 2,
+                    exit_button_rect.y + (EXIT_BUTTON_SIZE - exit_label.get_height()) // 2,
+                ),
+            )
+
+            pygame.display.flip()
+            clock.tick(FPS)
+
+
+        print(
+            f"Moved to floor: {floor} || Dropped off: {len(passengers_to_drop)} || Picked up: {picked_up}."
+        )
+        # Sleep to simulate the elevator waiting at each floor
+        time.sleep(0.5)
+
+    print("Simulation complete.")
+    time.sleep(3)
+    pygame.quit()

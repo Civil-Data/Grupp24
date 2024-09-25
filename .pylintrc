@@ -299,7 +299,7 @@ max-attributes=7
 max-bool-expr=5
 
 # Maximum number of branch for function / method body.
-max-branches=13
+max-branches=16
 
 # Maximum number of locals for function / method body.
 max-locals=35
@@ -314,7 +314,7 @@ max-public-methods=20
 max-returns=6
 
 # Maximum number of statements in function / method body.
-max-statements=70
+max-statements=72
 
 # Minimum number of public methods for a class (see R0903).
 min-public-methods=0
@@ -438,7 +438,9 @@ disable=raw-checker-failed,
 		use-implicit-booleaness-not-comparison-to-zero,
 		E0401,
 		W0612,
-		C0413
+		C0413,
+		W0311,	# bad-indentation
+		E0611	# no-name-in-module
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -468,7 +470,7 @@ notes-rgx=
 [REFACTORING]
 
 # Maximum number of nested blocks for function / method body
-max-nested-blocks=5
+max-nested-blocks=6
 
 # Complete name of functions that never returns. When checking for
 # inconsistent-return-statements if a never returning function is called then

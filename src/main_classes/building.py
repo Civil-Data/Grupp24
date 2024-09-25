@@ -35,8 +35,9 @@ class Building:
 
 		self.elevator.current_floor = arrived_floor
 		# Increments the number of trips
-		self.time_passed += abs(previous_floor - arrived_floor)
+		self.time_passed += abs(self.elevator.current_floor - previous_floor)
 
+		to_remove: data.People = []
 		for person in self.elevator.occupants:
 			# All occupants have traveled a certain distance
 			person.distance_traveled += abs(self.elevator.current_floor - previous_floor)
@@ -45,7 +46,13 @@ class Building:
 				person.has_arrived = True
 				# The time the person has been waiting is the same as the time from the start until they have arrived
 				person.time_spent_waiting += self.time_passed
-				self.elevator.occupants.remove(person)
+				# Collect
+				to_remove.append(person)
+
+		for person in to_remove:
+			self.elevator.occupants.remove(person)
+
+		to_remove.clear()
 
 		# Loop over all people waiting for the elevator at the current floor
 		for person in self.people_queues[self.elevator.current_floor]:
@@ -53,11 +60,18 @@ class Building:
 			if len(self.elevator.occupants) < self.elevator.max_capacity:
 				# Make sure there's no shenanigans going on
 				assert person.start_floor == self.elevator.current_floor
-
 				# Load person on to elevator
 				self.elevator.occupants.append(person)
-
-				# Remove that person from the queue of people waiting for elevator
-				self.people_queues[self.elevator.current_floor].remove(person)
+				# Collect
+				to_remove.append(person)
 			else:
 				break
+
+		for person in to_remove:
+			self.people_queues[self.elevator.current_floor].remove(person)
+
+	# def to_text(self):
+	# 	for people in self.people_queues:
+	# 		for person in people:
+	# 			print("*****")
+	# 			person.to_text()

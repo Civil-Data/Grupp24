@@ -21,6 +21,9 @@ def place_people(people: data.People) -> data.People_queues:
 	for person in people:
 		matrix[person.start_floor].append(person)
 
+	# for people in matrix:
+	# 	for person in people:
+	# 		person.to_text()
 	return matrix
 
 
