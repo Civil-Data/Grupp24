@@ -65,7 +65,7 @@ def create_building(
 		for floor in range(data.NUMBER_OF_FLOORS):
 			if remaining_people == 0:
 				break
-			
+
 			if random.choice([0, 1]) == 0: # 50% chance
 				numb_of_ppl_on_floor[floor] += 1
 				remaining_people -= 1
