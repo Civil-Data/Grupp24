@@ -14,7 +14,7 @@ from experiment.experiment import load_building
 
 # Constants for Pygame
 FPS = 60
-ELEVATOR_SPEED = 10
+ELEVATOR_SPEED = data.NUMBER_OF_FLOORS
 
 pygame.init()
 # Set dynamic GUI resolution
