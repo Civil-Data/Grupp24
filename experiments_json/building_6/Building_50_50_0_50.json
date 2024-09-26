@@ -1,0 +1,252 @@
+[
+    {
+        "start_floor": 0,
+        "end_floor": 20,
+        "floors": 50
+    },
+    {
+        "start_floor": 1,
+        "end_floor": 5,
+        "floors": 50
+    },
+    {
+        "start_floor": 1,
+        "end_floor": 16,
+        "floors": 50
+    },
+    {
+        "start_floor": 3,
+        "end_floor": 35,
+        "floors": 50
+    },
+    {
+        "start_floor": 4,
+        "end_floor": 33,
+        "floors": 50
+    },
+    {
+        "start_floor": 5,
+        "end_floor": 49,
+        "floors": 50
+    },
+    {
+        "start_floor": 6,
+        "end_floor": 41,
+        "floors": 50
+    },
+    {
+        "start_floor": 7,
+        "end_floor": 25,
+        "floors": 50
+    },
+    {
+        "start_floor": 8,
+        "end_floor": 26,
+        "floors": 50
+    },
+    {
+        "start_floor": 12,
+        "end_floor": 26,
+        "floors": 50
+    },
+    {
+        "start_floor": 12,
+        "end_floor": 15,
+        "floors": 50
+    },
+    {
+        "start_floor": 13,
+        "end_floor": 43,
+        "floors": 50
+    },
+    {
+        "start_floor": 15,
+        "end_floor": 24,
+        "floors": 50
+    },
+    {
+        "start_floor": 16,
+        "end_floor": 37,
+        "floors": 50
+    },
+    {
+        "start_floor": 17,
+        "end_floor": 14,
+        "floors": 50
+    },
+    {
+        "start_floor": 19,
+        "end_floor": 22,
+        "floors": 50
+    },
+    {
+        "start_floor": 21,
+        "end_floor": 47,
+        "floors": 50
+    },
+    {
+        "start_floor": 21,
+        "end_floor": 47,
+        "floors": 50
+    },
+    {
+        "start_floor": 22,
+        "end_floor": 28,
+        "floors": 50
+    },
+    {
+        "start_floor": 22,
+        "end_floor": 48,
+        "floors": 50
+    },
+    {
+        "start_floor": 23,
+        "end_floor": 48,
+        "floors": 50
+    },
+    {
+        "start_floor": 24,
+        "end_floor": 16,
+        "floors": 50
+    },
+    {
+        "start_floor": 24,
+        "end_floor": 28,
+        "floors": 50
+    },
+    {
+        "start_floor": 25,
+        "end_floor": 39,
+        "floors": 50
+    },
+    {
+        "start_floor": 26,
+        "end_floor": 34,
+        "floors": 50
+    },
+    {
+        "start_floor": 26,
+        "end_floor": 40,
+        "floors": 50
+    },
+    {
+        "start_floor": 27,
+        "end_floor": 39,
+        "floors": 50
+    },
+    {
+        "start_floor": 27,
+        "end_floor": 45,
+        "floors": 50
+    },
+    {
+        "start_floor": 28,
+        "end_floor": 35,
+        "floors": 50
+    },
+    {
+        "start_floor": 29,
+        "end_floor": 47,
+        "floors": 50
+    },
+    {
+        "start_floor": 29,
+        "end_floor": 13,
+        "floors": 50
+    },
+    {
+        "start_floor": 30,
+        "end_floor": 46,
+        "floors": 50
+    },
+    {
+        "start_floor": 32,
+        "end_floor": 33,
+        "floors": 50
+    },
+    {
+        "start_floor": 32,
+        "end_floor": 27,
+        "floors": 50
+    },
+    {
+        "start_floor": 33,
+        "end_floor": 6,
+        "floors": 50
+    },
+    {
+        "start_floor": 34,
+        "end_floor": 4,
+        "floors": 50
+    },
+    {
+        "start_floor": 34,
+        "end_floor": 13,
+        "floors": 50
+    },
+    {
+        "start_floor": 36,
+        "end_floor": 34,
+        "floors": 50
+    },
+    {
+        "start_floor": 37,
+        "end_floor": 38,
+        "floors": 50
+    },
+    {
+        "start_floor": 38,
+        "end_floor": 20,
+        "floors": 50
+    },
+    {
+        "start_floor": 40,
+        "end_floor": 21,
+        "floors": 50
+    },
+    {
+        "start_floor": 41,
+        "end_floor": 17,
+        "floors": 50
+    },
+    {
+        "start_floor": 42,
+        "end_floor": 11,
+        "floors": 50
+    },
+    {
+        "start_floor": 42,
+        "end_floor": 43,
+        "floors": 50
+    },
+    {
+        "start_floor": 43,
+        "end_floor": 49,
+        "floors": 50
+    },
+    {
+        "start_floor": 45,
+        "end_floor": 47,
+        "floors": 50
+    },
+    {
+        "start_floor": 46,
+        "end_floor": 2,
+        "floors": 50
+    },
+    {
+        "start_floor": 47,
+        "end_floor": 24,
+        "floors": 50
+    },
+    {
+        "start_floor": 48,
+        "end_floor": 6,
+        "floors": 50
+    },
+    {
+        "start_floor": 49,
+        "end_floor": 2,
+        "floors": 50
+    }
+]
