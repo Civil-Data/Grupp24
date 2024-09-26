@@ -74,37 +74,32 @@
 % 	\label{fig:plot_example}
 % \end{figure}
 
-
 Each genome has a score that is increased with one time unit for each person that has not arrived to their desired floor for each floor traveled by the elevator. The fitness function helps to keep track of each genome's score and gives time penalties for each person that has not arrived to their desired floor. The penalties increases the score with 100 which is a severe penalty to promote the algorithm to serve as many people as possible.
 
 \subsection{Building 1}
-As you can see in figure \ref{fig:Building1/Mutation_0.1/Floors: 10, People: 10, Generation: 1000_worst} when we used our first and most primitive crossover that simply swaps the last halves of two parents genomes the best fitness value we achieved in five runs was 205 but in this graph we show the worst case score of 10227 when it missed serving one person and received a big penalty. We then decided to try a new crossover that creates the first offspring with gene-by-gene selection and which parent to select a gene from is determined by a weighted random choice based on their fitness scores. The second offspring is created by reversing the first offspring.
+As you can see in figure \ref{fig:Building1/Floors: 10, People: 10, Generation: 1000_worst} when we used our first and most primitive crossover that simply swaps the last halves of two parents genomes the best fitness value we achieved in five runs was 182. We then decided to try a new crossover that creates the first offspring with gene-by-gene selection and which parent to select a gene from is determined by a weighted random choice based on their fitness scores. The second offspring is created by reversing the first offspring.
 % references here
-When running the algorithm with this crossover we didn't see any improvements and the best score we achieved was also 182, see \ref{fig:Building1/Mutation_0.1/Floors: 10, People: 10, Generation: 1000_best}. The first crossover reached the best value within fewer generations and seems to preform better in this instance. To be completely sure that we couldn't get improved results by changing to a different crossover without changing anything else we decided to try a much more advance crossover that had a great impact on. % references here
+When running the algorithm with this crossover we didn't see any improvements and the best score we achieved was also 182, see \ref{fig:Building1/Floors: 10, People: 10, Generation: 1000_best}. The first crossover reached the best value within fewer generations and seems to preform better in this instance. To be completely sure that we couldn't get improved results by changing to a different crossover without changing anything else we decided to try a much more advance crossover that had a great impact on. % references here
 
-The third crossover uses segment-based selection instead of selecting genes individually, this method selects contiguous segments of genes from each parent. The offsets determine how many genes to take from each parent based on their fitness scores. This one always performs well and never get stuck in local minima for long. The best score we achieved with this crossover was 172. % references here
-We also tested the same building with more people inside, and we saw similar results with the third crossover always having good results and a great consistency. The simplest one also performed similarly as the third one, but it wasn't as consistent. The second one is extremely unreliable it can perform very well, but it can also get stuck in local minima for a long time. Besides that it took more generations for all crossovers to reach a good solution because of the increased number of people. The third crossover often reaches a good solution quicker than the other two crossovers.
+The third crossover uses segment-based selection instead of selecting genes individually, this method selects contiguous segments of genes from each parent. The offsets determine how many genes to take from each parent based on their fitness scores.
+
 
 \begin{figure}[h]
 	\centering
 	\begin{subfigure}[b]{0.49\linewidth}
 		\centering
-		\includegraphics[width=\linewidth]{results/Building1/Mutation_0.1/Floors: 10, People: 10, Generation: 1000_worst.png}
-		\caption{Blue score = 10227, Red score = 213, Orange score = 297.}
-		\label{fig:Building1/Mutation_0.1/Floors: 10, People: 10, Generation: 1000_worst}
+		\includegraphics[width=\linewidth]{results/Building1/Floors: 10, People: 10, Generation: 1000_worst.png}
+		\caption{Worst case for Building 1}
+		\label{fig:Building1/Floors: 10, People: 10, Generation: 1000_worst}
 	\end{subfigure}
 	\hfill
 	\begin{subfigure}[b]{0.49\linewidth}
 		\centering
-		\includegraphics[width=\linewidth]{results/Building1/Mutation_0.1/Floors: 10, People: 10, Generation: 1000_best.png}
-		\caption{Blue score = 205, Red score = 182, Orange score = 172.}
-		\label{fig:Building1/Mutation_0.1/Floors: 10, People: 10, Generation: 1000_best}
+		\includegraphics[width=\linewidth]{results/Building1/Floors: 10, People: 10, Generation: 1000_best.png}
+		\caption{Best case for Building 1.}
+		\label{fig:Building1/Floors: 10, People: 10, Generation: 1000_best}
 	\end{subfigure}
 	\hfill
 	\label{fig:Building 1 results}
 \end{figure}
-\subsection{Building 2}
-Samuel had some papers he wanted to compare these results with.
-
 \subsection{Building 3}
-
