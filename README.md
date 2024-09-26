@@ -38,7 +38,7 @@
 
 ### Lint
 
-- To lint the whole project run `make`
+- To lint the whole project run `make lint`
 
 ### Test
 
