@@ -22,7 +22,7 @@
 	make install
 	```
 
-3. Install the required dependencies:
+4. Run the evolutionary algorithm:
 
 	```sh
 	make run
