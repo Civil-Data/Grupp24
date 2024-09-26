@@ -24,7 +24,7 @@ def test_init_people():
 	Check non-zero distance needed
 	"""
 	people = init_people()
-	assert len(people) is data.NUMBER_OF_PEOPLE
+	assert len(people) == data.NUMBER_OF_PEOPLE
 	for person in people:
 		assert 0 <= person.start_floor <= data.NUMBER_OF_FLOORS
 		assert 0 <= person.end_floor <= data.NUMBER_OF_FLOORS
