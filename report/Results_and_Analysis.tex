@@ -75,10 +75,9 @@
 % \end{figure}
 
 
-Each genome has a score that is increased with one time unit for each person that has not arrived to their desired floor for each floor traveled by the elevator. The fitness function helps to keep track of each genome's score and gives time penalties for each person that has not arrived to their desired floor. The penalties increases the score with 100 which is a severe penalty to promote the algorithm to serve as many people as possible.
+The following results are displayed using graphs to highlight some of the insights we have taken from the experiments we ran. Blue line and text represents our simplest crossover that swaps the last halves of two parents to create two children. The red represents the second crossover that selects genes from each parent based on their fitness scores. The orange represents the third crossover that selects contiguous segments of genes from each parent based on their fitness scores.
 
 \subsection{Building 1}
-As you can see in figure \ref{fig:Building1/Mutation_0.1/Floors: 10, People: 10, Generation: 1000_worst} when we used our first and most primitive crossover that simply swaps the last halves of two parents genomes the best fitness value we achieved in five runs was 205 but in this graph we show the worst case score of 10227 when it missed serving one person and received a big penalty. We then decided to try a new crossover that creates the first offspring with gene-by-gene selection and which parent to select a gene from is determined by a weighted random choice based on their fitness scores. The second offspring is created by reversing the first offspring.
 % references here
 When running the algorithm with this crossover we didn't see any improvements and the best score we achieved was also 182, see \ref{fig:Building1/Mutation_0.1/Floors: 10, People: 10, Generation: 1000_best}. The first crossover reached the best value within fewer generations and seems to preform better in this instance. To be completely sure that we couldn't get improved results by changing to a different crossover without changing anything else we decided to try a much more advance crossover that had a great impact on. % references here
 
