@@ -144,3 +144,9 @@ After running all the buildings with mutation rate of 0.1 we started testing out
 	\caption{Building 4 comparing different mutation rates}
 	\label{fig:Building 4 comparing different mutation rates}
 \end{figure}
+
+
+Thoughts:
+— The first crossover can perform really well and even beet the third one in some cases, but it also tends to get stuck in local minima in some cases. This means that it is inconsistent and that you can't trust it to always give you a good solution. It performs worst with fewer people in the buildings.
+— Too much diversity makes the second crossover bad, maybe it would have been better with more elitism and less diversity from mutations and roulette wheel selection. This crossover also have problems performing well on larger buildings with more people.
+— The third crossover is the best one, due to that it always performs well and never gets stuck in local minima for long. This one performs well on all buildings and with all amounts of people. It also performs well with different mutation rates.
