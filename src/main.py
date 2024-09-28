@@ -151,13 +151,13 @@ def run_evolution(
 	f"({ranked_population[2].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[2].fitness_score}, {len(ranked_population[2].genome)})"
 	)
 	print(f"Best Genome:\n{ranked_population[0].genome}")
-	print(
-		"Press 'y' to run simulation for best genome or any other key to exit"
-	)
-	if input() == "y":
-		run_simulation(ranked_population[0])
+	#print(
+	#	"Press 'y' to run simulation for best genome or any other key to exit"
+	#)
+	#if input() == "y":
+	#	run_simulation(ranked_population[0])
 
-	return result_data
+	return result_data, ranked_population[0], str(crossover_function.__name__)
 
 def run_experiments(people_folder_path, generation_folder_path) -> List:
 	"""
@@ -166,8 +166,6 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 	# Getting all files in experiment folders
 	people_experiment = [files for files in os.listdir(people_folder_path)]
 	generation_experiment = [files for files in os.listdir(generation_folder_path)]
-
-	mega_results = []
 
 	# Running through all different combinations of experiments
 	# *********************************************************************************************
@@ -186,24 +184,26 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 		people_data = load_building(people_file_path)
 		generation_data = load_population(generation_file_path)
 
+		csv_results = []
+
 		current_experiment = ExperimentElevator(people_data, generation_data)
-		
-		results = run(current_experiment)
-
 		experiment_name = (
-			f"People: {people_experiment}, Generation: {generation_experiment}"
-		)
-		mega_results.append((experiment_name, results))
+			f"Floors: {data.NUMBER_OF_FLOORS}, People: {data.NUMBER_OF_PEOPLE}, Generation: {data.GENERATION_LIMIT}"
+		)	
+		
+		results_f, best_results, crossover_name = run_swap(current_experiment)
+		csv_results.append((experiment_name, crossover_name, best_results))
+		results_s, best_results, crossover_name = run_h1(current_experiment)
+		csv_results.append((experiment_name, crossover_name, best_results))
+		results_t, best_results, crossover_name = run_h2(current_experiment)
+		csv_results.append((experiment_name, crossover_name, best_results))
 
-		current_experiment.display_experiment(experiment_name, results)
+		current_experiment.display_experiment(experiment_name, results_f, results_s, results_t)
+		save_experiment(experiment_name ,csv_results)
 
-	# Shows all results from all experiments in one graph
-	pyplot.show()
-	save_experiment(mega_results)
+	return csv_results
 
-	return mega_results
-
-def run(exp: ExperimentElevator = None):
+def run_swap(exp: ExperimentElevator = None):
 	return run_evolution(
 			populate_function=Populate.generate_population,
 			fitness_function=Fitness.calc_fitness,
@@ -215,13 +215,33 @@ def run(exp: ExperimentElevator = None):
 			experiment=exp
 		)
 
+def run_h1(exp: ExperimentElevator = None):
+	return run_evolution(
+			populate_function=Populate.generate_population,
+			fitness_function=Fitness.calc_fitness,
+			selection_function=Selection.rank,
+			crossover_function=Crossover.heuristic_crossover_single_gene,
+			mutation_functions=[Mutation.swap,
+								Mutation.increase_genome_length,
+								Mutation.decrease_genome_length],
+			experiment=exp
+		)
+
+def run_h2(exp: ExperimentElevator = None):
+	return run_evolution(
+			populate_function=Populate.generate_population,
+			fitness_function=Fitness.calc_fitness,
+			selection_function=Selection.rank,
+			crossover_function=Crossover.heuristic_crossover_sequense_of_genes,
+			mutation_functions=[Mutation.swap,
+								Mutation.increase_genome_length,
+								Mutation.decrease_genome_length],
+			experiment=exp
+		)
+
 if __name__ == "__main__":
 	if data.DO_EXP:
-		try:
-			use("Qt5Agg")
-		except:
-			print("Failed to use Qt5Agg PyPlot backend, will use Agg instead")
-			use("Agg")
-		run_experiments("./buildings", "./generations")
+		for i in range(1):
+			run_experiments("./buildings", "./generations")
 	else:
-		run()
+		run_swap()
