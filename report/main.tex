@@ -91,16 +91,16 @@
 \usepackage{graphicx}
 \usepackage{zref-totpages} % To get the total number of pages
 \usepackage{mathtools,amsmath} % for advanced math formulas
- % To highlight source code
+% To highlight source code
 \usepackage{minted}
 % Default options for all minted environments
 \setminted{
-		   style=default, % for minted envronment
-		   autogobble, % automatically remove all common leading whitespace
-		   xleftmargin=10pt, % indentation to add (on the left) before the listing
-		   numbersep=6pt, % gap between numbers and start of line
-		   linenos, % enables line numbers
-		   mathescape % enables the usual math mode inside comments
+			style=default, % for minted envronment
+			autogobble, % automatically remove all common leading whitespace
+			xleftmargin=10pt, % indentation to add (on the left) before the listing
+			numbersep=6pt, % gap between numbers and start of line
+			linenos, % enables line numbers
+			mathescape % enables the usual math mode inside comments
 }
 \setmintedinline[c]{style=default} % for minted inlines
 % Flexible handling of verbatim text
@@ -113,12 +113,11 @@
 % For plots and graphs
 \usepackage{pgfplots}
 \pgfplotsset{width=10cm,compat=1.9}
-
-% To generate placeholder text - can be deleted when you have written real text
-\usepackage{lipsum}
-% ----------- End of packages and custom commands ----------- %
+% To be able to place figures side by side
 \usepackage{subcaption}
+% This package is used to reference the last page of the document.
 \usepackage{lastpage}
+% ----------- End of packages and custom commands ----------- %
 
 \begin{document}
 
@@ -134,25 +133,37 @@
 \label{sec:intro}
 \input{Introduction}
 
+\newpage
+
 \section{Optimize elevator routing}
 \label{sec:problem_description}
-\input{Optimmize_Elevator_Routing}
+\input{Optimize_Elevator_Routing}
+
+\newpage
 
 \section{Algorithm}
 \label{sec:algorithm}
 \input{Algorithm}
 
+\newpage
+
 \section{Experimental part}
 \label{sec:experimentation}
 \input{Experimental_part}
+
+\newpage
 
 \section{Results and Analysis}
 \label{sec:results-analysis}
 \input{Results_and_Analysis}
 
+\newpage
+
 \section{Conclusions}
 \label{sec:conclusions}
 \input{Conclusions}
+
+\newpage
 
 \bibliographystyle{ieeetr}
 \bibliography{references}

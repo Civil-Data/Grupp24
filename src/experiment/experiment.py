@@ -61,9 +61,9 @@ def load_population(filename) -> data.Population:
 	Loading in data from a json file for list of genomes
 	"""
 	with open(filename, "r", encoding="UTF-8") as file:
-		pouplation_data = json.load(file)
+		population_data = json.load(file)
 
-	genome_list = [Genome(genome_data) for genome_data in pouplation_data]
+	genome_list = [Genome(genome_data) for genome_data in population_data]
 
 	return genome_list
 

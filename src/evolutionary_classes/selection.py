@@ -28,7 +28,7 @@ class Selection:
 		total_ranks = sum(ranks)
 		selection_probs: List[float] = [rank / total_ranks for rank in ranks]
 
-		# Create a cumulative distribution of selection probabilties
+		# Create a cumulative distribution of selection probabilities
 		cumulative_probabilities: List[float] = []
 		cumulative_sum: float = 0.0
 		for prob in selection_probs:
