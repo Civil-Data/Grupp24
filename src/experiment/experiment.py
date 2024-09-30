@@ -26,11 +26,12 @@ class ExperimentElevator:
 	param: path to generation list json file
 	"""
 
-	def __init__(self, people: data.People, generation: data.Population) -> None:
+	def __init__(self, people: data.People, generation: data.Population, experiment_name:str) -> None:
 		self.people_list: data.People = people
 		self.generation_list: data.Population = generation
+		self.exp_name = experiment_name
 
-	def display_experiment(self, exp_name:str, file_name:str, results_f = None, results_s = None, results_t = None) -> None:
+	def display_experiment(self, file_name:str, results_f = None, results_s = None, results_t = None) -> None:
 		"""
 		Plots a graph of best for of every generation
 		"""
@@ -64,7 +65,7 @@ class ExperimentElevator:
 
 
 		#Labels and title
-		pyplot.title(f"Experiment : {exp_name}", fontsize=8)
+		pyplot.title(f"Experiment : {self.exp_name}", fontsize=8)
 		pyplot.xlabel("Generation", fontsize=14)
 		pyplot.ylabel("Fitness Score", fontsize=14)
 

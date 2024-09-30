@@ -195,17 +195,18 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 
 		csv_results = []
 
-		current_experiment = ExperimentElevator(people_data, generation_data)
 		experiment_name = (
 			f"Floors: {data.NUMBER_OF_FLOORS}, People: {data.NUMBER_OF_PEOPLE}, Generation: {data.GENERATION_LIMIT}"
 		)
+		current_experiment = ExperimentElevator(people_data, generation_data, experiment_name)
+		
 		file_name = (f"Floors_{data.NUMBER_OF_FLOORS}_People_{data.NUMBER_OF_PEOPLE}_Generation_{data.GENERATION_LIMIT}")	
 		
 		results_f, best_results, crossover_name = run(current_experiment)
 		csv_results.append((experiment_name, crossover_name, best_results))
 		results_s, best_results, crossover_name = run(current_experiment, Crossover.heuristic_crossover_single_gene)
 		csv_results.append((experiment_name, crossover_name, best_results))
-		results_t, best_results, crossover_name = run(current_experiment, Crossover.heuristic_crossover_sequense_of_genes)
+		results_t, best_results, crossover_name = run(current_experiment, Crossover.heuristic_crossover_sequence_of_genes)
 		csv_results.append((experiment_name, crossover_name, best_results))
 
 		current_experiment.display_experiment(experiment_name, file_name, results_f, results_s, results_t)
