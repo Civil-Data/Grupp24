@@ -35,7 +35,10 @@ class ExperimentElevator:
 		"""
 		Plots a graph of best for of every generation
 		"""
+		directory = "./exp_done"
 		base_file_path = f"./exp_done/{file_name}.png"
+
+		os.makedirs(directory, exist_ok=True)
 
 		if os.path.isfile(base_file_path):
 			counter = 1
@@ -89,7 +92,10 @@ def save_experiment(file_name:str ,result: list) -> None:
 	"""
 	Saves experiment results to csv file
 	"""
+	directory = "./exp_done"
 	base_file_path = f"./exp_done/{file_name}.csv"
+
+	os.makedirs(directory, exist_ok=True)
 
 	if os.path.isfile(base_file_path):
 		counter = 1
