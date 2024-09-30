@@ -1,0 +1,68 @@
+\subsection{Evolutionary approach}
+% Clearly describe the algorithm you developed. You
+% should clearly explain the evolutionary operators you used and what modifications
+% you did to match the problem. It is extremely important to present also a pseudocode
+% of your algorithm.
+
+    \begin{algorithm}
+        \caption{Genetic Algorithm}\label{alg:pseudocode_ga}
+        \begin{algorithmic}
+        \Require $g \geq 0$
+        % \Ensure $y = x^n$
+        \State Initialize a new population
+        \State $g \gets 0$
+        % \State $X \gets x$
+        % \State $N \gets n$
+        \While{$g \leq generation Limit$}
+        % \For ??
+            \State Execute the genome on its people
+        
+        
+        
+        
+        %     \If{$N$ is even}
+        %     \State $X \gets X \times X$
+        %     \State $N \gets \frac{N}{2}$  % \Comment{This is a comment}
+        % \ElsIf{$N$ is odd}
+        %     \State $y \gets y \times X$
+        %     \State $N \gets N - 1$
+        % \EndIf
+        \EndWhile
+        \end{algorithmic}
+    \end{algorithm}
+
+\subsubsection{Selection}
+% Explain selection algorithm(s). Give pseudo code ?
+
+\subsubsection{Crossover}
+% Explain crossover algorithm(s). Give pseudo code ?
+
+\subsubsection{Mutation}
+% Explain mutation algorithm(s). Give pseudo code ?
+
+% \subsubsection{Replacement} % Elitism
+% We never used elitism in the experiments?
+
+\subsection{Solution representation}
+% Clearly describe the solution representation you used.
+% You can use figures to improve the comprehensibility of this part.
+
+    Given the nature of this problem, there is not a typical direct solution approach as seen in e.g. the knapsack problem, where the solution representation is also directly what is being manipulated in the genetic algorithm. In this paper's elevator problem, the genome is a sequence of floors in which the elevator travels to with the goal to deliver as many people. This situation forced a 'two-way' representation, where the fitness of a genome is reflected upon a list of people. Thus it was decided to encapsulate the list of floors and the list of people under a single class 'Genome' as the solution representation.
+
+\subsection{Fitness function}
+% It is also very important to mention the fitness function you
+% used. In many cases, the objective function of the problem is not the same as
+% the fitness function used in an evolutionary algorithm
+
+    After some basic trial and error, and more importantly, a healthy discussion with the assignment teacher, it was decided to exclusively punish unwanted behaviour of the genome instead of giving rewards or mixing rewards with punishments. As the ultimate goal of the algorithm is to deliver all passangers in a short average time, a punishment-only approach acts like a 'catch-all' sink. Instead of trying to find and giving rewards for all of the different kinds of positive behaviours, it is instead easier to punish any and all negative behaviours. For example, if a passanger wants to travel from floor five to one, that requires an absolute minimum of four floors worth of travel. The implemented fitness function would in that case punish based on the difference in distance needed and the distance that was actually traveled by the passanger. Another simple example would be to punish the genome for everyone that did not arrive at their destinations, rather than rewarding for those that did arrive.
+
+
+
+% Text from Joel :))
+
+% Each genome has a score that is increased with one time unit for each person that has not arrived to their desired floor for each floor traveled by the elevator. The fitness function helps to keep track of each genome's score and gives time penalties for each person that has not arrived to their desired floor. The penalties increases the score with 100 which is a severe penalty to promote the algorithm to serve as many people as possible.
+
+% When we used our first and most primitive crossover that simply swaps the last halves of two parents genomes the best fitness value we achieved in five runs was 205 but in this graph we show the worst case score of 10227 when it missed serving one person and received a big penalty. We then decided to try a new crossover that creates the first offspring with gene-by-gene selection and which parent to select a gene from is determined by a weighted random choice based on their fitness scores. The second offspring is created by reversing the first offspring.
+% The first crossover reached the best value within fewer generations and seems to preform better in this instance. To be completely sure that we couldn't get improved results by changing to a different crossover without changing anything else we decided to try a much more advance crossover that had a great impact on. 
+
+% The third crossover uses segment-based selection instead of selecting genes individually, this method selects contiguous segments of genes from each parent. The offsets determine how many genes to take from each parent based on their fitness scores. This one always performs well and never get stuck in local minima for long. The best score we achieved with this crossover was 172.
