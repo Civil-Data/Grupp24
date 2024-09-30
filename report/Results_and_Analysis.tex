@@ -1,77 +1,91 @@
-\textcolor{red}{This section should present the obtained results and provide an insightful analysis of them. You can present the results using graphs, tables, or any other visualization method suits your purpose. Do not forget to include proper captions \cite{zobel2014graphs} in any of these illustration methods you use. You do not need to provide any execution details as they are already presented in Sec.~\ref{sec:experimentation}.}
+The following results are displayed using graphs to highlight some of the insights we have taken from the experiments we ran. Blue line and text represents our simplest crossover that swaps the last halves of two parents to create two children described in(3. X1). The red represents the second crossover that selects genes from each parent based on their fitness scores, described in (3. X2). The orange represents the third crossover that selects contiguous segments of genes from each parent based on their fitness scores, described in (3. X3).
 
-\textcolor{red}{A good practise would be to compare your algorithm with a simpler approach, such as (a) a naive method, (b) a Hill Climbing approach, or (c) a simple evolutionary algorithm. In the third case, you can use the simpler version of the algorithm you developed, i.e., the original algorithm without your modifications. In that case, you should briefly describe the comparing method(s) in Sec.~\ref{sec:experimentation}. Alternatively, you can use some reference results derived from the repositories you found some benchmark instances.}
+We started of with a fitness function that gave 10 points for each person served, which in the end promoted the algorithm to serve all people in the building. The problem with this was that it tended to give long genomes because it was more beneficial to serve all people than to serve them quickly. We then changed fitness function to one that gave huge penalties for all people that wasn't served by the elevator when the route was finished. It also increased the score with one for each person not arriving to its destination for each floor traveled. This means that the lower score the better. It also made it possible for us to analyze the average waiting time and this was also a benchmark that most papers we found used for this kind of problem.
 
-\textcolor{red}{To display tables, the \texttt{booktabs} package might be useful. For example, Table~\ref{tab:results_example} shows how you should increase the  size of $n$, when running your code. You can advice \cite{zobel2014graphs} to see a few examples of proper tables.}
+We didn't investigate how different mutation functions would affect the results. We used 5 different ones that was randomly selected when mutation occurred. The mutation functions we used was swapping a random element in a genome, increase the length of a genome, decrease the length of a genome and the combinations of swapping and increasing or decreasing the length of a genome. These are all thoroughly explained in (3. M).
 
-\begin{table}[h]
+\newpage
+
+\subsection{Building 1}
+% references here
+Figure \ref{fig:Building1 results} shows results with 100 people in the building and the worst performance from 5 runs for each crossover on the smallest building with 10 people in it. Figure \ref{fig:Building1 worst} displays the worst case in these runs where the blue crossover failed to serve one person and then received a huge penalty. We used figure \ref{fig:Building1 100 people} to highlight that with more people inside the orange crossover kept getting good results with great consistency. The blue one also performed as good as the orange one, but it wasn't as consistent. The red one was extremely unreliable it performed well sometimes, but it also got stuck in local minimums for long time periods. Besides that it took more generations for all crossovers to reach an acceptable solution because of the increased number of people. The orange and blue crossover often reached a good solution quicker than the red one, and it also tends to get worse the more people it has to serve.
+
+\begin{figure}[ht]
 	\centering
-	\caption{Example of comparison the developed algorithm's results with the best ones from a repository.}
-	\label{tab:results_example}
-	\begin{tabular}{lrrr}
-		\toprule
-		\textbf{Instance} & \textbf{Optimum (Repository xyz)} & \textbf{EA} & \textbf{time (s)} \\
-		\midrule
-		st70              & 678.597                           & 677.109     & 0.67              \\
-		ei176             & 545.387                           & 544.369     & 1.16              \\
-		kroA100           & 21285.443                         & 21285.443   & 1.69              \\
-		rd100             & 7910.396                          & 7910.396    & 2.14              \\
-		Pr136             & 96772                             & 96770.924   & 7.11              \\
-		Pr144             & 58537                             & 58535.221   & 7.97              \\
-		a280              & 2856.769                          & 2856.769    & 33.47             \\
-		\bottomrule
-	\end{tabular}
-\end{table}
-
-\textcolor{red}{You can use different illustration methods to present different aspects of your analysis. Figure~\ref{fig:plot_example} gives an example using the \href{https://www.overleaf.com/learn/latex/Pgfplots_package}{\texttt{pgfplots}} package.}
-
-\begin{figure}[h]
-	\centering
-	\begin{tikzpicture}
-		\begin{axis}[
-				% title={Example of convergence analysis},
-				xlabel={Generation},
-				ylabel={Fitness function value},
-				xmin=0, xmax=20,
-				ymin=290, ymax=450,
-				xtick={0,5,10,15,20},
-				ytick={290,300,350,400,450},
-				legend pos=north east,
-				ymajorgrids=true,
-				grid style=dashed,
-			]
-
-			\addplot[
-				color=blue,
-				mark=square,
-			]
-			coordinates {
-					(0,420)(4,411)(7,387)(10,382)(14,364)(18,360)(20,358)
-				};
-			\addlegendentry{EA1}
-
-			\addplot[
-				color=red,
-				mark=triangle,
-			]
-			coordinates {
-					(0,422)(4,373)(9,362)(12,312)(18,311)(20,309)
-				};
-			\addlegendentry{EA2}
-
-			\addplot[
-				color=violet,
-				mark=diamond,
-			]
-			coordinates {
-					(0,448)(6,401)(8,349)(11,325)(14,299)(20,298)
-				};
-			\addlegendentry{EA3}
-
-		\end{axis}
-	\end{tikzpicture}
-	\caption{Example of convergence analysis.}
-	\label{fig:plot_example}
+	\begin{subfigure}[b]{0.49\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{results/Building1/Mutation_0.1/Floors__10,_People__10,_Generation__1000_worst.png}
+		\captionsetup{justification=centering,font=tiny}
+		\caption{Score/Arrived/Length:\\\textcolor{blue}{10227/9/9}, \textcolor{red}{182/10/11}, \textcolor{orange}{172/10/11}.}
+		\label{fig:Building1 worst}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{results/Building1/Mutation_0.1/Floors__10,_People__100,_Generation__1000.png}
+		\captionsetup{justification=centering,font=tiny}
+		\caption{Score/Arrived/Length:\\\textcolor{blue}{6727/100/45}, \textcolor{red}{9113/100/61}, \textcolor{orange}{6880/100/52}.}
+		\label{fig:Building1 100 people}
+	\end{subfigure}
+	\captionsetup{font=scriptsize}
+	\caption{Building 1 comparing worst and best case.}
+	\label{fig:Building1 results}
 \end{figure}
 
-\lipsum[4]
+\newpage
+
+\subsection{Building 2}
+Samuel had some papers he wanted to compare these results with.
+
+\newpage
+
+\subsection{Building 3}
+As mentioned earlier the red crossover tends to perform worse the more people in the building instances and Figure \ref{fig:Building3 results} highlights this phenom again. In figure \ref{fig:Building3 worst} the blue crossover actually outperform the orange one, that got stuck in a local minimum for a long time. The orange one also was slower than the blue one. In addition, figure \ref{fig:Building3 best} then shows a case where the blue one performed similar to how it performed in \ref{fig:Building3 worst} and the orange one reached an extraordinary low score of 121157 without getting stuck in a local minimum. With other words this pinpoints that the orange crossover have a good worst case and great best case which makes it the most reliable crossover of the three.
+
+\begin{figure}[ht]
+	\centering
+	\begin{subfigure}[b]{0.49\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{results/Building3/Mutation_0.1/Floors__50,_People__100,_Generation__1000_4_worst.png}
+		\captionsetup{justification=centering,font=tiny}
+		\caption{Score/Arrived/Length:\\\textcolor{blue}{300697/74/69}, \textcolor{red}{661991/35/52}, \textcolor{orange}{341167/69/74}.}
+		\label{fig:Building3 worst}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{results/Building3/Mutation_0.1/Floors__50,_People__100,_Generation__1000_1_best.png}
+		\captionsetup{justification=centering,font=tiny}
+		\caption{Score/Arrived/Length:\\\textcolor{blue}{259130/79/71}, \textcolor{red}{548857/48/59}, \textcolor{orange}{121157/94/124}.}
+		\label{fig:Building3 best}
+	\end{subfigure}
+	\captionsetup{font=scriptsize}
+	\caption{Building 3 comparing worst and best case.}
+	\label{fig:Building3 results}
+\end{figure}
+\newpage
+\subsection{Building 4}
+After running all the buildings with mutation rate of 10\% we started testing out different values and quickly found out that our algorithm found a solution that serves all or almost all people much faster with a greater mutation rate. We display result from runs with a mutation rate of 60\%. \ref{fig:Building 4 results} shows how much faster our algorithm reach acceptable solutions than before. When mutation rate was low the best solutions gave us fitness scores around 500 000 but with a high rate we were able to get scores around 200 000. The best run served 66 people when mutation was 10\%, the best run with mutation 60\% served all 100 people. Reason behind this is that to be able to serve as many people as possible the genes have to mutate to become longer than number of floors. With a higher mutation rate this happens in much quicker pace and therefore the algorithm is able to leave local minimums faster. Therefore, a greater mutation rate is beneficial and less computational power is needed compared to increasing the population size or the number of generations. We tested increasing number of generations and received similar results as with a greater mutation rate. If we had more time to experiment with different mutation rates we could probably find an even better rate.
+
+\begin{figure}[ht]
+	\centering
+	\begin{subfigure}[b]{0.49\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{results/Building4/Mutation_0.1/Floors__100,_People__100,_Generation__1000_2_best.png}
+		\captionsetup{justification=centering,font=tiny}
+		\caption{Score/Arrived/Length:\\\textcolor{blue}{425352/67/80}, \textcolor{red}{605508/44/102}, \textcolor{orange}{401562/66/75}.}
+		\label{fig:Building4/Mutation_0.1/Floors__100, People__100, Generation__1000_2_best}
+	\end{subfigure}
+	\hfill
+	\begin{subfigure}[b]{0.49\linewidth}
+		\centering
+		\includegraphics[width=\linewidth]{results/Building4/Mutation_0.6/Floors__100,_People__100,_Generation__1000_best.png}
+		\captionsetup{justification=centering,font=tiny}
+		\caption{Score/Arrived/Length:\\\textcolor{blue}{155619/100/151}, \textcolor{red}{576322/48/117}, \textcolor{orange}{216508/94/139}.}
+		\label{fig:Building4/Mutation_0.6/Floors__100, People__100, Generation__1000_best}
+	\end{subfigure}
+	\captionsetup{font=scriptsize}
+	\caption{Building 4 comparing different mutation rates.}
+	\label{fig:Building 4 results}
+\end{figure}
+

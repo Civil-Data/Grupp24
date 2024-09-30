@@ -98,7 +98,7 @@ def run_evolution(
 
 		# Elitism
 		if data.ELITISM_PERC > 0.0:
-			# not neccessary to check data.ELITISM_PERC, but it looks nicer and saves some time
+			# not necessary to check data.ELITISM_PERC, but it looks nicer and saves some time
 			numb_elitism_parents: int = math.floor(
 				data.POPULATION_SIZE * data.ELITISM_PERC
 			)

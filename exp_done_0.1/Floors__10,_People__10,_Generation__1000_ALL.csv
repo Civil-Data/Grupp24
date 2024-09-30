@@ -1,0 +1,20 @@
+Name,Crossover Name,Arrvied,Best Fitness,Best Genome,Genome Length
+"Floors: 10, People: 10, Generation: 1000",swap_last_halves,10/10,284,"[9, 7, 0, 3, 4, 5, 6, 7, 8, 4, 2]",11
+"Floors: 10, People: 10, Generation: 1000",heuristic_crossover_single_gene,10/10,187,"[0, 3, 5, 6, 8, 7, 4, 2, 0, 2, 7, 9, 2, 0]",14
+"Floors: 10, People: 10, Generation: 1000",heuristic_crossover_sequence_of_genes,10/10,167,"[3, 4, 5, 7, 9, 8, 6, 4, 2, 0, 6, 8]",12
+Name,Crossover Name,Arrvied,Best Fitness,Best Genome,Genome Length
+"Floors: 10, People: 10, Generation: 1000",swap_last_halves,10/10,205,"[0, 3, 5, 6, 8, 9, 4, 7, 2, 0]",10
+"Floors: 10, People: 10, Generation: 1000",heuristic_crossover_single_gene,10/10,204,"[3, 0, 4, 5, 6, 7, 8, 9, 4, 2, 0]",11
+"Floors: 10, People: 10, Generation: 1000",heuristic_crossover_sequence_of_genes,10/10,230,"[0, 8, 4, 5, 7, 9, 6, 2, 0, 3, 5]",11
+Name,Crossover Name,Arrvied,Best Fitness,Best Genome,Genome Length
+"Floors: 10, People: 10, Generation: 1000",swap_last_halves,10/10,239,"[4, 7, 9, 2, 0, 3, 5, 6, 7, 8, 4, 2]",12
+"Floors: 10, People: 10, Generation: 1000",heuristic_crossover_single_gene,10/10,213,"[0, 3, 6, 8, 9, 5, 4, 7, 2, 0]",10
+"Floors: 10, People: 10, Generation: 1000",heuristic_crossover_sequence_of_genes,10/10,297,"[9, 7, 0, 4, 5, 6, 7, 8, 4, 2, 3, 5]",12
+Name,Crossover Name,Arrvied,Best Fitness,Best Genome,Genome Length
+"Floors: 10, People: 10, Generation: 1000",swap_last_halves,10/10,276,"[9, 8, 7, 4, 0, 3, 5, 6, 7, 8, 2]",11
+"Floors: 10, People: 10, Generation: 1000",heuristic_crossover_single_gene,10/10,188,"[3, 4, 5, 6, 7, 9, 2, 0, 6, 8, 4]",11
+"Floors: 10, People: 10, Generation: 1000",heuristic_crossover_sequence_of_genes,10/10,245,"[9, 8, 7, 4, 2, 0, 3, 5, 6, 7, 8, 2]",12
+Name,Crossover Name,Arrvied,Best Fitness,Best Genome,Genome Length
+"Floors: 10, People: 10, Generation: 1000",swap_last_halves,9/10,10227,"[4, 5, 7, 9, 0, 6, 8, 4, 2]",9
+"Floors: 10, People: 10, Generation: 1000",heuristic_crossover_single_gene,10/10,182,"[0, 3, 5, 4, 9, 8, 7, 6, 4, 2, 0]",11
+"Floors: 10, People: 10, Generation: 1000",heuristic_crossover_sequence_of_genes,10/10,172,"[0, 3, 5, 6, 7, 8, 9, 2, 0, 4, 7]",11
