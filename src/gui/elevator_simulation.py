@@ -34,6 +34,7 @@ def run_simulation(best_genome: Genome) -> None:
 	Run a visual simulation of the elevator using the best genome.
 	"""
 	# Initialize Pygame and the screen settings
+	pygame.init()
 	screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))  # Windowed mode
 	pygame.display.set_caption("Elevator Simulation")
 	font = pygame.font.SysFont(None, 50)
