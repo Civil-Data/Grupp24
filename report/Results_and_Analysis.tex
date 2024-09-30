@@ -2,6 +2,8 @@ The following results are displayed using graphs to highlight some of the insigh
 
 We started of with a fitness function that gave 10 points for each person served, which in the end promoted the algorithm to serve all people in the building. The problem with this was that it tended to give long genomes because it was more beneficial to serve all people than to serve them quickly. We then changed fitness function to one that gave huge penalties for all people that wasn't served by the elevator when the route was finished. It also increased the score with one for each person not arriving to its destination for each floor traveled. This means that the lower score the better. It also made it possible for us to analyze the average waiting time and this was also a benchmark that most papers we found used for this kind of problem.
 
+We didn't investigate how different mutation functions would affect the results. We used 5 different ones that was randomly selected when mutation occurred. The mutation functions we used was swapping a random element in a genome, increase the length of a genome, decrease the length of a genome and the combinations of swapping and increasing or decreasing the length of a genome. These are all thoroughly explained in (3. M).
+
 \newpage
 
 \subsection{Building 1}
