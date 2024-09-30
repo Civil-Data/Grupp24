@@ -151,11 +151,11 @@ def run_evolution(
 	f"({ranked_population[2].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[2].fitness_score}, {len(ranked_population[2].genome)})"
 	)
 	print(f"Best Genome:\n{ranked_population[0].genome}")
-	#print(
-	#	"Press 'y' to run simulation for best genome or any other key to exit"
-	#)
-	#if input() == "y":
-	#	run_simulation(ranked_population[0])
+	print(
+		"Press 'y' to run simulation for best genome or any other key to exit"
+	)
+	if input() == "y":
+		run_simulation(ranked_population[0])
 
 	return result_data, ranked_population[0], str(crossover_function.__name__)
 
@@ -166,6 +166,15 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 	# Getting all files in experiment folders
 	people_experiment = [files for files in os.listdir(people_folder_path)]
 	generation_experiment = [files for files in os.listdir(generation_folder_path)]
+
+
+	if (len(people_experiment) == 0 and len(generation_experiment) == 0):
+		print("No experiment found!")
+		return []
+	elif (len(people_experiment) == 0 and len(generation_experiment) != 0) or (len(people_experiment) != 0 and len(generation_experiment) == 0):
+		print("Mismatch between people_experiment and generation_experiment: One is empty while the other is not.")
+		return []
+ 
 
 	# Running through all different combinations of experiments
 	# *********************************************************************************************
@@ -189,50 +198,27 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 		current_experiment = ExperimentElevator(people_data, generation_data)
 		experiment_name = (
 			f"Floors: {data.NUMBER_OF_FLOORS}, People: {data.NUMBER_OF_PEOPLE}, Generation: {data.GENERATION_LIMIT}"
-		)	
+		)
+		file_name = (f"Floors_{data.NUMBER_OF_FLOORS}_People_{data.NUMBER_OF_PEOPLE}_Generation_{data.GENERATION_LIMIT}")	
 		
-		results_f, best_results, crossover_name = run_swap(current_experiment)
+		results_f, best_results, crossover_name = run(current_experiment)
 		csv_results.append((experiment_name, crossover_name, best_results))
-		results_s, best_results, crossover_name = run_h1(current_experiment)
+		results_s, best_results, crossover_name = run(current_experiment, Crossover.heuristic_crossover_single_gene)
 		csv_results.append((experiment_name, crossover_name, best_results))
-		results_t, best_results, crossover_name = run_h2(current_experiment)
-		csv_results.append((experiment_name, crossover_name, best_results))
+		#results_t, best_results, crossover_name = run(current_experiment, Crossover.heuristic_crossover_sequense_of_genes)
+		#csv_results.append((experiment_name, crossover_name, best_results))
 
-		current_experiment.display_experiment(experiment_name, results_f, results_s, results_t)
-		save_experiment(experiment_name ,csv_results)
+		current_experiment.display_experiment(experiment_name, file_name, results_f, results_s)
+		save_experiment(file_name ,csv_results)
 
 	return csv_results
 
-def run_swap(exp: ExperimentElevator = None):
+def run(exp: ExperimentElevator = None, current_crossover: Crossover = Crossover.swap_last_halves):
 	return run_evolution(
 			populate_function=Populate.generate_population,
 			fitness_function=Fitness.calc_fitness,
 			selection_function=Selection.rank,
-			crossover_function=Crossover.swap_last_halves,
-			mutation_functions=[Mutation.swap,
-								Mutation.increase_genome_length,
-								Mutation.decrease_genome_length],
-			experiment=exp
-		)
-
-def run_h1(exp: ExperimentElevator = None):
-	return run_evolution(
-			populate_function=Populate.generate_population,
-			fitness_function=Fitness.calc_fitness,
-			selection_function=Selection.rank,
-			crossover_function=Crossover.heuristic_crossover_single_gene,
-			mutation_functions=[Mutation.swap,
-								Mutation.increase_genome_length,
-								Mutation.decrease_genome_length],
-			experiment=exp
-		)
-
-def run_h2(exp: ExperimentElevator = None):
-	return run_evolution(
-			populate_function=Populate.generate_population,
-			fitness_function=Fitness.calc_fitness,
-			selection_function=Selection.rank,
-			crossover_function=Crossover.heuristic_crossover_sequense_of_genes,
+			crossover_function=current_crossover,
 			mutation_functions=[Mutation.swap,
 								Mutation.increase_genome_length,
 								Mutation.decrease_genome_length],
@@ -241,7 +227,12 @@ def run_h2(exp: ExperimentElevator = None):
 
 if __name__ == "__main__":
 	if data.DO_EXP:
-		for i in range(1):
+		try:
+			use("Qt5Agg")
+		except:
+			print("Failed to use Qt5Agg PyPlot backend, will use Agg instead")
+			use("Agg")
+		for i in range(data.NUMBER_OF_EXP):
 			run_experiments("./buildings", "./generations")
 	else:
-		run_swap()
+		run()
