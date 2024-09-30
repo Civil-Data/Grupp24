@@ -30,7 +30,7 @@ class ExperimentElevator:
 		self.people_list: data.People = people
 		self.generation_list: data.Population = generation
 
-	def display_experiment(self, exp_name:str, file_name:str, results_f= None, results_s = None, results_t = None) -> None:
+	def display_experiment(self, exp_name:str, file_name:str, results_f = None, results_s = None, results_t = None) -> None:
 		"""
 		Plots a graph of best for of every generation
 		"""
