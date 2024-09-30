@@ -11,8 +11,6 @@ import numpy as np
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 
 import json
-import matplotlib
-matplotlib.use('Agg')  # or 'TkAgg' if you installed Tkinter
 from matplotlib import pyplot
 
 import pandas as pf
@@ -32,36 +30,41 @@ class ExperimentElevator:
 		self.people_list: data.People = people
 		self.generation_list: data.Population = generation
 
-	def display_experiment(self, name, results_f, results_s, results_t) -> None:
+	def display_experiment(self, exp_name:str, file_name:str, results_f= None, results_s = None, results_t = None) -> None:
 		"""
 		Plots a graph of best for of every generation
 		"""
-		base_file_path = f"./exp_done/{name}.png"
+		base_file_path = f"./exp_done/{file_name}.png"
 
 		if os.path.isfile(base_file_path):
 			counter = 1
-			new_file_path = f"./exp_done/{name}_{counter}.png"
+			new_file_path = f"./exp_done/{file_name}_{counter}.png"
 			while os.path.isfile(new_file_path):
 				counter += 1
-				new_file_path = f"./exp_done/{name}_{counter}.png"
+				new_file_path = f"./exp_done/{file_name}_{counter}.png"
 			file_path = new_file_path
 		else:
 			file_path = base_file_path
 
-		generation_f = [res['Generation'] for res in results_f]
-		fitness_score_f = [res['Best Fitness'] for res in results_f]
-		generation_s = [res['Generation'] for res in results_s]
-		fitness_score_s = [res['Best Fitness'] for res in results_s]
-		generation_t = [res['Generation'] for res in results_t]
-		fitness_score_t = [res['Best Fitness'] for res in results_t]
 
-		#Plotting data
-		pyplot.plot(generation_f, fitness_score_f, label="Fitness Score Swap", color="blue", linewidth=2)
-		pyplot.plot(generation_s, fitness_score_s, label="Fitness Score Heuristic Single", color="red", linewidth=2)
-		pyplot.plot(generation_t, fitness_score_t, label="Fitness Score Heuristic Sequence", color="orange", linewidth=2)
+		# Plotting data if it exist
+		if results_f != None:
+			generation_f = [res['Generation'] for res in results_f]
+			fitness_score_f = [res['Best Fitness'] for res in results_f]
+			pyplot.plot(generation_f, fitness_score_f, label="Fitness Score Swap", color="blue", linewidth=2)
+		if results_s != None:
+			generation_s = [res['Generation'] for res in results_s]
+			fitness_score_s = [res['Best Fitness'] for res in results_s]
+			pyplot.plot(generation_s, fitness_score_s, label="Fitness Score Heuristic Single", color="red", linewidth=2)
+		if results_t != None:
+			generation_t = [res['Generation'] for res in results_t]
+			fitness_score_t = [res['Best Fitness'] for res in results_t]
+			pyplot.plot(generation_t, fitness_score_t, label="Fitness Score Heuristic Sequence", color="orange", linewidth=2)
+
+		
 
 		#Labels and title
-		pyplot.title(f"Experiment : {name}", fontsize=8)
+		pyplot.title(f"Experiment : {exp_name}", fontsize=8)
 		pyplot.xlabel("Generation", fontsize=14)
 		pyplot.ylabel("Fitness Score", fontsize=14)
 		
@@ -81,18 +84,18 @@ class ExperimentElevator:
 		pyplot.savefig(file_path, dpi=300)
 		pyplot.clf()
 
-def save_experiment(name:str ,result: list) -> None:
+def save_experiment(file_name:str ,result: list) -> None:
 	"""
 	Saves experiment results to csv file
 	"""
-	base_file_path = f"./exp_done/{name}.csv"
+	base_file_path = f"./exp_done/{file_name}.csv"
 
 	if os.path.isfile(base_file_path):
 		counter = 1
-		new_file_path = f"./exp_done/{name}_{counter}.csv"
+		new_file_path = f"./exp_done/{file_name}_{counter}.csv"
 		while os.path.isfile(new_file_path):
 			counter += 1
-			new_file_path = f"./exp_done/{name}_{counter}.csv"
+			new_file_path = f"./exp_done/{file_name}_{counter}.csv"
 		file_path = new_file_path
 	else:
 		file_path = base_file_path
