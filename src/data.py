@@ -3,10 +3,10 @@
 from typing import List, Callable, Tuple
 from genome import Genome, Person
 
-NUMBER_OF_FLOORS: int = 21
-NUMBER_OF_PEOPLE: int = 10
+NUMBER_OF_FLOORS: int = 15
+NUMBER_OF_PEOPLE: int = 15
 
-ELEVATOR_CAPACITY: int = 4
+ELEVATOR_CAPACITY: int = 8
 
 GENOME_LENGTH: int = NUMBER_OF_FLOORS
 POPULATION_SIZE: int = 100

@@ -205,10 +205,10 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 		csv_results.append((experiment_name, crossover_name, best_results))
 		results_s, best_results, crossover_name = run(current_experiment, Crossover.heuristic_crossover_single_gene)
 		csv_results.append((experiment_name, crossover_name, best_results))
-		#results_t, best_results, crossover_name = run(current_experiment, Crossover.heuristic_crossover_sequense_of_genes)
-		#csv_results.append((experiment_name, crossover_name, best_results))
+		results_t, best_results, crossover_name = run(current_experiment, Crossover.heuristic_crossover_sequense_of_genes)
+		csv_results.append((experiment_name, crossover_name, best_results))
 
-		current_experiment.display_experiment(experiment_name, file_name, results_f, results_s)
+		current_experiment.display_experiment(experiment_name, file_name, results_f, results_s, results_t)
 		save_experiment(file_name ,csv_results)
 
 	return csv_results

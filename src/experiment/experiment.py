@@ -4,13 +4,13 @@ Experiment module
 
 import sys
 import os
+import json
 
-from matplotlib.ticker import ScalarFormatter
 import numpy as np
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
 
-import json
+from matplotlib.ticker import ScalarFormatter
 from matplotlib import pyplot
 
 import pandas as pf
@@ -48,26 +48,26 @@ class ExperimentElevator:
 
 
 		# Plotting data if it exist
-		if results_f != None:
+		if results_f is not None:
 			generation_f = [res['Generation'] for res in results_f]
 			fitness_score_f = [res['Best Fitness'] for res in results_f]
 			pyplot.plot(generation_f, fitness_score_f, label="Fitness Score Swap", color="blue", linewidth=2)
-		if results_s != None:
+		if results_s is not None:
 			generation_s = [res['Generation'] for res in results_s]
 			fitness_score_s = [res['Best Fitness'] for res in results_s]
 			pyplot.plot(generation_s, fitness_score_s, label="Fitness Score Heuristic Single", color="red", linewidth=2)
-		if results_t != None:
+		if results_t is not None:
 			generation_t = [res['Generation'] for res in results_t]
 			fitness_score_t = [res['Best Fitness'] for res in results_t]
 			pyplot.plot(generation_t, fitness_score_t, label="Fitness Score Heuristic Sequence", color="orange", linewidth=2)
 
-		
+
 
 		#Labels and title
 		pyplot.title(f"Experiment : {exp_name}", fontsize=8)
 		pyplot.xlabel("Generation", fontsize=14)
 		pyplot.ylabel("Fitness Score", fontsize=14)
-		
+
 		xticks = np.arange(0, (data.GENERATION_LIMIT + 100), (data.GENERATION_LIMIT//10))
 		pyplot.xticks(xticks, fontsize=12)
 		pyplot.xlim(-30, data.GENERATION_LIMIT)
@@ -99,7 +99,7 @@ def save_experiment(file_name:str ,result: list) -> None:
 		file_path = new_file_path
 	else:
 		file_path = base_file_path
-	
+
 	for experiment_name, crossover_name, genome in result:
 		result_data = {
 				'Name': [experiment_name],
@@ -109,9 +109,9 @@ def save_experiment(file_name:str ,result: list) -> None:
 				'Best Genome': [genome.genome],
 				'Genome Length': [len(genome.genome)]
 			}
-		
+
 		data_frame = pf.DataFrame(result_data)
-	
+
 		if not os.path.isfile(file_path):
 			data_frame.to_csv(file_path, mode='w', header=True, index=False)
 		else:
