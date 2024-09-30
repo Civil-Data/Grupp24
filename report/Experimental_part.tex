@@ -1,11 +1,44 @@
-{\color{red}
-This section describes the setup of experiments \cite{zobel2014experimentation}:
+This section describes the setup of experiments:
+
+Each experiment consists of two JSON files: one representing the building which specifies where all people are located, and another containing the population with a set of initial genomes.
+These experiments are saved to files rather than being generated randomly each time to ensure the ability to run the same experiment multiple times for consistency.
+
+One specific building which already had result data available was used to compare our algorithm's results against previously known results. 
+
+To thoroughly evaluate the algorithm we decided to test it on buildings of different sizes (small, medium, large) and with corresponding population sizes.
+Given the number of experiments required to be run we selected buildings with 10, 50, and 100 floors containing populations of 10, 50, and 100 people respectively. Additionally the specific building mentioned earlier which has 21 floors and 10 people was included.
+
+Buildings were generated with constraints ensuring that each floor could hold between 0 and half of the maximum population.
+While it was theoretically possible for all people to be on just two floors in practice the distribution was more balanced. For example in the small 10-floor building with 10 people the distribution looked as follows:
+
+\begin{center}
+\begin{tabular}{c c c}
+    \textbf{From} &  & \textbf{To} \\
+    \hline
+    0 & $\to$ & 6 \\
+    0 & $\to$ & 8 \\
+    3 & $\to$ & 5 \\
+	4 & $\to$ & 7 \\
+	5 & $\to$ & 7 \\
+	6 & $\to$ & 2 \\
+	7 & $\to$ & 0 \\
+	8 & $\to$ & 4 \\
+	9 & $\to$ & 0 \\
+	9 & $\to$ & 2 \\
+\end{tabular}
+\end{center}
+
+After generating and validating all buildings and populations we proceeded to run the experiments. Each experiment was conducted on a computer with an AMD Ryzen 7 7800X3D and took roughly ten seconds to a minute. In totally 150 experiments were run.
+
+Due to time constraints the only parameter that was adjusted during the experiments was the mutation rate to limit the number of results to analyze.
+To ensure the reliability of results each combination of building and population was tested five times allowing us to identify potential anomalies. Experiments were conducted with two mutation rates, 10\% and 60\%, to observe differences in algorithm performance.
+The thought process behind the very high mutation rate was to semi-simulate the effects of a longer generation limit without significantly increasing runtime.
+
+The experimental procedure is outlined as follows:
 
 \begin{itemize}
-	\item Provide the details of the hardware and software that you used.
-	\item Describe the steps you carried out during your experiments.
-	\item Detail the data you used for the evaluation of your algorithm.
+	\item Generate the building and population, or load a pre-existing experiment.
+    \item Run the experiment generating a CSV file with results and a PNG with a graph.
+    \item Re-run the same experiment with different parameters.
+	\item Analyze the results to evaluate the algorithm's performance.
 \end{itemize}
-}
-
-\lipsum[4]
