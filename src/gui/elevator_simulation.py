@@ -30,18 +30,18 @@ ELEVATOR_WIDTH_PROPORTION = ELEVATOR_HEIGHT_PROPORTION
 EXIT_BUTTON_SIZE = int(0.05 * WINDOW_WIDTH)
 
 def run_simulation(best_genome: Genome) -> None:
-    """
-    Run a visual simulation of the elevator using the best genome.
-    """
-    # Initialize Pygame and the screen settings
-    pygame.init()
-    screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))  # Windowed mode
-    pygame.display.set_caption("Elevator Simulation")
-    font = pygame.font.SysFont(None, 50)
-    clock = pygame.time.Clock()
+	"""
+	Run a visual simulation of the elevator using the best genome.
+	"""
+	# Initialize Pygame and the screen settings
+	pygame.init()
+	screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))  # Windowed mode
+	pygame.display.set_caption("Elevator Simulation")
+	font = pygame.font.SysFont(None, 50)
+	clock = pygame.time.Clock()
 
 	# Calculate dynamic sizes
-    floor_height = int(WINDOW_HEIGHT * FLOOR_HEIGHT_PROPORTION)
+	floor_height = int(WINDOW_HEIGHT * FLOOR_HEIGHT_PROPORTION)
 	floor_width = int(WINDOW_WIDTH * FLOOR_WIDTH_PROPORTION)
 	elevator_width = int(WINDOW_WIDTH * ELEVATOR_WIDTH_PROPORTION)
 	elevator_height = int(WINDOW_HEIGHT * ELEVATOR_HEIGHT_PROPORTION)
