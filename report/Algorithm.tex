@@ -9,6 +9,8 @@
 % you did to match the problem. It is extremely important to present also a pseudocode
 % of your algorithm.
 
+    The genetic algorithm implemented in this study is based on the framework presented in a relatively recent paper \cite{tartan2016flow}, which explored a similar problem. The details of the implemented genetic algorithm can be found in \ref{alg:pseudocode_ga}. A key difference in this paper is the absence of a termination criterion; instead, the algorithm is set to execute for a specified number of generations.
+
     \begin{algorithm}
         \caption{Genetic Algorithm}\label{alg:pseudocode_ga}
         \begin{algorithmic}
@@ -56,7 +58,8 @@
 
 	The first basic crossover operator is one that simply swaps the last halves of the parents, while respecting the possibility that the length of the two parents may be of different length. For example, if the two parents are $$ [1, 2, 3, 4], [5, 6, 7, 8, 9, 10] $$ the resulting children would be $$ [1, 2, 8, 9, 10], [5, 6, 7, 1, 2] $$
 
-    % !!! TODO:Samuel text here !!!
+    % !!! TODO: Samuel text here !!!
+    Samuel's text here pls
 
 \subsubsection{Mutation}
 % Explain mutation algorithm(s)
