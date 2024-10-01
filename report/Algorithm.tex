@@ -43,8 +43,12 @@
 \subsubsection{Crossover}
 % Explain crossover algorithm(s). Give pseudo code ?
 
+	The first basic crossover operator is one that simply swaps the last halves of the parents, while respecting the possibility that the length of the two parents may be of different length. For example, if the two parents are $$ [1, 2, 3, 4], [5, 6, 7, 8, 9, 10] $$ respectively, the resulting children would be $$ [1, 2, 8, 9, 10], [5, 6, 7, 1, 2] $$
+
 \subsubsection{Mutation}
 % Explain mutation algorithm(s). Give pseudo code ?
+
+	Three basic mutation operators were implemented. Firstly, a swap mutation where two randomly chosen floors are swapped. Secondly, an operator which increases the length of the genome by appending a random floor at the end. Lastly, an operator that decreases the length by removing a randomly chosen index of the genome. With these three operators, an additional two operators were constructed by combining the effects of swap and either length operator.
 
 % \subsubsection{Replacement} % Elitism
 % We never used elitism in the experiments?
