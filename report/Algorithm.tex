@@ -13,13 +13,23 @@
         \State $g \gets 0$
         % \State $X \gets x$
         % \State $N \gets n$
-        \While{$g \leq generation Limit$}
-        % \For ??
+        \While{\text{g} $ < $ \text{generation limit}}
+        \For{\text{some condition}}
             \State Execute the genome on its people
-        
-        
-        
-        
+        \EndFor
+		\State Calculate the fitness of the population
+		\State Sort the population
+        \If{\text{do elitism}} \Comment{Start prepairing the next generation}
+			\State Bring some of the best genomes to the new population
+        \EndIf
+		\While{\text{the size of the new population} $ < $ \text{population size}}
+		\State Select two parents from the old population
+		\If{the crossover chance is fulfilled}
+			\State Breed two children using a crossover operator
+		\Else
+			\State 
+		\EndIf
+		\EndWhile
         %     \If{$N$ is even}
         %     \State $X \gets X \times X$
         %     \State $N \gets \frac{N}{2}$  % \Comment{This is a comment}
