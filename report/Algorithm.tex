@@ -5,7 +5,7 @@
 % of your algorithm.
 
     \begin{algorithm}
-        \caption{Genetic Algorithm}\label{alg:pseudocode_ga}
+        \caption{Genetic Algorithm !! WORK IN PROGRESS !!}\label{alg:pseudocode_ga}
         \begin{algorithmic}
         \Require $g \geq 0$
         % \Ensure $y = x^n$
@@ -33,6 +33,12 @@
 
 \subsubsection{Selection}
 % Explain selection algorithm(s). Give pseudo code ?
+
+    The chosen selection algorithm is rank-based selection, and the basic idea behind it is to choose two parents based on their ranks rather than their raw fitness values. For example, if the population consists of six genomes, the best genome is given rank six, the second best rank five and so on. The worst genome is given rank one. Each genome is then given a probability $ P_i $ to be chosen based on their respective ranks, expressed as:
+
+    $$ P_i = \frac{\text{rank}_i}{\sum \text{ranks}} $$
+
+    That is, the best genome would have a probability of $ P_6 = \frac{6}{21} $ to be chosen, the second best $ P_5 = \frac{5}{21} $, and the worst genome $ P_1 = \frac{1}{21} $.
 
 \subsubsection{Crossover}
 % Explain crossover algorithm(s). Give pseudo code ?
