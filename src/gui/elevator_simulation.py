@@ -1,3 +1,8 @@
+# Author: Joel Scarinius Stävmo, Oskar Sundberg, Linus Savinainen, Samuel Wallander Leyonberg  and Gustav Pråmell
+# Update: October 1, 2024
+# Version: 1.0.0
+# License: Apache 2.0
+
 """
 This module contains the code to run a visual simulation of the elevator using the best genome.
 """
