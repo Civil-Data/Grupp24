@@ -34,6 +34,20 @@ While it was theoretically possible for all people to be on just two floors in p
 \end{center}
 
 After generating and validating all buildings and populations, the experiments were run. Each experiment was conducted on a computer with an AMD Ryzen 7 7800X3D and took roughly ten seconds to a minute. In totally 150 experiments were run.
+All experiment were run with the following settings 
+\newpage
+The settings used to run the experiment are as follows:
+
+\begin{itemize}
+    \item \textbf{Generations:} 1000
+    \item \textbf{Population size:} 100
+    \item \textbf{Crossover methods:} Heuristic single, Heuristic sequence, Swap crossover
+    \item \textbf{Mutation methods:} Increase, Decrease, Swap, Swap and Increase, Swap and Decrease
+    \item \textbf{Elitism rate:} 0.1
+    \item \textbf{Crossover rate:} 1.0
+    \item \textbf{Mutation rate:} 0.1, 0.6
+\end{itemize}
+
 
 Due to time constraints the only parameter that was adjusted during the experiments was the mutation rate to limit the number of results to analyze.
 To ensure the reliability of results each combination of building and population was tested five times allowing to identify potential anomalies. Experiments were conducted with two mutation rates, 10\% and 60\%, to observe differences in algorithm performance.
