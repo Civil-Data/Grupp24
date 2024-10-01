@@ -5,7 +5,7 @@
 % of your algorithm.
 
     \begin{algorithm}
-        \caption{Genetic Algorithm !! WORK IN PROGRESS !!}\label{alg:pseudocode_ga}
+        \caption{Genetic Algorithm}\label{alg:pseudocode_ga}
         \begin{algorithmic}
         \Require $g \geq 0$
         % \Ensure $y = x^n$
@@ -14,29 +14,28 @@
         % \State $X \gets x$
         % \State $N \gets n$
         \While{\text{g} $ < $ \text{generation limit}}
-        \For{\text{some condition}}
-            \State Execute the genome on its people
-        \EndFor
-		\State Calculate the fitness of the population
-		\State Sort the population
-        \If{\text{do elitism}} \Comment{Start prepairing the next generation}
-			\State Bring some of the best genomes to the new population
-        \EndIf
-		\While{\text{the size of the new population} $ < $ \text{population size}}
-		\State Select two parents from the old population
-		\If{the crossover chance is fulfilled}
-			\State Breed two children using a crossover operator
-		\Else
-			\State 
-		\EndIf
-		\EndWhile
-        %     \If{$N$ is even}
-        %     \State $X \gets X \times X$
-        %     \State $N \gets \frac{N}{2}$  % \Comment{This is a comment}
-        % \ElsIf{$N$ is odd}
-        %     \State $y \gets y \times X$
-        %     \State $N \gets N - 1$
-        % \EndIf
+            \For{\text{all genomes in population}}
+                \State Execute the genome on its people
+            \EndFor
+            \State Calculate the fitness of the population
+            \State Sort the population
+            \If{\text{want elitism}} \Comment{Start prepairing the next generation}
+                \State Bring some of the best genomes to the new population
+            \EndIf
+            \While{\text{the size of the new population} $ < $ \text{population size}}
+                \State Select two parents from the old population
+                \If{the crossover chance is fulfilled}
+                    \State Breed two children using a crossover operator
+                \Else
+                    \State Select the two parents as the two new children
+                \EndIf
+                \For{\text{each child}}
+                    \If{the mutation chance is fulfilled}
+                        \State Apply a mutation operator
+                    \EndIf
+                \EndFor
+                \State Append the two children to the next population
+            \EndWhile
         \EndWhile
         \end{algorithmic}
     \end{algorithm}
