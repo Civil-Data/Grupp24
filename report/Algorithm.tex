@@ -8,11 +8,8 @@
         \caption{Genetic Algorithm}\label{alg:pseudocode_ga}
         \begin{algorithmic}
         \Require $g \geq 0$
-        % \Ensure $y = x^n$
         \State Initialize a new population
         \State $g \gets 0$
-        % \State $X \gets x$
-        % \State $N \gets n$
         \While{\text{g} $ < $ \text{generation limit}}
             \For{\text{all genomes in population}}
                 \State Execute the genome on its people
@@ -41,7 +38,7 @@
     \end{algorithm}
 
 \subsubsection{Selection}
-% Explain selection algorithm(s). Give pseudo code ?
+% Explain selection algorithm(s)
 
     The chosen selection algorithm is rank-based selection, and the basic idea behind it is to choose two parents based on their ranks rather than their raw fitness values. For example, if the population consists of six genomes, the best genome is given rank six, the second best rank five and so on. The worst genome is given rank one. Each genome is then given a probability $ P_i $ to be chosen based on their respective ranks, expressed as:
 
@@ -50,12 +47,14 @@
     That is, the best genome would have a probability of $ P_6 = \frac{6}{21} $ to be chosen, the second best $ P_5 = \frac{5}{21} $, and the worst genome $ P_1 = \frac{1}{21} $.
 
 \subsubsection{Crossover}
-% Explain crossover algorithm(s). Give pseudo code ?
+% Explain crossover algorithm(s)
 
 	The first basic crossover operator is one that simply swaps the last halves of the parents, while respecting the possibility that the length of the two parents may be of different length. For example, if the two parents are $$ [1, 2, 3, 4], [5, 6, 7, 8, 9, 10] $$ the resulting children would be $$ [1, 2, 8, 9, 10], [5, 6, 7, 1, 2] $$
 
+    % !!! TODO:Samuel text here !!!
+
 \subsubsection{Mutation}
-% Explain mutation algorithm(s). Give pseudo code ?
+% Explain mutation algorithm(s)
 
 	Three basic mutation operators were implemented. Firstly, a swap mutation where two randomly chosen floors are swapped. Secondly, an operator which increases the length of the genome by appending a random floor at the end. Lastly, an operator that decreases the length by removing a randomly chosen index of the genome. With these three operators, an additional two operators were constructed by combining the effects of swap and either length operator.
 
