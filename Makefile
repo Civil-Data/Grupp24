@@ -19,6 +19,7 @@ create:
 	python src/experiment/create_experiment.py
 
 latex:
+	make clean
 	cd report && latexmk -pdf -shell-escape -interaction=nonstopmode main.tex
 	make clean
 
