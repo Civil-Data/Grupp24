@@ -1,0 +1,4 @@
+Name,Crossover Name,Arrvied,Best Fitness,Best Genome,Genome Length
+"Floors: 50, People: 10, Generation: 1000",swap_last_halves,9/10,11269,"[7, 12, 40, 47, 1, 4, 6, 8, 23, 27, 34, 41, 0, 13, 26, 37, 5, 22]",18
+"Floors: 50, People: 10, Generation: 1000",heuristic_crossover_single_gene,10/10,1868,"[7, 40, 0, 4, 4, 13, 13, 17, 12, 12, 26, 24, 24, 24, 5, 5, 6, 8, 13, 23, 22, 22, 22, 27, 41, 41, 37, 24, 24, 47, 47, 26, 12, 12, 1, 22, 34]",37
+"Floors: 50, People: 10, Generation: 1000",heuristic_crossover_sequence_of_genes,10/10,1141,"[8, 17, 24, 27, 1, 4, 6, 13, 23, 34, 37, 41, 0, 5, 7, 22, 26, 40, 12, 47]",20

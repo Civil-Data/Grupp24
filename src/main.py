@@ -98,7 +98,7 @@ def run_evolution(
 
 		# Elitism
 		if data.ELITISM_PERC > 0.0:
-			# not neccessary to check data.ELITISM_PERC, but it looks nicer and saves some time
+			# not necessary to check data.ELITISM_PERC, but it looks nicer and saves some time
 			numb_elitism_parents: int = math.floor(
 				data.POPULATION_SIZE * data.ELITISM_PERC
 			)
@@ -157,7 +157,7 @@ def run_evolution(
 	if input() == "y":
 		run_simulation(ranked_population[0])
 
-	return result_data
+	return result_data, ranked_population[0], str(crossover_function.__name__)
 
 def run_experiments(people_folder_path, generation_folder_path) -> List:
 	"""
@@ -167,7 +167,14 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 	people_experiment = [files for files in os.listdir(people_folder_path)]
 	generation_experiment = [files for files in os.listdir(generation_folder_path)]
 
-	mega_results = []
+
+	if (len(people_experiment) == 0 and len(generation_experiment) == 0):
+		print("No experiment found!")
+		return []
+	elif (len(people_experiment) == 0 and len(generation_experiment) != 0) or (len(people_experiment) != 0 and len(generation_experiment) == 0):
+		print("Mismatch between people_experiment and generation_experiment: One is empty while the other is not.")
+		return []
+ 
 
 	# Running through all different combinations of experiments
 	# *********************************************************************************************
@@ -186,29 +193,33 @@ def run_experiments(people_folder_path, generation_folder_path) -> List:
 		people_data = load_building(people_file_path)
 		generation_data = load_population(generation_file_path)
 
-		current_experiment = ExperimentElevator(people_data, generation_data)
-		
-		results = run(current_experiment)
+		csv_results = []
 
 		experiment_name = (
-			f"People: {people_experiment}, Generation: {generation_experiment}"
+			f"Floors: {data.NUMBER_OF_FLOORS}, People: {data.NUMBER_OF_PEOPLE}, Generation: {data.GENERATION_LIMIT}"
 		)
-		mega_results.append((experiment_name, results))
+		current_experiment = ExperimentElevator(people_data, generation_data, experiment_name)
+		
+		file_name = (f"Floors_{data.NUMBER_OF_FLOORS}_People_{data.NUMBER_OF_PEOPLE}_Generation_{data.GENERATION_LIMIT}")	
+		
+		results_f, best_results, crossover_name = run(current_experiment)
+		csv_results.append((experiment_name, crossover_name, best_results))
+		results_s, best_results, crossover_name = run(current_experiment, Crossover.heuristic_crossover_single_gene)
+		csv_results.append((experiment_name, crossover_name, best_results))
+		results_t, best_results, crossover_name = run(current_experiment, Crossover.heuristic_crossover_sequence_of_genes)
+		csv_results.append((experiment_name, crossover_name, best_results))
 
-		current_experiment.display_experiment(experiment_name, results)
+		current_experiment.display_experiment(file_name, results_f, results_s, results_t)
+		save_experiment(file_name ,csv_results)
 
-	# Shows all results from all experiments in one graph
-	pyplot.show()
-	save_experiment(mega_results)
+	return csv_results
 
-	return mega_results
-
-def run(exp: ExperimentElevator = None):
+def run(exp: ExperimentElevator = None, current_crossover: Crossover = Crossover.swap_last_halves):
 	return run_evolution(
 			populate_function=Populate.generate_population,
 			fitness_function=Fitness.calc_fitness,
 			selection_function=Selection.rank,
-			crossover_function=Crossover.swap_last_halves,
+			crossover_function=current_crossover,
 			mutation_functions=[Mutation.swap,
 								Mutation.increase_genome_length,
 								Mutation.decrease_genome_length],
@@ -222,6 +233,7 @@ if __name__ == "__main__":
 		except:
 			print("Failed to use Qt5Agg PyPlot backend, will use Agg instead")
 			use("Agg")
-		run_experiments("./buildings", "./generations")
+		for i in range(data.NUMBER_OF_EXP):
+			run_experiments("./buildings", "./generations")
 	else:
 		run()
