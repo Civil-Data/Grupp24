@@ -3,6 +3,7 @@
 % Version: 1.0.0
 % License: Apache 2.0
 
+
 \subsection{Evolutionary approach}
 % Clearly describe the algorithm you developed. You
 % should clearly explain the evolutionary operators you used and what modifications
@@ -58,8 +59,8 @@
 
 	The first basic crossover operator is one that simply swaps the last halves of the parents, while respecting the possibility that the length of the two parents may be of different length. For example, if the two parents are $$ [1, 2, 3, 4], [5, 6, 7, 8, 9, 10] $$ the resulting children would be $$ [1, 2, 8, 9, 10], [5, 6, 7, 1, 2] $$
 
-    % !!! TODO: Samuel text here !!!
-    Samuel's text here pls
+
+\input{heuristic_crossover}
 
 \subsubsection{Mutation}
 % Explain mutation algorithm(s)
@@ -92,3 +93,4 @@
 % The first crossover reached the best value within fewer generations and seems to preform better in this instance. To be completely sure that we couldn't get improved results by changing to a different crossover without changing anything else we decided to try a much more advance crossover that had a great impact on. 
 
 % The third crossover uses segment-based selection instead of selecting genes individually, this method selects contiguous segments of genes from each parent. The offsets determine how many genes to take from each parent based on their fitness scores. This one always performs well and never get stuck in local minima for long. The best score we achieved with this crossover was 172.
+

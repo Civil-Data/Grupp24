@@ -3,30 +3,29 @@
 % Version: 1.0.0
 % License: Apache 2.0
 
-Diffing a lower bound:
+\textbf{Diffing a lower bound}:
 
 Dn = distance needed, Dt = distance travled, N is the number on persons in the building and F = number off floors.(using zero index)
 
-Assumption I: The distance between any floor J and J+1 or J and J-1 is one and the time required is one.
+\textbf{Assumption I}: The distance between any floor J and J+1 or J and J-1 is one and the time required is one.
 
-Assumption II: Following I, a person need to go from floor J to floor J+3, the Dn is equal to |J-(J+3)|.
+\textbf{Assumption II}: Following I, a person need to go from floor J to floor J+3, the Dn is equal to |J-(J+3)|.
 
-Assumption III: The elevator has the capacity of N.
+\textbf{Assumption III}: The elevator has the capacity of N.
 
-Assumption IV: For N persons that starts on the same floor and needs to go to the same floor, the lowest time spent waiting is equal to Dn*N.
+\textbf{Assumption IV}: For N persons that starts on the same floor and needs to go to the same floor, the lowest time spent waiting is equal to Dn*N.
 
-Proof:
+\textbf{Proof}:
 To prove Assumption IV:
 Trivial case: A building with F = X and N = 0, there is no need to move the elevator. Resulting in 0*N=0, the Dn*0 = time = 0.
 
-Simple case: A building with F = 2 and N = 1, where the person needs to move for floor zero to floor one. It is trivial to see that the best solution is for the elevator to take one person from floor 0 to floor one. Resulting in Dn = time = 1 = Dt*1.
+\textbf{Simple case}: A building with F = 2 and N = 1, where the person needs to move for floor zero to floor one. It is trivial to see that the best solution is for the elevator to take one person from floor 0 to floor one. Resulting in Dn = time = 1 = Dt*1.
 
-A more general case:
+\textbf{A more general case}:
 A building with 2 floor and N person that need to move from floor zero to floor one. The optimal solution is, N*Dn = N*Dt = Time = N.
 
 This is the lower bound of our problem, by proving IV, it can be shown that the lower bound is Dn*N.
 
-The upper bound:
-To prove the upper bound the following solution can be imagined.
+\textbf{The upper bound}:
+To prove the upper bound the following solution can be imagined. Resulting is \( 1 \cdot \infty = \infty \).
 
-A building with F = 3, N = 1, the person is on floor 0 and like to go to floor 2. The elevator picks up the person but never goes to floor 2, instead the elevator moves between floor zero and floor one for ever. Resulting is  1 * \infty  =   \infty.
