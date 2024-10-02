@@ -48,7 +48,7 @@ The genetic algorithm implemented in this study is based on the framework presen
 \subsubsection{Selection}
 % Explain selection algorithm(s)
 
-The chosen selection algorithm is rank-based selection, and the basic idea behind it is to choose two parents based on their ranks rather than their raw fitness values. For example, if the population consists of six genomes, the best genome is given rank six, the second best rank five and so on. The worst genome is given rank one. Each genome is then given a probability $ P_i $ to be chosen based on their respective ranks, expressed as:
+The chosen selection algorithm is rank-based selection, and the basic principle behind it is to choose two parents based on their ranks rather than their raw fitness values. For example, if the population consists of six genomes, the best genome is given rank six, the second best rank five and so on. The worst genome is given rank one. Each genome is then given a probability $ P_i $ to be chosen based on their respective ranks, expressed as:
 
 $$ P_i = \frac{\text{rank}_i}{\sum \text{ranks}} $$
 
@@ -57,7 +57,7 @@ That is, the best genome would have a probability of $ P_6 = \frac{6}{21} $ to b
 \subsubsection{Crossover}
 % Explain crossover algorithm(s)
 \begin{par}
-	The first basic crossover operator is one that simply swaps the last halves of the parents, while respecting the possibility that the length of the two parents may be of different length. For example, if the two parents are
+	The first basic crossover operator is one that simply swaps the last halves of the parents, while respecting the possibility that the two parents may be of different length. For example, if the two parents are
 	\[
 		[1, 2, 3, 4], [5, 6, 7, 8, 9, 10]
 	\]
@@ -82,7 +82,7 @@ Three basic mutation operators were implemented. Firstly, a swap mutation where 
 % Clearly describe the solution representation you used.
 % You can use figures to improve the comprehensibility of this part.
 
-Given the nature of this problem, there is not a typical direct solution representation approach as seen in e.g. the knapsack problem, where the solution representation is also directly what is being manipulated in the genetic algorithm. In this paper's elevator problem, the genome is a sequence of floors in which the elevator travels to with the goal to deliver as many people. This situation forced a 'two-way' representation, where the fitness of a genome is reflected upon a list of people. Thus it was decided to encapsulate the list of floors and the list of people under a single class 'Genome' as the solution representation.
+Given the nature of this problem, there is not a typical direct solution representation approach as seen in e.g. the knapsack problem, where the solution representation is also directly what is being manipulated in the genetic algorithm. In this paper's elevator problem, the genome is a sequence of floors in which the elevator travels to with the goal to deliver as many people. This situation forced a 'two-way' representation, where the fitness of a genome is reflected upon a list of people. Thus it was decided to encapsulate the list of floors and the list of people under a single object 'Genome' as the solution representation.
 
 \subsection{Fitness function}
 \label{subsec:fitness_function}
