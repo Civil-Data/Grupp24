@@ -1,20 +1,20 @@
-% Author: Joel Scarinius Stävmo, Oskar Sundberg, Linus Savinainen, Samuel Wallander Leyonberg  and Gustav Pråmell
+% Author: Joel Scarinius Stävmo, Oskar Sundberg, Linus Savinainen, Samuel Wallander Leyonberg and Gustav Pråmell
 % Update: October 1, 2024
 % Version: 1.0.0
 % License: Apache 2.0
 
 This section describes the setup of experiments:
 
-Each experiment consists of two JSON files: one representing the building which specifies where all people are located, and another containing the population with a set of initial genomes.
+Each experiment consists of two JSON files; one representing the building which specifies where all people are located, and another containing the population with a set of initial genomes.
 These experiments are saved to files rather than being generated randomly each time to ensure the ability to run the same experiment multiple times for consistency.
 
 One specific building which already had result data available was used to compare this algorithm's results against previously known results.
 
 To thoroughly evaluate the algorithm it was decided to test it on buildings of different sizes (small, medium, large) and with corresponding population sizes.
-Given the number of experiments required to be run buildings with 10, 50, and 100 floors containing populations of 10, 50, and 100 people respectively was selected. Additionally, the specific building mentioned earlier which has 21 floors and 10 people was included.
+Given the number of experiments required to be run, buildings with 10, 50, and 100 floors containing populations of 10, 50, and 100 people respectively was selected. Additionally, the specific building mentioned earlier which has 21 floors and 10 people was included.
 
 Buildings were generated with constraints ensuring that each floor could hold between 0 and half of the maximum population.
-While it was theoretically possible for all people to be on just two floors in practice the distribution was more balanced. For example in the small 10-floor building with 10 people the distribution looked as follows:
+While it was theoretically possible for all people to be on just two floors in practice the distribution was more balanced. For example, in the small 10-floor building with 10 people the distribution was as follows:
 
 \begin{center}
 	\begin{tabular}{c c c}
@@ -33,10 +33,9 @@ While it was theoretically possible for all people to be on just two floors in p
 	\end{tabular}
 \end{center}
 
-After generating and validating all buildings and populations, the experiments were run. Each experiment was conducted on a computer with an AMD Ryzen 7 7800X3D and took roughly ten seconds to a minute. In totally 150 experiments were run.
-All experiment were run with the following settings 
+After generating and validating all buildings and populations, the experiments were run. Each experiment was conducted on a computer with an AMD Ryzen 7 7800X3D and took roughly ten seconds to a minute. In total 150 experiments were run.
 \newpage
-The settings used to run the experiment are as follows:
+All experiment used the following settings 
 
 \begin{itemize}
     \item \textbf{Generations:} 1000
