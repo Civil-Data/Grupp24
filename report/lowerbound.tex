@@ -4,28 +4,37 @@
 % License: Apache 2.0
 
 \textbf{Diffing a lower bound}:
+\\
+$ D_n $ is the distance needed, $ D_t $ is the distance travled, $ N $ is the number on people in the building and $ F $ is the number of floors, using zero index.
 
-Dn = distance needed, Dt = distance travled, N is the number on persons in the building and F = number off floors.(using zero index)
+\textbf{Assumption I}:
+\\
+The distance between any floor $ J $ and $ J + 1 $, or  $ J $ and $ J - 1 $ is $ 1 $ and the $ time $ required is $ 1 $.
 
-\textbf{Assumption I}: The distance between any floor J and J+1 or J and J-1 is one and the time required is one.
+\textbf{Assumption II}:
+\\
+Following \textit{I}, a person traveling from e.g. floor $ J $ to floor $ J + 3 $, $ D_n = |J - ( J + 3)|$.
 
-\textbf{Assumption II}: Following I, a person need to go from floor J to floor J+3, the Dn is equal to |J-(J+3)|.
+\textbf{Assumption III}:
+\\
+The elevator has a capacity of $ E $ people.
 
-\textbf{Assumption III}: The elevator has the capacity of N.
-
-\textbf{Assumption IV}: For N persons that starts on the same floor and needs to go to the same floor, the lowest time spent waiting is equal to Dn*N.
+\textbf{Assumption IV}:
+\\
+For $ X $ people that start on the same floor and needs to go to the same floor, the lowest $ time $ spent waiting is equal to $ D_n \cdot X $.
 
 \textbf{Proof}:
-To prove Assumption IV:
-Trivial case: A building with F = X and N = 0, there is no need to move the elevator. Resulting in 0*N=0, the Dn*0 = time = 0.
+\\
+To prove \textit{IV}, the trivial case is a building with $ N = 0 $. There is no need to move the elevator, resulting in $ 0 \cdot N = 0 $ and $ time = D_n \cdot 0 = 0 $.
 
-\textbf{Simple case}: A building with F = 2 and N = 1, where the person needs to move for floor zero to floor one. It is trivial to see that the best solution is for the elevator to take one person from floor 0 to floor one. Resulting in Dn = time = 1 = Dt*1.
+\textbf{Simple case}:
+\\
+A building with $ F = 2 $ and $ N = 1 $, where the person needs to move for floor zero to floor one. It is trivial to see that the best solution is for the elevator to take one person from floor 0 to floor one. Resulting in $ D_n = time = 1 = D_t \cdot 1 $.
 
 \textbf{A more general case}:
-A building with 2 floor and N person that need to move from floor zero to floor one. The optimal solution is, N*Dn = N*Dt = Time = N.
-
-This is the lower bound of our problem, by proving IV, it can be shown that the lower bound is Dn*N.
+\\
+A building with $ F = 2 $ and $ P $ people that need to move from floor zero to floor one. The optimal solution is $ P \cdot D_n = P \cdot D_t = time = P $. This is the lower bound of the problem. By proving \textit{IV}, it can be shown that the lower bound is $ D_n \cdot P $.
 
 \textbf{The upper bound}:
-To prove the upper bound the following solution can be imagined. Resulting is \( 1 \cdot \infty = \infty \).
-
+\\
+To prove the upper bound the following solution can be imagined; in an arbitrary building, move the elevator continously between any two or more floors that does not have any people. Resulting in $ 1 \cdot \infty = \infty $.
