@@ -16,14 +16,14 @@ sys.path.insert(
 )
 
 from evolutionary_classes.selection import Selection
-from genome import Genome
+from chromosome import Chromosome
 from data import Population
 
-genome_1 = Genome([])
-genome_2 = Genome([])
-genome_3 = Genome([])
-genome_4 = Genome([])
-genome_5 = Genome([])
+genome_1 = Chromosome([])
+genome_2 = Chromosome([])
+genome_3 = Chromosome([])
+genome_4 = Chromosome([])
+genome_5 = Chromosome([])
 population: Population = [genome_1, genome_2, genome_3, genome_4, genome_5]
 
 

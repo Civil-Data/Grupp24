@@ -7,7 +7,7 @@
 \subsection{Evolutionary approach}
 % Clearly describe the algorithm you developed. You
 % should clearly explain the evolutionary operators you used and what modifications
-% you did to match the problem. It is extremely important to present also a pseudocode
+% you did to match the problem. It is extremely important to present also a pseudo code
 % of your algorithm.
 
 The genetic algorithm implemented in this study is based on the framework presented in a relatively recent paper \cite{tartan2016flow}, which explored a similar problem. The details of the implemented genetic algorithm can be found in \ref{alg:pseudocode_ga}. A key difference in this paper is the absence of a termination criterion; instead, the algorithm is set to execute for a specified number of generations. The flowchart illustrating the original framework is shown in Figure \ref{fig:flowchart}.
@@ -19,13 +19,13 @@ The genetic algorithm implemented in this study is based on the framework presen
 		\State Initialize a new population
 		\State $g \gets 0$
 		\While{\text{g} $ < $ \text{generation limit}}
-		\For{\text{all genomes in population}}
-		\State Execute the genome on its people
+		\For{\text{all chromosome in population}}
+		\State Execute the chromosome on its people
 		\EndFor
 		\State Calculate the fitness of the population
 		\State Sort the population
-		\If{\text{want elitism}} \Comment{Start prepairing the next generation}
-		\State Bring some of the best genomes to the new population
+		\If{\text{want elitism}} \Comment{Start preparing the next generation}
+		\State Bring some of the best chromosome to the new population
 		\EndIf
 		\While{\text{the size of the new population} $ < $ \text{population size}}
 		\State Select two parents from the old population
@@ -48,11 +48,11 @@ The genetic algorithm implemented in this study is based on the framework presen
 \subsubsection{Selection}
 % Explain selection algorithm(s)
 
-The chosen selection algorithm is rank-based selection, and the basic principle behind it is to choose two parents based on their ranks rather than their raw fitness values. For example, if the population consists of six genomes, the best genome is given rank six, the second best rank five and so on. The worst genome is given rank one. Each genome is then given a probability $ P_i $ to be chosen based on their respective ranks, expressed as:
+The chosen selection algorithm is rank-based selection, and the basic principle behind it is to choose two parents based on their ranks rather than their raw fitness values. For example, if the population consists of six chromosome, the best chromosome is given rank six, the second best rank five and so on. The worst chromosome is given rank one. Each chromosome is then given a probability $ P_i $ to be chosen based on their respective ranks, expressed as:
 
 $$ P_i = \frac{\text{rank}_i}{\sum \text{ranks}} $$
 
-That is, the best genome would have a probability of $ P_6 = \frac{6}{21} $ to be chosen, the second best $ P_5 = \frac{5}{21} $, and the worst genome $ P_1 = \frac{1}{21} $.
+That is, the best chromosome would have a probability of $ P_6 = \frac{6}{21} $ to be chosen, the second best $ P_5 = \frac{5}{21} $, and the worst chromosome $ P_1 = \frac{1}{21} $.
 
 \subsubsection{Crossover}
 % Explain crossover algorithm(s)
@@ -72,8 +72,9 @@ That is, the best genome would have a probability of $ P_6 = \frac{6}{21} $ to b
 
 \subsubsection{Mutation}
 % Explain mutation algorithm(s)
+\label{subsubsec:mutation}
 
-Three basic mutation operators were implemented. Firstly, a swap mutation where two randomly chosen floors are swapped. Secondly, an operator which increases the length of the genome by appending a random floor at the end. Lastly, an operator that decreases the length by removing a randomly chosen index of the genome. With these three operators, an additional two operators were constructed by combining the effects of swap and either length operator.
+Three basic mutation operators were implemented. Firstly, a swap mutation where two randomly chosen floors are swapped. Secondly, an operator which increases the length of the chromosome by appending a random floor at the end. Lastly, an operator that decreases the length by removing a randomly chosen index of the chromosome. With these three operators, an additional two operators were constructed by combining the effects of swap and either length operator.
 
 % \subsubsection{Replacement} % Elitism
 % We never used elitism in the experiments?
@@ -82,7 +83,7 @@ Three basic mutation operators were implemented. Firstly, a swap mutation where 
 % Clearly describe the solution representation you used.
 % You can use figures to improve the comprehensibility of this part.
 
-Given the nature of this problem, there is not a typical direct solution representation approach as seen in e.g. the knapsack problem, where the solution representation is also directly what is being manipulated in the genetic algorithm. In this paper's elevator problem, the genome is a sequence of floors in which the elevator travels to with the goal to deliver as many people. This situation forced a 'two-way' representation, where the fitness of a genome is reflected upon a list of people. Thus it was decided to encapsulate the list of floors and the list of people under a single object 'Genome' as the solution representation.
+Given the nature of this problem, there is not a typical direct solution representation approach as seen in e.g. the knapsack problem, where the solution representation is also directly what is being manipulated in the genetic algorithm. In this paper's elevator problem, the chromosome is a sequence of floors in which the elevator travels to with the goal to deliver as many people as possible. This situation forced a 'two-way' representation, where the fitness of a chromosome is reflected upon a list of people. Thus, it was decided to encapsulate the list of floors and the list of people under a single object 'Chromosome' as the solution representation.
 
 \subsection{Fitness function}
 \label{subsec:fitness_function}
@@ -90,16 +91,4 @@ Given the nature of this problem, there is not a typical direct solution represe
 % used. In many cases, the objective function of the problem is not the same as
 % the fitness function used in an evolutionary algorithm
 
-After some basic trial and error, and more importantly, a healthy discussion with the assignment teacher, it was decided to exclusively punish unwanted behaviour of the genome instead of giving rewards or mixing rewards with punishments. As the ultimate goal of the algorithm is to deliver all passangers in a short average time, a punishment-only approach acts like a 'catch-all' sink. Instead of trying to find and giving rewards for all of the different kinds of positive behaviours, it is instead easier to punish any and all negative behaviours. For example, if a passanger wants to travel from floor five to one, that requires an absolute minimum of four floors worth of travel. The implemented fitness function would in that case punish based on the difference in distance needed and the distance that was actually traveled by the passanger. Another simple example would be to punish the genome for everyone that did not arrive at their destinations, rather than rewarding for those that did arrive. This fitness function also takes into account the total time taken for each individual person, starting when the elevator initially starts moving to when the passanger steps out of the elevator. That is, the total time for a person is time spent waiting for the elevator plus the time spent inside the elevator. 
-
-
-
-% Text from Joel :))
-
-% Each genome has a score that is increased with one time unit for each person that has not arrived to their desired floor for each floor traveled by the elevator. The fitness function helps to keep track of each genome's score and gives time penalties for each person that has not arrived to their desired floor. The penalties increases the score with 100 which is a severe penalty to promote the algorithm to serve as many people as possible.
-
-% When we used our first and most primitive crossover that simply swaps the last halves of two parents genomes the best fitness value we achieved in five runs was 205 but in this graph we show the worst case score of 10227 when it missed serving one person and received a big penalty. We then decided to try a new crossover that creates the first offspring with gene-by-gene selection and which parent to select a gene from is determined by a weighted random choice based on their fitness scores. The second offspring is created by reversing the first offspring.
-% The first crossover reached the best value within fewer generations and seems to preform better in this instance. To be completely sure that we couldn't get improved results by changing to a different crossover without changing anything else we decided to try a much more advance crossover that had a great impact on. 
-
-% The third crossover uses segment-based selection instead of selecting genes individually, this method selects contiguous segments of genes from each parent. The offsets determine how many genes to take from each parent based on their fitness scores. This one always performs well and never get stuck in local minima for long. The best score we achieved with this crossover was 172.
-
+After some basic trial and error, and more importantly, a healthy discussion with the assignment teacher, it was decided to exclusively punish unwanted behavior of the chromosome instead of giving rewards or mixing rewards with punishments. As the ultimate goal of the algorithm is to deliver all passengers in a short average time, a punishment-only approach acts like a 'catch-all' sink. Instead of trying to find and giving rewards for all the different kinds of positive behaviors, it is instead easier to punish any and all negative behaviors. For example, if a passenger wants to travel from floor five to one, that requires an absolute minimum of four floors worth of travel. The implemented fitness function would in that case punish based on the difference in distance needed and the distance that was actually traveled by the passenger. Another simple example would be to punish the chromosome for everyone that did not arrive at their destinations, rather than rewarding for those that did arrive.  This fitness function also takes into account the total time taken for each individual person, starting when the elevator initially starts moving to when the passanger steps out of the elevator. That is, the total time for a person is time spent waiting for the elevator plus the time spent inside the elevator.

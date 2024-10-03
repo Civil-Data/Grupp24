@@ -10,13 +10,13 @@ Module containing static selection function(s)
 import random
 from typing import List, Tuple
 import data
-from genome import Genome
+from chromosome import Chromosome
 
 class Selection:
 	" Class containing static selection function(s) "
 
 	@staticmethod
-	def rank(ranked_population: data.Population) -> Tuple[Genome, Genome]:
+	def rank(ranked_population: data.Population) -> Tuple[Chromosome, Chromosome]:
 		"""
 		param: ranked_population = a sorted population in descending order, based on fitness
 		In rank selection, individuals are ranked based on their fitness, and selection is
@@ -41,7 +41,7 @@ class Selection:
 			cumulative_probabilities.append(cumulative_sum)
 
 		# Select two parents based on the cumulative distribution
-		parents: List[Genome] = []
+		parents: List[Chromosome] = []
 		while len(parents) < 2:  # 2 parents
 			random_value = random.uniform(0.0, 1.0)  # Generate a random number between 0 and 1
 			for j, value in enumerate(cumulative_probabilities):

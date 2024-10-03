@@ -7,21 +7,21 @@
 Module containing static fitness function(s)
 """
 
-from genome import Genome
+from chromosome import Chromosome
 from data import TIME_PENALTY
 
 class Fitness:
 	"""
-	Function(s) that calculates fitness of a Genome
+	Function(s) that calculates fitness of a Chromosome
 	"""
 	@staticmethod
-	def calc_fitness(genome: Genome) -> None:
+	def calc_fitness(chromosome: Chromosome) -> None:
 		"""
-		Calculate the fitness score of a genome
+		Calculate the fitness score of a chromosome
 		"""
 		accumulated_score: int = 0
 
-		for person in genome.people:
+		for person in chromosome.people:
 			accumulated_score += person.time_spent_waiting
 
 			if person.has_arrived:
@@ -31,6 +31,6 @@ class Fitness:
 			else:
 				accumulated_score += TIME_PENALTY
 
-		accumulated_score += len(genome.genome)
+		accumulated_score += len(chromosome.chromosome)
 
-		genome.fitness_score = accumulated_score
+		chromosome.fitness_score = accumulated_score

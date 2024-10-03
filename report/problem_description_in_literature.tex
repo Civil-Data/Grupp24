@@ -4,15 +4,15 @@
 % License: Apache 2.0
 
 \subsubsection{Mapping the elevator problem to the swapping problem.}
-"Each vertex of a graph initially may contain an object of a known type. A final state, specifying the type of object desired at each vertex, is also given. A single vehicle of unit capacity is available for shipping objects among the vertices. The swapping problem is to compute a shortest route such that a vehicle can accomplish the rearrangement of the objects while following this route."\cite{anily1992swapping}
+“Each vertex of a graph initially may contain an object of a known type. A final state, specifying the type of object desired at each vertex, is also given. A single vehicle of unit capacity is available for shipping objects among the vertices. The swapping problem is to compute the shortest route such that a vehicle can accomplish the rearrangement of the objects while following this route.” \cite{anily1992swapping}
 
 \begin{itemize}
 	\item Vertices are represented as floors in the elevator.
 	\item The object is defined as a person.
 	\item Initial state consists of $ N $ people waiting at the floors.
 	\item The final state is reached when all people are at their destination floor.
-	\item The elevator is a vehicle with a max capacity that moves the people between floors, i.e. a single vehicle shipping objects among the vertices.
+	\item The elevator is a vehicle with a max capacity that moves the people between floors, i.e., a single vehicle shipping objects among the vertices.
 	\item The elevator problem is aiming to reduce the waiting time of the people in the elevator and thereby reduce the distance traveled.
 \end{itemize}
 
-"Even the simple swapping problem is NP-hard."\cite{anily1992swapping} This indicates that even the problem in this report is NP-hard.
+“Even the simple swapping problem is NP-hard.” \cite{anily1992swapping} This indicates that even the problem in this report is NP-hard.

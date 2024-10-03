@@ -30,7 +30,7 @@ def test_move_elevator():
 	assert building.elevator.current_floor == 2
 	building.move_elevator(building.elevator.current_floor, 4)
 	assert building.elevator.current_floor == 4
-	# What happens when the Genome generates the same floor twice in a row, i.e., [1, 2, 3, 3, 4, ..., n].
+	# What happens when the Chromosome generates the same floor twice in a row, i.e., [1, 2, 3, 3, 4, ..., n].
 	# It is allowed should and should therefore result in the elevator not moving floors.
 	building.move_elevator(
 		building.elevator.current_floor, building.elevator.current_floor
