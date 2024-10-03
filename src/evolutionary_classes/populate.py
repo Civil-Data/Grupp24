@@ -9,7 +9,7 @@ Module containing static population generating function(s)
 
 import random
 import data
-from genome import Genome
+from chromosome import Chromosome
 
 class Populate:
 	"""
@@ -23,5 +23,5 @@ class Populate:
 
 		population: data.Population = []
 		for _ in range(data.POPULATION_SIZE):
-			population.append(Genome([random.randint(0, data.NUMBER_OF_FLOORS - 1) for _ in range(data.GENOME_LENGTH)]))
+			population.append(Chromosome([random.randint(0, data.NUMBER_OF_FLOORS - 1) for _ in range(data.GENOME_LENGTH)]))
 		return population
