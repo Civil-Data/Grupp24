@@ -1,4 +1,4 @@
-Name,Crossover Name,Arrvied,Best Fitness,Best Genome,Genome Length
+Name,Crossover Name,Arrvied,Best Fitness,Best Chromosome,Chromosome Length
 "Floors: 100, People: 10, Generation: 1000",swap_last_halves,8/10,20638,"[5, 10, 11, 16, 18, 32, 34, 47, 17, 12, 76, 8, 30]",13
 "Floors: 100, People: 10, Generation: 1000",heuristic_crossover_single_gene,10/10,1021,"[5, 5, 11, 8, 8, 8, 8, 8, 10, 16, 30, 32, 34, 32, 30, 30, 30, 18, 17, 12, 12, 12, 4, 4, 13, 13, 32, 32, 32, 47, 66, 76, 83, 66, 66, 66, 5, 5, 16, 16, 16, 16, 5, 5, 5, 16, 66, 66, 13, 66, 66, 66, 76, 76, 4, 4, 76, 13, 11, 11, 17, 17, 17, 17, 17, 30, 30, 30, 30, 8, 8, 8, 8]",73
 "Floors: 100, People: 10, Generation: 1000",heuristic_crossover_sequence_of_genes,10/10,1226,"[4, 11, 13, 16, 18, 32, 47, 66, 83, 17, 12, 5, 8, 10, 16, 30, 34, 76]",18

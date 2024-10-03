@@ -4,19 +4,19 @@
 # License: Apache 2.0
 
 """
-Genome module
+Chromosome module
 """
 
 from typing import List
 from main_classes.person import Person
 
-class Genome:
-	genome: List[int]
-	people: List[Person] # 'genome' affects 'people'
+class Chromosome:
+	chromosome: List[int]
+	people: List[Person] # 'chromosome' affects 'people'
 	fitness_score: int
 
-	def __init__(self, genome: List[int]) -> None:
-		self.genome = genome
+	def __init__(self, chromosome: List[int]) -> None:
+		self.chromosome = chromosome
 		self.people = []
 		self.fitness_score = 0
 	

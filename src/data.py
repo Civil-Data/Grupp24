@@ -6,7 +6,7 @@
 "Module containing shared information and configuration data"
 
 from typing import List, Callable, Tuple
-from genome import Genome, Person
+from chromosome import Chromosome, Person
 
 NUMBER_OF_FLOORS: int = 15
 NUMBER_OF_PEOPLE: int = 15
@@ -38,13 +38,13 @@ EXP_GENOME_RANGE_END = GENOME_LENGTH
 EXP_FLOOR_LENGTH_START: int = 0
 EXP_FLOOR_LENGTH_END: int = NUMBER_OF_PEOPLE
 
-Population = List[Genome]
+Population = List[Chromosome]
 
 People = List[Person]
 People_queues = List[People]
 
 PopulateFunction = Callable[[], Population]
-FitnessFunction = Callable[[Genome], None]
-SelectionFunction = Callable[[Population], Tuple[Genome, Genome]]
-CrossoverFunction = Callable[[Genome, Genome], Tuple[Genome, Genome]]
-MutationFunction = Callable[[Genome], None]
+FitnessFunction = Callable[[Chromosome], None]
+SelectionFunction = Callable[[Population], Tuple[Chromosome, Chromosome]]
+CrossoverFunction = Callable[[Chromosome, Chromosome], Tuple[Chromosome, Chromosome]]
+MutationFunction = Callable[[Chromosome], None]

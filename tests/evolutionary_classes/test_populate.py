@@ -25,6 +25,6 @@ def test_generate_population() -> None:
 	"""
 	population = Populate.generate_population()
 	assert len(population) == POPULATION_SIZE
-	for genome in population:
-		for i in genome.genome:
+	for chromosome in population:
+		for i in chromosome.chromosome:
 			assert 0 <= i < NUMBER_OF_FLOORS

@@ -22,7 +22,7 @@ import pandas as pf
 import data
 
 from main_classes.person import Person
-from genome import Genome
+from chromosome import Chromosome
 
 
 class ExperimentElevator:
@@ -112,14 +112,14 @@ def save_experiment(file_name:str ,result: list) -> None:
 	else:
 		file_path = base_file_path
 
-	for experiment_name, crossover_name, genome in result:
+	for experiment_name, crossover_name, chromosome in result:
 		result_data = {
 				'Name': [experiment_name],
 				'Crossover Name': [crossover_name],
-				'Arrvied': [f"{genome.how_many_arrived()}/{data.NUMBER_OF_PEOPLE}"],
-				'Best Fitness': [genome.fitness_score],
-				'Best Genome': [genome.genome],
-				'Genome Length': [len(genome.genome)]
+				'Arrvied': [f"{chromosome.how_many_arrived()}/{data.NUMBER_OF_PEOPLE}"],
+				'Best Fitness': [chromosome.fitness_score],
+				'Best Chromosome': [chromosome.chromosome],
+				'Chromosome Length': [len(chromosome.chromosome)]
 			}
 
 		data_frame = pf.DataFrame(result_data)
@@ -138,7 +138,7 @@ def load_population(filename) -> data.Population:
 	with open(filename, "r", encoding="UTF-8") as file:
 		population_data = json.load(file)
 
-	genome_list = [Genome(genome_data) for genome_data in population_data]
+	genome_list = [Chromosome(genome_data) for genome_data in population_data]
 
 	return genome_list
 
