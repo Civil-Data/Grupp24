@@ -5,7 +5,7 @@
 
 This section describes the setup of experiments:
 
-Each experiment consists of two JSON files; one representing the building which specifies where all people are located, and another containing the population with a set of initial genomes.
+Each experiment consists of two JSON files; one representing the building which specifies where all people are located, and another containing the population with a set of initial chromosomes.
 These experiments are saved to files rather than being generated randomly each time to ensure the ability to run the same experiment multiple times for consistency.
 
 One specific building which already had result data available was used to compare this algorithm's results against previously known results.
@@ -35,16 +35,16 @@ While it was theoretically possible for all people to be on just two floors in p
 
 After generating and validating all buildings and populations, the experiments were run. Each experiment was conducted on a computer with an AMD Ryzen 7 7800X3D and took roughly ten seconds to a minute. In total 150 experiments were run.
 \newpage
-All experiment used the following settings 
+All experiment used the following settings.
 
 \begin{itemize}
-    \item \textbf{Generations:} 1000
-    \item \textbf{Population size:} 100
-    \item \textbf{Crossover methods:} Heuristic single, Heuristic sequence, Swap crossover
-    \item \textbf{Mutation methods:} Increase, Decrease, Swap, Swap and Increase, Swap and Decrease
-    \item \textbf{Elitism rate:} 0.1
-    \item \textbf{Crossover rate:} 1.0
-    \item \textbf{Mutation rate:} 0.1, 0.6
+	\item \textbf{Generations:} 1000
+	\item \textbf{Population size:} 100
+	\item \textbf{Crossover methods:} Heuristic single, Heuristic sequence, Swap crossover
+	\item \textbf{Mutation methods:} Increase, Decrease, Swap, Swap and Increase, Swap and Decrease
+	\item \textbf{Elitism rate:} 0.1
+	\item \textbf{Crossover rate:} 1.0
+	\item \textbf{Mutation rate:} 0.1, 0.6
 	\item \textbf{Elevator capacity:} 8
 \end{itemize}
 

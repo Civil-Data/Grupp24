@@ -20,7 +20,7 @@ from evolutionary_classes.populate import Populate
 from evolutionary_classes.selection import Selection
 from evolutionary_classes.crossover import Crossover
 from evolutionary_classes.mutation import Mutation
-from genome import Genome
+from chromosome import Chromosome
 from main_classes.building import Building
 from experiment.experiment import ExperimentElevator, load_building, load_population, save_experiment
 from gui.elevator_simulation import run_simulation
@@ -57,8 +57,8 @@ def run_evolution(
 							ascii=True,
 							colour="green"):
 		# Loop over the genomes
-		for genome in population:
-			# Always reset to original state between the genome iterations
+		for chromosome in population:
+			# Always reset to original state between the chromosome iterations
 			people_list: data.People = None
 			if data.DO_EXP:
 				people_list = copy.deepcopy(experiment.people_list)
@@ -66,22 +66,22 @@ def run_evolution(
 				people_list = copy.deepcopy(CONST_PEOPLE_LIST)
 				
 			building: Building = Building(place_people(people_list))
-			genome.people = people_list
+			chromosome.people = people_list
 
 			# Loop over the floors
-			for floor in genome.genome:
+			for floor in chromosome.chromosome:
 				building.move_elevator(building.elevator.current_floor, floor)
 
 		# All genomes has been run. Prepare the next population of genomes
 
-		# Calculate fitness for each genome
-		for genome in population:
-			fitness_function(genome)
+		# Calculate fitness for each chromosome
+		for chromosome in population:
+			fitness_function(chromosome)
 
 		# Sort the genomes based on the fitness
 		ranked_population: data.Population = sorted(
 			population,  # The population to be sorted
-			key=lambda genome: genome.fitness_score,  # Sort based on fitness score
+			key=lambda chromosome: chromosome.fitness_score,  # Sort based on fitness score
 			reverse=False,  # Lowest score first
 		)
 
@@ -89,8 +89,8 @@ def run_evolution(
 		result_data_temp = {
 			'Generation': generation,
 			'Best Fitness': ranked_population[0].fitness_score,
-			'Best Genome': ranked_population[0].genome,
-			'Genome Length': len(ranked_population[0].genome)#,
+			'Best Chromosome': ranked_population[0].chromosome,
+			'Chromosome Length': len(ranked_population[0].chromosome)#,
 			# 'Time Score': ranked_population[0].time_score,
 		}
 		result_data.append(result_data_temp)
@@ -126,9 +126,9 @@ def run_evolution(
 			assert data.POPULATION_SIZE % 2 == 0
 
 			# Select two parents
-			parents: Tuple[Genome, Genome] = selection_function(ranked_population)
+			parents: Tuple[Chromosome, Chromosome] = selection_function(ranked_population)
 			# Breed two children from those parents with a chance for crossover
-			children: Tuple[Genome, Genome]
+			children: Tuple[Chromosome, Chromosome]
 			if data.CROSSOVER_CHANCE > random.uniform(0.0, 1.0):
 				children = crossover_function(parents[0], parents[1])
 			else:
@@ -151,13 +151,13 @@ def run_evolution(
 
 	print(
 	f"Top three genomes (arrived/total, fitness, length):   "
-	f"({ranked_population[0].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[0].fitness_score}, {len(ranked_population[0].genome)}) "
-	f"({ranked_population[1].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[1].fitness_score}, {len(ranked_population[1].genome)}) "
-	f"({ranked_population[2].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[2].fitness_score}, {len(ranked_population[2].genome)})"
+	f"({ranked_population[0].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[0].fitness_score}, {len(ranked_population[0].chromosome)}) "
+	f"({ranked_population[1].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[1].fitness_score}, {len(ranked_population[1].chromosome)}) "
+	f"({ranked_population[2].how_many_arrived()}/{data.NUMBER_OF_PEOPLE}, {ranked_population[2].fitness_score}, {len(ranked_population[2].chromosome)})"
 	)
-	print(f"Best Genome:\n{ranked_population[0].genome}")
+	print(f"Best Chromosome:\n{ranked_population[0].chromosome}")
 	print(
-		"Press 'y' to run simulation for best genome or any other key to exit"
+		"Press 'y' to run simulation for best chromosome or any other key to exit"
 	)
 	if input() == "y":
 		run_simulation(ranked_population[0])

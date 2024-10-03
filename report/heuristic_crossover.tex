@@ -1,12 +1,12 @@
 Two last crossover functions where both heuristic crossover functions, meaning the parents fitness score determines how much of the genes from each parent is transferred to its children with favor for the “dominant” parent.
 
 \begin{par}
-	The first heuristic crossover function works simply by summarizing both parents' fitness scores and then calculating the parents' score differences in percentage. Random single genes are then transferred to the children where the previously calculated percentage gives a higher chance for transferring its genes.
+	The first heuristic crossover function works simply by summarizing both parents fitness scores and then calculating the parents score differences in percentage. Random single genes are then transferred to the children where the previously calculated percentage gives a higher chance for transferring its genes.
 
 	\label{par:swap single genes}
 \end{par}
 
 \begin{par}
-	The second crossover function works in a similar way but with the implementation of a crossover point instead of choosing single genes. This crossover point moves further down the dominant parents chromosome based on the difference between the parents fitness score. With a crossover point instead of choosing single genes, the children get a larger sequence from the dominant parent and are therefore more alike the dominant parent.
+	The second crossover function works similarly but with the implementation of a crossover point instead of choosing single genes. This crossover point moves further down the dominant parents chromosome based on the difference between the parents fitness score. With a crossover point instead of choosing single genes, the children get a larger sequence from the dominant parent and are therefore more alike the dominant parent.
 	\label{par:swap sequnce of genes}
 \end{par}

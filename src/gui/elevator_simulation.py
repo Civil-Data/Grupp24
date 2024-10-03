@@ -4,7 +4,7 @@
 # License: Apache 2.0
 
 """
-This module contains the code to run a visual simulation of the elevator using the best genome.
+This module contains the code to run a visual simulation of the elevator using the best chromosome.
 """
 
 import os
@@ -12,7 +12,7 @@ import time
 import copy
 import pygame
 import data
-from genome import Genome
+from chromosome import Chromosome
 from main_classes.building import Building
 from init_and_place_people import CONST_PEOPLE_LIST, place_people
 from experiment.experiment import load_building
@@ -34,9 +34,9 @@ ELEVATOR_HEIGHT_PROPORTION = FLOOR_HEIGHT_PROPORTION
 ELEVATOR_WIDTH_PROPORTION = ELEVATOR_HEIGHT_PROPORTION
 EXIT_BUTTON_SIZE = int(0.05 * WINDOW_WIDTH)
 
-def run_simulation(best_genome: Genome) -> None:
+def run_simulation(best_genome: Chromosome) -> None:
 	"""
-	Run a visual simulation of the elevator using the best genome.
+	Run a visual simulation of the elevator using the best chromosome.
 	"""
 	# Initialize Pygame and the screen settings
 	pygame.init()
@@ -78,7 +78,7 @@ def run_simulation(best_genome: Genome) -> None:
 	elevator_passengers: data.People = []
 
 	running = True
-	for floor in best_genome.genome:
+	for floor in best_genome.chromosome:
 		if not running:
 			break
 

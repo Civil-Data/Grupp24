@@ -15,15 +15,15 @@ sys.path.insert(
 	0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../src"))
 )
 
-from genome import Genome
+from chromosome import Chromosome
 from main_classes.person import Person
 from evolutionary_classes.fitness import Fitness
 from data import Population
 
 person1 = Person(2, 5, 10)
 person2 = Person(3, 4, 10)
-genome_1 = Genome([])
-genome_2 = Genome([])
+genome_1 = Chromosome([])
+genome_2 = Chromosome([])
 genome_1.people = [person1, person2]
 genome_2.people = []
 test_population: Population = [genome_1, genome_2]
@@ -31,8 +31,8 @@ test_population: Population = [genome_1, genome_2]
 
 def test_calc_fitness_no_people() -> None:
 	"""
-	Test the calc_fitness function to see that it actually calculates the fitness of the genome
-	when there are no people in the genome.
+	Test the calc_fitness function to see that it actually calculates the fitness of the chromosome
+	when there are no people in the chromosome.
 	"""
 	Fitness.calc_fitness(test_population[1])
 	assert test_population[1].fitness_score == 0
@@ -40,7 +40,7 @@ def test_calc_fitness_no_people() -> None:
 
 #def test_calc_fitness_no_one_arrived() -> None:
 #	"""
-#	Test the calc_fitness function to see that it actually calculates the fitness of the genome
+#	Test the calc_fitness function to see that it actually calculates the fitness of the chromosome
 #	when no one has arrived.
 #	"""
 #	test_population[0].people[0].has_arrived = False
@@ -51,7 +51,7 @@ def test_calc_fitness_no_people() -> None:
 
 #def test_calc_fitness_some_arrived() -> None:
 #	"""
-#	Test the calc_fitness function to see that it actually calculates the fitness of the genome
+#	Test the calc_fitness function to see that it actually calculates the fitness of the chromosome
 #	when some people have arrived.
 #	"""
 #	test_population[0].people[0].has_arrived = True
@@ -62,7 +62,7 @@ def test_calc_fitness_no_people() -> None:
 
 #def test_calc_fitness_all_arrived() -> None:
 #	"""
-#	Test the calc_fitness function to see that it actually calculates the fitness of the genome
+#	Test the calc_fitness function to see that it actually calculates the fitness of the chromosome
 #	when all people have arrived.
 #	"""
 #	test_population[0].people[0].has_arrived = True

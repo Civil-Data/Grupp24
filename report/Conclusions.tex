@@ -6,18 +6,18 @@
 This paper mainly looked at different crossover functions impact on genetic algorithm ability to find solutions for various buildings configurations.
 
 It started off with a fitness function that gave 10 points for each person served, which in the end promoted the algorithm to serve all people in the building.
-The problem with this was that it tended to give long genomes because it was more beneficial to serve all people than to serve them quickly.
+The problem with this was that it tended to give long chromosomes because it was more beneficial to serve all people than to serve them quickly.
 It was then changed to a fitness function that gave huge penalties for all people that weren't served by the elevator. It also increased the score by one for each additional unnecessary floor a person traveled in the elevator, worsening the overall result since a lower score is better.
 This also made it possible to analyze the average waiting time and this was also the benchmark that most papers used for results in this kind of problems.
 
 How different mutation functions would affect the results were not investigated in this paper. The implementation used 5 different ones that are randomly selected when a mutation occurred.
-The mutation functions used were swapping a random element in a genome, increase the length of a genome, decrease the length of a genome and the combinations of swapping and increasing or decreasing the length of a genome.
-These are all thoroughly explained in (3.1.3).
+The mutation functions used were swapping a random element in a chromosome, increase the length of a chromosome, decrease the length of a chromosome and the combinations of swapping and increasing or decreasing the length of a chromosome.
+These are all thoroughly explained in \ref{subsubsec:mutation}.
 
 An approach that would have been interesting to test is to implement elements of heuristic operators into Davis-order crossover.
 This would allow for more segments being made but also have the more dominant parent transfer more of its genes into the next generations.
 
-Because the algorithm is not forced to find a solution where all people reach their destination floor, this implementation includes a time penalty discussed in (3.3), this is to incentivize the algorithm to serve all people to their destination floor.
+Because the algorithm is not forced to find a solution where all people reach their destination floor, this implementation includes a time penalty discussed in \ref{subsec:fitness_function}, this is to incentivize the algorithm to serve all people to their destination floor.
 Further research on the impact of this time penalty in relation to the number of people in the building and their configurations would be interesting.
 
 A finding from this paper is that a higher mutation rate seems to be better. To determine this further research in this area is needed. Is a higher mutation rate better? If so, what is the optimal range?
